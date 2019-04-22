@@ -7,11 +7,13 @@
     "@rematch/persist": "^1.1.6",
     "history": "^4.9.0",
     "localforage": "^1.7.3",
+    "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
-    "redux-persist": "^5.10.0"
+    "redux-persist": "^5.10.0",
+    "styled-components": "^4.2.0"
   },
   "scripts": {
     "start": "PORT=1989 react-app-rewired start",
