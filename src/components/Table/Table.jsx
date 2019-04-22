@@ -42,9 +42,11 @@ const TableCell = styled.td`
 const TableBody = styled.tbody``;
 
 const PaginationContainer = styled.div`
-  display: flex;
+  display: inline-block;
   background: white;
+  width: 100%;
   border-top: 1px solid rgba(221, 221, 221, 0.5);
+  text-align: right;
 `;
 
 const TablePropTypes = {

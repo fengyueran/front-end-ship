@@ -5,7 +5,7 @@ import { PaginationItem, PrevIcon, NextIcon } from './Widget';
 
 const BasePagination = styled.ul`
   border-radius: 4px;
-  display: flex;
+  display: inline-block;
   padding: 10px 0;
   margin: 0;
   li {
