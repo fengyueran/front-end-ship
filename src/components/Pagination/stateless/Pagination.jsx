@@ -15,6 +15,7 @@ const BasePagination = styled.ul`
 
 const PaginationPropTypes = {
   totalPages: PropTypes.number.isRequired,
+  pageItems: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   jumpPrePage: PropTypes.func.isRequired,
   jumpNextPage: PropTypes.func.isRequired,
@@ -24,6 +25,7 @@ const PaginationPropTypes = {
 const Pagination = props => {
   const {
     totalPages,
+    pageItems,
     currentPage,
     jumpPrePage,
     jumpNextPage,
@@ -31,23 +33,19 @@ const Pagination = props => {
   } = props;
   const preDisabled = currentPage === 1;
   const nextDisabled = currentPage === totalPages;
-  const pageItems = Array(totalPages).fill(0);
+
+  const items = pageItems.map((v, index) => {
+    const isActive = v === currentPage;
+    return (
+      <PaginationItem key={index} isActive={isActive} onClick={handleJumpPage}>
+        {v}
+      </PaginationItem>
+    );
+  });
   return (
     <BasePagination>
       <PrevIcon disabled={preDisabled} onClick={jumpPrePage} />
-      {pageItems.map((v, index) => {
-        const pageNumber = 1 + index;
-        const isActive = pageNumber === currentPage;
-        return (
-          <PaginationItem
-            key={pageNumber}
-            isActive={isActive}
-            onClick={handleJumpPage}
-          >
-            {pageNumber}
-          </PaginationItem>
-        );
-      })}
+      {items}
       <NextIcon disabled={nextDisabled} onClick={jumpNextPage} />
     </BasePagination>
   );

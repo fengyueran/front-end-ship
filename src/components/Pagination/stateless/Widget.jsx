@@ -53,7 +53,7 @@ const PaginationItem = styled.li`
   user-select: none;
   min-width: 32px;
   height: 32px;
-  line-height: 30px;
+  line-height: 32px;
   text-align: center;
   display: inline-block;
   vertical-align: middle;
@@ -69,6 +69,8 @@ const PaginationItem = styled.li`
     ${props => props.disabled && paginationDisabledItemStyle}
   }
 `;
+
+const Ellipsis = () => <PaginationItem>...</PaginationItem>;
 
 const withIcon = Icon => {
   const Item = ({ disabled, onClick }) => (
@@ -88,4 +90,4 @@ const withIcon = Icon => {
 const PrevIcon = withIcon(PrevImg);
 const NextIcon = withIcon(NextImg);
 
-export { PaginationItem, PrevIcon, NextIcon };
+export { PaginationItem, Ellipsis, PrevIcon, NextIcon };

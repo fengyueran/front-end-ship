@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 const withData = WrappedComponent => {
   const PaginationContainer = props => {
+    const EXPANDE_THRESHOLD_PAGE = 10;
+    const ELLIPSIS_THRESHOLD_PAGE = 5;
     const { total, pageSize, current, onPageChange } = props;
-    let totalPages = Math.ceil(total / pageSize) || 0;
-    totalPages = totalPages < 5 ? totalPages : 5;
+    const totalPages = Math.ceil(total / pageSize) || 0;
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -43,11 +44,45 @@ const withData = WrappedComponent => {
       }
     };
 
+    const calcPageItem = () => {
+      let pageItems;
+      if (totalPages < EXPANDE_THRESHOLD_PAGE) {
+        pageItems = Array(totalPages).fill(0);
+        pageItems = pageItems.map((v, index) => index + 1);
+      } else {
+        pageItems = [1];
+        const isShowLeftEllipsis = currentPage >= ELLIPSIS_THRESHOLD_PAGE;
+        if (isShowLeftEllipsis) {
+          pageItems = [...pageItems, '...', currentPage - 1, currentPage];
+        } else {
+          pageItems = Array(ELLIPSIS_THRESHOLD_PAGE - 1).fill(0);
+          pageItems = pageItems.map((v, index) => index + 1);
+        }
+        const isShowRightEllipsis =
+          totalPages - currentPage >= ELLIPSIS_THRESHOLD_PAGE - 1;
+        if (isShowRightEllipsis) {
+          if (currentPage >= ELLIPSIS_THRESHOLD_PAGE) {
+            pageItems.push(currentPage + 1);
+          }
+          pageItems.push('...');
+          pageItems.push([totalPages]);
+        } else {
+          pageItems = Array(ELLIPSIS_THRESHOLD_PAGE - 1).fill(0);
+          pageItems = pageItems.map((v, index) => totalPages - index);
+          pageItems.reverse();
+          pageItems = [1, '...', ...pageItems];
+        }
+      }
+      return pageItems;
+    };
+
     const isShowPagination = total > pageSize;
+    const pageItems = calcPageItem();
     return (
       isShowPagination && (
         <WrappedComponent
           totalPages={totalPages}
+          pageItems={pageItems}
           currentPage={currentPage}
           jumpPrePage={jumpPrePage}
           jumpNextPage={jumpNextPage}
