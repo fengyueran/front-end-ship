@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Pagination from '../Pagination';
+import { Pagination } from '@xinghunm/widgets';
 
 const Container = styled.div``;
 
