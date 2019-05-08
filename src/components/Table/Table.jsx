@@ -60,7 +60,7 @@ const TableDefaultPropTypes = {
   pagination: {}
 };
 
-const DEFAULT_PAGE_SIZE = 3;
+const DEFAULT_PAGE_SIZE = 10;
 
 const Table = ({ columns, dataSource, onPageChange, pagination }) => {
   const [currentPage, setCurrentPage] = useState(0);

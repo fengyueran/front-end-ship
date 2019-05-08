@@ -126,7 +126,7 @@ const withData = WrappedComponent => {
   };
 
   PaginationContainer.defaultProps = {
-    pageSize: 3
+    pageSize: 10
   };
 
   return PaginationContainer;
