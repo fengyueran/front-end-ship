@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { withButtonBase, DoubleLeftImg } from '../stateless/Widget';
 
 const withData = WrappedComponent => {
   const PaginationContainer = props => {
@@ -44,6 +45,31 @@ const withData = WrappedComponent => {
       }
     };
 
+    const jumpPreFivePage = () => {
+      let page = currentPage - 5;
+      if (page < 1) {
+        page = 1;
+      }
+      setCurrentPage(page);
+      if (onPageChange) {
+        onPageChange(page - 1);
+      }
+    };
+
+    const jumpNextFivePage = () => {
+      let page = currentPage + 5;
+      if (page > totalPages) {
+        page = totalPages;
+      }
+      setCurrentPage(page);
+      if (onPageChange) {
+        onPageChange(page - 1);
+      }
+    };
+
+    const PreFiveBtn = withButtonBase(DoubleLeftImg, 0, jumpPreFivePage);
+    const NextFiveBtn = withButtonBase(DoubleLeftImg, 180, jumpNextFivePage);
+
     const calcPageItem = () => {
       let pageItems;
       if (totalPages < EXPANDE_THRESHOLD_PAGE) {
@@ -53,7 +79,7 @@ const withData = WrappedComponent => {
         pageItems = [1];
         const isShowLeftEllipsis = currentPage >= ELLIPSIS_THRESHOLD_PAGE;
         if (isShowLeftEllipsis) {
-          pageItems = [...pageItems, '...', currentPage - 1, currentPage];
+          pageItems = [...pageItems, PreFiveBtn, currentPage - 1, currentPage];
         } else {
           pageItems = Array(ELLIPSIS_THRESHOLD_PAGE - 1).fill(0);
           pageItems = pageItems.map((v, index) => index + 1);
@@ -64,13 +90,13 @@ const withData = WrappedComponent => {
           if (currentPage >= ELLIPSIS_THRESHOLD_PAGE) {
             pageItems.push(currentPage + 1);
           }
-          pageItems.push('...');
+          pageItems.push(NextFiveBtn);
           pageItems.push([totalPages]);
         } else {
           pageItems = Array(ELLIPSIS_THRESHOLD_PAGE - 1).fill(0);
           pageItems = pageItems.map((v, index) => totalPages - index);
           pageItems.reverse();
-          pageItems = [1, '...', ...pageItems];
+          pageItems = [1, PreFiveBtn, ...pageItems];
         }
       }
       return pageItems;

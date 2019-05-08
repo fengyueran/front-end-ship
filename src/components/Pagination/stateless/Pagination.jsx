@@ -10,12 +10,13 @@ const BasePagination = styled.ul`
   margin: 0;
   li {
     display: inline-block;
+    margin-right: 8px;
   }
 `;
 
 const PaginationPropTypes = {
   totalPages: PropTypes.number.isRequired,
-  pageItems: PropTypes.number.isRequired,
+  pageItems: PropTypes.array.isRequired,
   currentPage: PropTypes.number.isRequired,
   jumpPrePage: PropTypes.func.isRequired,
   jumpNextPage: PropTypes.func.isRequired,
@@ -35,9 +36,17 @@ const Pagination = props => {
   const nextDisabled = currentPage === totalPages;
 
   const items = pageItems.map((v, index) => {
+    const isNotNum = isNaN(v);
     const isActive = v === currentPage;
-    return (
-      <PaginationItem key={index} isActive={isActive} onClick={handleJumpPage}>
+    return isNotNum ? (
+      React.cloneElement(v(), { key: index })
+    ) : (
+      <PaginationItem
+        key={index}
+        isEllipsis={isNotNum}
+        isActive={isActive}
+        onClick={handleJumpPage}
+      >
         {v}
       </PaginationItem>
     );
