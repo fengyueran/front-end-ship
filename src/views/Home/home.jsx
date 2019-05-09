@@ -1,38 +1,7 @@
 import React from 'react';
-import Table from 'src/components/Table';
 import { VerticalBox } from '@xinghunm/widgets';
 import NavBar from '../NavBar';
-
-const columnsData = [
-  {
-    name: '#',
-    dataIndex: 'questionNum',
-    width: '25%'
-  },
-  {
-    name: '题名',
-    dataIndex: 'questionTtile',
-    render: () => <div>123</div>
-  },
-  {
-    name: '练习次数',
-    dataIndex: 'exerciseTimes',
-    width: '20%',
-    render: () => <div>123</div>
-  },
-  {
-    name: '通过率',
-    dataIndex: 'passRate',
-    width: '15%',
-    render: () => <div>123</div>
-  },
-  {
-    name: '难度',
-    dataIndex: 'difficulty',
-    width: '15%',
-    render: () => <div>123</div>
-  }
-];
+import QuestionTable from '../QuestionTable';
 
 const dataSource = [
   {
@@ -233,20 +202,18 @@ const dataSource = [
   },
   {
     questionNum: 127,
-    questionTtile: 'asdfsa',
+    questionTtile: 'xhm',
     exerciseTimes: 5,
     passRate: '20%',
     difficulty: 1
   }
 ];
 
-const Home = () => {
-  return (
-    <VerticalBox>
-      <NavBar />
-      <Table columns={columnsData} dataSource={dataSource} />
-    </VerticalBox>
-  );
-};
+const Home = () => (
+  <VerticalBox>
+    <NavBar />
+    <QuestionTable questions={dataSource} />
+  </VerticalBox>
+);
 
 export default Home;
