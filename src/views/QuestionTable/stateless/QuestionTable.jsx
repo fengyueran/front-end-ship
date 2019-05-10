@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { map } from 'lodash-es';
 import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
-import { map, filter } from 'lodash-es';
 import { LineBox, VerticalBox, Sizer } from '@xinghunm/widgets';
 
 const Content = styled(VerticalBox)`
@@ -71,70 +71,29 @@ const FilterItems = [
   { name: '标签', items: ['JS', 'CSS', '其他'] }
 ];
 
-const columnsData = [
-  {
-    name: '#',
-    dataIndex: 'questionNum',
-    width: '25%'
-  },
-  {
-    name: '题名',
-    dataIndex: 'questionTtile',
-    render: () => <div>123</div>
-  },
-  {
-    name: '练习次数',
-    dataIndex: 'exerciseTimes',
-    width: '20%',
-    render: () => <div>123</div>
-  },
-  {
-    name: '通过率',
-    dataIndex: 'passRate',
-    width: '15%',
-    render: () => <div>123</div>
-  },
-  {
-    name: '难度',
-    dataIndex: 'difficulty',
-    width: '15%',
-    render: () => <div>123</div>
-  }
-];
-
 const propTypes = {
-  questions: PropTypes.array.isRequired
+  columnsData: PropTypes.array.isRequired,
+  questions: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
-const QuestionTable = ({ questions }) => {
-  const [searchedQuestions, setSearchedQuestions] = useState();
-  const handleSearch = e => {
-    const filteredData = filter(questions, ({ questionTtile }) =>
-      questionTtile.includes(e.target.value)
-    );
-    setSearchedQuestions(filteredData);
-  };
-
-  const questionsToShow = searchedQuestions || questions;
-
-  return (
-    <Content>
-      <Header>
-        <HeaderTitle>
-          <strong>练习题</strong>
-        </HeaderTitle>
-        <SearchBox>
-          <Input placeholder="搜索题目" onChange={handleSearch} />
-        </SearchBox>
-        <Sizer />
-        {map(FilterItems, ({ name, items }) => (
-          <DropDown key={name} name={name} items={items} />
-        ))}
-      </Header>
-      <Table columns={columnsData} dataSource={questionsToShow} />
-    </Content>
-  );
-};
+const QuestionTable = ({ columnsData, questions, onChange }) => (
+  <Content>
+    <Header>
+      <HeaderTitle>
+        <strong>练习题</strong>
+      </HeaderTitle>
+      <SearchBox>
+        <Input placeholder="搜索题目" onChange={onChange} />
+      </SearchBox>
+      <Sizer />
+      {map(FilterItems, ({ name, items }) => (
+        <DropDown key={name} name={name} items={items} />
+      ))}
+    </Header>
+    <Table columns={columnsData} dataSource={questions} />
+  </Content>
+);
 
 QuestionTable.propTypes = propTypes;
 
