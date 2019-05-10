@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CodeMirror from 'react-codemirror';
 import styled from 'styled-components';
-import { LineBox, Button, VerticalBox, Sizer } from '@xinghunm/widgets';
+import { LineBox, Button, VerticalBox, Sizer, utils } from '@xinghunm/widgets';
 
 import 'codemirror/mode/markdown/markdown';
 import 'codemirror/mode/javascript/javascript';
@@ -31,6 +31,21 @@ const ResultArea = styled.div`
   height: 100px;
   border: 1px solid;
   margin-top: -1px;
+`;
+
+const StyledBtn = styled(Button)`
+  font-size: ${props => `${props.fontSize || 13}px`};
+  color: #000;
+  border: solid #000 1px;
+  outline: none;
+  padding: 6px 18px;
+  border-radius: 3px;
+  margin: 0;
+  min-height: 34px;
+  :hover {
+    background-color: ${utils.fade('#337ab7', 0.2)};
+  }
+  background: ${props => props.background || 'none'};
 `;
 
 class CodeEditor extends Component {
@@ -62,9 +77,11 @@ class CodeEditor extends Component {
         <ResultArea>{result}</ResultArea>
         <ButtonContainer>
           <Sizer />
-          <Button onClick={excuteCode}>执行</Button>
+          <StyledBtn onClick={excuteCode}>执行</StyledBtn>
           <Sizer.X size={25} />
-          <Button onClick={excuteCode}>提交</Button>
+          <StyledBtn background="#ddd" onClick={excuteCode}>
+            提交
+          </StyledBtn>
         </ButtonContainer>
       </CodeArea>
     );
