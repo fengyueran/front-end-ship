@@ -2,9 +2,13 @@ import React from 'react';
 
 const columnsData = [
   {
+    name: '',
+    width: '10px'
+  },
+  {
     name: '#',
     dataIndex: 'questionNum',
-    width: '25%'
+    width: '10%'
   },
   {
     name: '题名',
@@ -14,7 +18,7 @@ const columnsData = [
   {
     name: '练习次数',
     dataIndex: 'exerciseTimes',
-    width: '20%',
+    width: '15%',
     render: () => <div>123</div>
   },
   {

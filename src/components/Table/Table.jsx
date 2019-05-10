@@ -33,10 +33,12 @@ const TableHeadCell = styled.th`
   text-align: left;
   padding: 0 8px;
   border-bottom: 1px solid #e8e8e8;
+  width: ${props => props.width || 'auto'};
 `;
 
 const TableCell = styled.td`
   padding: 0 8px;
+  width: ${props => props.width || 'auto'};
 `;
 
 const TableBody = styled.tbody``;
@@ -90,16 +92,21 @@ const Table = ({ columns, dataSource, onPageChange, pagination }) => {
       <StyledTable>
         <TableHead>
           <TableRow>
-            {columns.map(({ name }) => (
-              <TableHeadCell key={name}>{name}</TableHeadCell>
+            {columns.map(({ name, width }) => (
+              <TableHeadCell key={name} width={width}>
+                {name}
+              </TableHeadCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           {currentPageData.map((rowData, index) => (
             <TableRow key={index}>
-              {columns.map(({ dataIndex, key }) => (
-                <TableCell key={rowData[key] || rowData[dataIndex]}>
+              {columns.map(({ dataIndex, width, key }) => (
+                <TableCell
+                  key={rowData[key] || rowData[dataIndex]}
+                  width={width}
+                >
                   {rowData[dataIndex]}
                 </TableCell>
               ))}
