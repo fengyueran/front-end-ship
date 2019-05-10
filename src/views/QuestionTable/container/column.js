@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'src/utils/constants';
 
 const columnsData = [
   {
@@ -13,7 +15,9 @@ const columnsData = [
   {
     name: '题名',
     dataIndex: 'questionTtile',
-    render: () => <div>123</div>
+    render: (title, rowData) => (
+      <Link to={`${ROUTES.ANSWER}/${rowData.id}`}>{title}</Link>
+    )
   },
   {
     name: '练习次数',
