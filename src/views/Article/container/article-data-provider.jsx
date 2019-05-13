@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { getDocument } from 'src/webapi';
+import client from 'src/webapi';
 
 const withData = WrappedComponent => {
   const Container = () => {
     const [html, setHtml] = useState({ __html: null });
 
     const getHtml = async () => {
-      getDocument().then(htmlObj => {
-        setHtml(htmlObj);
+      client.getQuestionHtml().then(htmlObj => {
+        if (htmlObj.__html) {
+          setHtml(htmlObj);
+        }
       });
     };
 

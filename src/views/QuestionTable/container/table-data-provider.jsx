@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import { filter } from 'lodash-es';
+import client from 'src/webapi';
 import columnsData from './column';
 
 const withData = WrappedComponent => {
-  const propTypes = {
-    questions: PropTypes.array.isRequired
-  };
-  const Container = props => {
-    const { questions } = props;
+  const Container = () => {
+    const [questions, setQeuestions] = useState([]);
+
     const [searchedQuestions, setSearchedQuestions] = useState();
     const handleSearch = e => {
       const filteredData = filter(questions, ({ questionTtile }) =>
@@ -16,6 +14,16 @@ const withData = WrappedComponent => {
       );
       setSearchedQuestions(filteredData);
     };
+
+    const getQuestions = async () => {
+      client.getQuestions().then(data => {
+        setQeuestions(data);
+      });
+    };
+
+    useEffect(() => {
+      getQuestions();
+    }, []);
 
     const questionsToShow = searchedQuestions || questions;
     return (
@@ -26,7 +34,7 @@ const withData = WrappedComponent => {
       />
     );
   };
-  Container.propTypes = propTypes;
+
   return Container;
 };
 
