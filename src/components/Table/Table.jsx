@@ -102,11 +102,8 @@ const Table = ({ columns, dataSource, onPageChange, pagination }) => {
         <TableBody>
           {currentPageData.map((rowData, index) => (
             <TableRow key={index}>
-              {columns.map(({ dataIndex, width, render, key }) => (
-                <TableCell
-                  key={rowData[key] || rowData[dataIndex]}
-                  width={width}
-                >
+              {columns.map(({ dataIndex, width, render }, cellIndex) => (
+                <TableCell key={rowData.key || cellIndex} width={width}>
                   {render
                     ? render(rowData[dataIndex], rowData)
                     : rowData[dataIndex]}
