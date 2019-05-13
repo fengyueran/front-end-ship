@@ -6,6 +6,7 @@
     "@rematch/core": "^1.1.0",
     "@rematch/persist": "^1.1.6",
     "@xinghunm/widgets": "^0.0.18",
+    "axios": "^0.18.0",
     "codemirror": "^5.46.0",
     "history": "^4.9.0",
     "localforage": "^1.7.3",
