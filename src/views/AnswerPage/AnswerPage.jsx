@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { LineBox } from '@xinghunm/widgets';
 import CodeEditor from '../CodeEditor';
@@ -11,15 +11,12 @@ const Container = styled(LineBox)`
     width: 50%;
   }
 `;
-class AnswerPage extends Component {
-  render() {
-    return (
-      <Container>
-        <Article />
-        <CodeEditor />
-      </Container>
-    );
-  }
-}
+
+const AnswerPage = () => (
+  <Container>
+    <Article />
+    <CodeEditor />
+  </Container>
+);
 
 export default AnswerPage;
