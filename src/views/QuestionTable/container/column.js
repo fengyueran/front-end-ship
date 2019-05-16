@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ROUTES } from 'src/utils/constants';
+import TitleCell from '../stateless/TitleCell';
+import withData from './title-cell-data-provider';
+
+const TitleCellContainer = withData(TitleCell);
 
 const columnsData = [
   {
@@ -15,9 +17,7 @@ const columnsData = [
   {
     name: '题名',
     dataIndex: 'questionTtile',
-    render: (title, rowData) => (
-      <Link to={`${ROUTES.ANSWER}/${rowData.id}`}>{title}</Link>
-    )
+    render: (title, rowData) => <TitleCellContainer rowData={rowData} />
   },
   {
     name: '练习次数',
