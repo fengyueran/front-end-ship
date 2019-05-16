@@ -10,7 +10,7 @@ localforage.config({
   name: 'WebSQL'
 });
 
-const whitelist = ['app'];
+const whitelist = ['question'];
 
 const persistPlugin = createRematchPersist({
   version: 1,
