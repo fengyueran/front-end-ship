@@ -9,8 +9,8 @@ const withData = WrappedComponent => {
 
     const [searchedQuestions, setSearchedQuestions] = useState();
     const handleSearch = e => {
-      const filteredData = filter(questions, ({ questionTtile }) =>
-        questionTtile.includes(e.target.value)
+      const filteredData = filter(questions, ({ questionTitle }) =>
+        questionTitle.includes(e.target.value)
       );
       setSearchedQuestions(filteredData);
     };

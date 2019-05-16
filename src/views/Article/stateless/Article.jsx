@@ -7,7 +7,6 @@ const QuestionArea = styled.div`
   padding: 1rem;
   overflow: auto;
   background: #fff;
-  border: 1px solid;
 `;
 
 const propTypes = {

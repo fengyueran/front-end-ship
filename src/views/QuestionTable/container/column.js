@@ -16,7 +16,7 @@ const columnsData = [
   },
   {
     name: '题名',
-    dataIndex: 'questionTtile',
+    dataIndex: 'questionTitle',
     render: (title, rowData) => <TitleCellContainer rowData={rowData} />
   },
   {
