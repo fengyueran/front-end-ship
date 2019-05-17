@@ -7,7 +7,7 @@ import ToolBar from './ToolBar';
 import CodeActionBar from './CodeActionBar';
 
 const CodeArea = styled(VerticalBox)`
-  width: 100%;
+  flex: 1 0 0;
   height: 100%;
 `;
 

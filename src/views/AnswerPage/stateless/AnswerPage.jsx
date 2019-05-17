@@ -16,9 +16,6 @@ const Container = styled(VerticalBox)`
 const Content = styled(LineBox)`
   height: 100%;
   width: 100%;
-  & > div {
-    width: 50%;
-  }
 `;
 
 const propTypes = {

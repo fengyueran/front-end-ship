@@ -9,6 +9,7 @@ import QuestionPickBar from './QuestionPickBar';
 
 const Container = styled(VerticalBox)`
   height: 100%;
+  flex: 1 0 0;
   overflow: auto;
   background: #fff;
 `;
