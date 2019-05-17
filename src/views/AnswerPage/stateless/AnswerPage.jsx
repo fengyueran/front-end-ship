@@ -1,12 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LineBox, VerticalBox } from '@xinghunm/widgets';
-import withData from '../container/info-bar-data-provider';
 import QuestionInfoBar from './QuestionInfoBar';
 import CodeEditor from '../../CodeEditor';
-import Article from '../../Article';
-
-const InfoBarContainer = withData(QuestionInfoBar);
+import AnswerArea from '../../AnswerArea';
 
 const Container = styled(VerticalBox)`
   width: 100%;
@@ -23,14 +21,19 @@ const Content = styled(LineBox)`
   }
 `;
 
-const AnswerPage = () => (
+const propTypes = {
+  currentQuestion: PropTypes.object.isRequired
+};
+
+const AnswerPage = ({ currentQuestion }) => (
   <Container>
-    <InfoBarContainer />
+    <QuestionInfoBar currentQuestion={currentQuestion} />
     <Content>
-      <Article />
+      <AnswerArea currentQuestion={currentQuestion} />
       <CodeEditor />
     </Content>
   </Container>
 );
+AnswerPage.propTypes = propTypes;
 
 export default AnswerPage;

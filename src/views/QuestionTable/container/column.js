@@ -11,12 +11,12 @@ const columnsData = [
   },
   {
     name: '#',
-    dataIndex: 'questionNum',
+    dataIndex: 'number',
     width: '10%'
   },
   {
     name: '题名',
-    dataIndex: 'questionTitle',
+    dataIndex: 'title',
     render: (title, rowData) => <TitleCellContainer rowData={rowData} />
   },
   {

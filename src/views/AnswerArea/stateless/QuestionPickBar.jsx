@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LineBox } from '@xinghunm/widgets';
 
@@ -10,12 +9,8 @@ const Container = styled(LineBox)`
   flex-shrink: 0;
 }`;
 
-const propTypes = {
-  currentQuestion: PropTypes.object.isRequired
-};
-
 const QuestionPickBar = () => {
-  return <Container>{132}</Container>;
+  return <Container />;
 };
 
 export default QuestionPickBar;

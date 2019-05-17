@@ -1,26 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CodeMirror from 'react-codemirror';
 import styled from 'styled-components';
 import { LineBox, Button, VerticalBox, Sizer, utils } from '@xinghunm/widgets';
-
-import 'codemirror/mode/markdown/markdown';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/addon/hint/show-hint';
-import 'codemirror/addon/hint/javascript-hint';
-import 'codemirror/addon/hint/show-hint.css';
+import Editor from 'src/components/Editor';
+import ToolBar from './ToolBar';
+import CodeActionBar from './CodeActionBar';
 
 const CodeArea = styled(VerticalBox)`
   width: 100%;
   height: 100%;
-  border: 1px solid;
-  padding: 20px;
-`;
-
-const Editor = styled.div`
-  flex-grow: 1;
-  border: 1px solid;
-  position: relative;
 `;
 
 const ButtonContainer = styled(LineBox)`
@@ -60,29 +48,19 @@ class CodeEditor extends Component {
     const { value, result, excuteCode, handleCodeChange } = this.props;
     return (
       <CodeArea>
-        <Editor>
-          <CodeMirror
-            value={value}
-            options={{
-              mode: 'javascript',
-              lineNumbers: true,
-              lineWrapping: true,
-              extraKeys: {
-                Tab: 'autocomplete'
-              }
-            }}
-            onChange={handleCodeChange}
-          />
-        </Editor>
+        <ToolBar />
+        <Editor value={value} onChange={handleCodeChange} />
         <ResultArea>{result}</ResultArea>
-        <ButtonContainer>
-          <Sizer />
-          <StyledBtn onClick={excuteCode}>执行</StyledBtn>
-          <Sizer.X size={25} />
-          <StyledBtn background="#ddd" onClick={excuteCode}>
-            提交
-          </StyledBtn>
-        </ButtonContainer>
+        <CodeActionBar>
+          <ButtonContainer>
+            <Sizer />
+            <StyledBtn onClick={excuteCode}>执行</StyledBtn>
+            <Sizer.X size={25} />
+            <StyledBtn background="#ddd" onClick={excuteCode}>
+              提交
+            </StyledBtn>
+          </ButtonContainer>
+        </CodeActionBar>
       </CodeArea>
     );
   }

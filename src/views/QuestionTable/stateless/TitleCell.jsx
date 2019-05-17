@@ -8,13 +8,13 @@ const propTypes = {
   setCurrentQuestion: PropTypes.func.isRequired
 };
 const TitleCell = ({ rowData, setCurrentQuestion }) => {
-  const { id, questionTitle } = rowData;
+  const { id, title } = rowData;
   const handleClick = () => {
     setCurrentQuestion(rowData);
   };
   return (
     <Link onClick={handleClick} to={`${ROUTES.ANSWER}/${id}`}>
-      {questionTitle}
+      {title}
     </Link>
   );
 };

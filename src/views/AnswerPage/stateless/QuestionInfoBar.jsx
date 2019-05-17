@@ -33,10 +33,10 @@ const propTypes = {
 };
 
 const QuestionInfoBar = ({ currentQuestion }) => {
-  const { questionNum, questionTitle } = currentQuestion;
+  const { number, title } = currentQuestion;
   return (
     <Container>
-      <Title>{`${questionNum}. ${questionTitle}`}</Title>
+      <Title>{`${number}. ${title}`}</Title>
     </Container>
   );
 };
