@@ -9,6 +9,7 @@ import Article from '../../Article';
 const InfoBarContainer = withData(QuestionInfoBar);
 
 const Container = styled(VerticalBox)`
+  width: 100%;
   height: 100%;
   padding: 20px;
   align-items: flex-start;
@@ -16,6 +17,7 @@ const Container = styled(VerticalBox)`
 
 const Content = styled(LineBox)`
   height: 100%;
+  width: 100%;
   & > div {
     width: 50%;
   }
