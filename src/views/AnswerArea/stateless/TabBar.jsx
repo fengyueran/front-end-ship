@@ -10,7 +10,7 @@ const Container = styled(LineBox)`
   background: #f5f5f5;
   flex-shrink: 0;
   box-shadow: inset 0 -1px #eee;
-}`;
+`;
 
 const propTypes = {
   tabs: PropTypes.array.isRequired,

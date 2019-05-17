@@ -22,7 +22,7 @@ const Container = styled(LineBox)`
     background-color: #457fca;
     margin: auto 0;
   }
-}`;
+`;
 
 const Title = styled.h4`
   color: rgba(0, 0, 0, 0.85);

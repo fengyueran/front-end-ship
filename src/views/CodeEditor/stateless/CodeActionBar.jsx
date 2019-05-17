@@ -7,7 +7,7 @@ const Container = styled(LineBox)`
   padding: 15px;
   background: gray;
   flex-shrink: 0;
-}`;
+`;
 
 const CodeActionBar = () => {
   return <Container />;

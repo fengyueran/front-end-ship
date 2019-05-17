@@ -8,7 +8,7 @@ const Container = styled(LineBox)`
   padding: 0 15px;
   background: #f5f5f5;
   box-shadow: inset 0 -1px #eee;
-}`;
+`;
 
 const ToolBar = () => {
   return <Container />;
