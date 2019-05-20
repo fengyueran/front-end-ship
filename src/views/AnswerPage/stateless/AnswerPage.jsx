@@ -5,6 +5,7 @@ import { LineBox, VerticalBox } from '@xinghunm/widgets';
 import QuestionInfoBar from './QuestionInfoBar';
 import CodeEditor from '../../CodeEditor';
 import AnswerArea from '../../AnswerArea';
+import ResizeBar from './ResizeBar';
 
 const Container = styled(VerticalBox)`
   width: 100%;
@@ -27,6 +28,7 @@ const AnswerPage = ({ currentQuestion }) => (
     <QuestionInfoBar currentQuestion={currentQuestion} />
     <Content>
       <AnswerArea currentQuestion={currentQuestion} />
+      <ResizeBar />
       <CodeEditor />
     </Content>
   </Container>
