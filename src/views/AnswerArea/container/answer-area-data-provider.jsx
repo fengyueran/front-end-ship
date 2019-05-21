@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import client from 'src/webapi';
 import { QUESTION_TYPES, TABS } from 'src/utils/constants';
@@ -8,7 +8,8 @@ const withData = WrappedComponent => {
     currentQuestion: PropTypes.object.isRequired
   };
 
-  const Container = ({ currentQuestion }) => {
+  const Container = props => {
+    const { currentQuestion } = props;
     const { questionType } = currentQuestion;
     const tabs = TABS[questionType] || TABS[QUESTION_TYPES.SHORT_ANSWER];
 
@@ -27,17 +28,20 @@ const withData = WrappedComponent => {
       getHtml();
     }, []);
 
-    const onTabChange = index => {
-      setActiveTab(tabs[index]);
-    };
+    const onTabChange = useCallback(
+      index => {
+        setActiveTab(tabs[index]);
+      },
+      [tabs]
+    );
 
     return (
       <WrappedComponent
         html={html}
         activeTab={activeTab}
         tabs={tabs}
-        currentQuestion={currentQuestion}
         onTabChange={onTabChange}
+        {...props}
       />
     );
   };

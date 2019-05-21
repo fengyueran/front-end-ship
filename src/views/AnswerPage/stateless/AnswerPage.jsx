@@ -20,19 +20,39 @@ const Content = styled(LineBox)`
 `;
 
 const propTypes = {
-  currentQuestion: PropTypes.object.isRequired
+  currentQuestion: PropTypes.object.isRequired,
+  answerAreaEl: PropTypes.object.isRequired,
+  codeEditorEl: PropTypes.object.isRequired,
+  resizeBarEl: PropTypes.object.isRequired,
+  flexGrow: PropTypes.number.isRequired,
+  onMouseDown: PropTypes.func.isRequired
 };
 
-const AnswerPage = ({ currentQuestion }) => (
-  <Container>
-    <QuestionInfoBar currentQuestion={currentQuestion} />
-    <Content>
-      <AnswerArea currentQuestion={currentQuestion} />
-      <ResizeBar />
-      <CodeEditor />
-    </Content>
-  </Container>
-);
+const AnswerPage = props => {
+  const {
+    currentQuestion,
+    answerAreaEl,
+    codeEditorEl,
+    resizeBarEl,
+    flexGrow,
+    onMouseDown
+  } = props;
+
+  return (
+    <Container>
+      <QuestionInfoBar currentQuestion={currentQuestion} />
+      <Content>
+        <AnswerArea
+          currentQuestion={currentQuestion}
+          getRef={answerAreaEl}
+          flexGrow={flexGrow}
+        />
+        <ResizeBar getRef={resizeBarEl} onMouseDown={onMouseDown} />
+        <CodeEditor getRef={codeEditorEl} />
+      </Content>
+    </Container>
+  );
+};
 AnswerPage.propTypes = propTypes;
 
 export default AnswerPage;

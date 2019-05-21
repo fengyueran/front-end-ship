@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LineBox, Button, VerticalBox, Sizer, utils } from '@xinghunm/widgets';
@@ -8,6 +8,7 @@ import CodeActionBar from './CodeActionBar';
 
 const CodeArea = styled(VerticalBox)`
   flex: 1 0 0;
+  min-width: 200px;
   height: 100%;
 `;
 
@@ -36,34 +37,35 @@ const StyledBtn = styled(Button)`
   background: ${props => props.background || 'none'};
 `;
 
-class CodeEditor extends Component {
-  static propTypes = {
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    result: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    excuteCode: PropTypes.func,
-    handleCodeChange: PropTypes.func
-  };
+const propTypes = {
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  result: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  excuteCode: PropTypes.func,
+  getRef: PropTypes.object.isRequired,
+  handleCodeChange: PropTypes.func
+};
 
-  render() {
-    const { value, result, excuteCode, handleCodeChange } = this.props;
-    return (
-      <CodeArea>
-        <ToolBar />
-        <Editor value={value} onChange={handleCodeChange} />
-        <ResultArea>{result}</ResultArea>
-        <CodeActionBar>
-          <ButtonContainer>
-            <Sizer />
-            <StyledBtn onClick={excuteCode}>执行</StyledBtn>
-            <Sizer.X size={25} />
-            <StyledBtn background="#ddd" onClick={excuteCode}>
-              提交
-            </StyledBtn>
-          </ButtonContainer>
-        </CodeActionBar>
-      </CodeArea>
-    );
-  }
-}
+const CodeEditor = props => {
+  const { value, result, excuteCode, getRef, handleCodeChange } = props;
+  return (
+    <CodeArea ref={getRef}>
+      <ToolBar />
+      <Editor value={value} onChange={handleCodeChange} />
+      <ResultArea>{result}</ResultArea>
+      <CodeActionBar>
+        <ButtonContainer>
+          <Sizer />
+          <StyledBtn onClick={excuteCode}>执行</StyledBtn>
+          <Sizer.X size={25} />
+          <StyledBtn background="#ddd" onClick={excuteCode}>
+            提交
+          </StyledBtn>
+        </ButtonContainer>
+      </CodeActionBar>
+    </CodeArea>
+  );
+};
+
+CodeEditor.propTypes = propTypes;
 
 export default CodeEditor;

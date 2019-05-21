@@ -7,9 +7,10 @@ import { TABS_NAME } from 'src/utils/constants';
 import TabBar from './TabBar';
 import QuestionPickBar from './QuestionPickBar';
 
-const Container = styled(VerticalBox)`
+const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
+  style: { flex: `${flexGrow} 0 0` }
+}))`
   height: 100%;
-  flex: 1 0 0;
   overflow: auto;
   background: #fff;
 `;
@@ -25,13 +26,22 @@ const propTypes = {
   html: PropTypes.object,
   tabs: PropTypes.array.isRequired,
   activeTab: PropTypes.string.isRequired,
+  flexGrow: PropTypes.number.isRequired,
+  getRef: PropTypes.object.isRequired,
   onTabChange: PropTypes.func.isRequired
 };
 
-const AnswerArea = ({ html, activeTab, tabs, onTabChange }) => {
+const AnswerArea = ({
+  html,
+  activeTab,
+  tabs,
+  flexGrow,
+  getRef,
+  onTabChange
+}) => {
   const isShowAnswer = activeTab === TABS_NAME.REFERENCE_ANSWER;
   return (
-    <Container>
+    <Container ref={getRef} flexGrow={flexGrow}>
       <TabBar tabs={tabs} onTabChange={onTabChange} />
       {isShowAnswer ? <Content dangerouslySetInnerHTML={html} /> : <Editor />}
       <QuestionPickBar />
