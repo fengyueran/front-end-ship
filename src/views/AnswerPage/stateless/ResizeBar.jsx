@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { VerticalBox } from '@xinghunm/widgets';
+import useResizeBarStatus from '../container/use-resize-bar-status';
 
 const VerticalBar = styled(VerticalBox)`
   width: 10px;
   height: 100%;
-  background: #f5f5f5;
-  background: gray;
+  background: ${props => (props.isMouseDown ? '#d1dff180' : '#f5f5f5')};
   justify-content: center;
   align-items: center;
   :hover {
     cursor: col-resize;
+    background: #d1dff180;
   }
 `;
 
@@ -28,8 +29,13 @@ const propTypes = {
 };
 
 const ResizeBar = ({ onMouseDown, getRef }) => {
+  const { isMouseDown, handleMouseDown } = useResizeBarStatus(onMouseDown);
   return (
-    <VerticalBar ref={getRef} onMouseDown={onMouseDown}>
+    <VerticalBar
+      ref={getRef}
+      onMouseDown={handleMouseDown}
+      isMouseDown={isMouseDown}
+    >
       <Ellipsis>••••••</Ellipsis>
     </VerticalBar>
   );
