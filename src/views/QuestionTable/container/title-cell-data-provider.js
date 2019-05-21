@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-const mapDispatch = ({ question: { setCurrentQuestion } }) => ({
-  setCurrentQuestion
+const mapDispatch = ({ question: { updateQuestionParam } }) => ({
+  updateQuestionParam
 });
 
 const withData = WrappedComponent => {

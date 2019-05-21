@@ -12,6 +12,11 @@ export const TABS_NAME = {
   REFERENCE_ANSWER: '参考答案'
 };
 
+export const BUTTONS_NAME = {
+  NEXT_QUESTION: '下一题',
+  PRE_QUESTION: '上一题'
+};
+
 export const TABS = {
   SHORT_ANSWER: [TABS_NAME.QUESTION_ANSWER, TABS_NAME.REFERENCE_ANSWER]
 };

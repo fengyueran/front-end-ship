@@ -5,12 +5,12 @@ import { ROUTES } from 'src/utils/constants';
 
 const propTypes = {
   rowData: PropTypes.object,
-  setCurrentQuestion: PropTypes.func.isRequired
+  updateQuestionParam: PropTypes.func.isRequired
 };
-const TitleCell = ({ rowData, setCurrentQuestion }) => {
+const TitleCell = ({ rowData, updateQuestionParam }) => {
   const { id, title } = rowData;
   const handleClick = () => {
-    setCurrentQuestion(rowData);
+    updateQuestionParam({ currentQuestion: rowData });
   };
   return (
     <Link onClick={handleClick} to={`${ROUTES.ANSWER}/${id}`}>

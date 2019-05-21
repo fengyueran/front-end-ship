@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { filter } from 'lodash-es';
 import client from 'src/webapi';
 import columnsData from './column';
 
-const withData = WrappedComponent => {
-  const Container = () => {
-    const [questions, setQeuestions] = useState([]);
+const mapState = state => ({
+  questions: state.question.questions
+});
 
+const mapDispatch = ({ question: { initQuestions } }) => ({
+  initQuestions
+});
+
+const withData = WrappedComponent => {
+  const propTypes = {
+    questions: PropTypes.array.isRequired,
+    initQuestions: PropTypes.func.isRequired
+  };
+
+  const Wrapper = ({ questions, initQuestions }) => {
     const [searchedQuestions, setSearchedQuestions] = useState();
     const handleSearch = e => {
       const filteredData = filter(questions, ({ title }) =>
@@ -17,12 +30,13 @@ const withData = WrappedComponent => {
 
     const getQuestions = async () => {
       client.getQuestions().then(data => {
-        setQeuestions(data);
+        initQuestions(data);
       });
     };
 
     useEffect(() => {
       getQuestions();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const questionsToShow = searchedQuestions || questions;
@@ -34,6 +48,12 @@ const withData = WrappedComponent => {
       />
     );
   };
+
+  Wrapper.propTypes = propTypes;
+  const Container = connect(
+    mapState,
+    mapDispatch
+  )(Wrapper);
 
   return Container;
 };

@@ -5,7 +5,10 @@ import { VerticalBox } from '@xinghunm/widgets';
 import Editor from 'src/components/Editor';
 import { TABS_NAME } from 'src/utils/constants';
 import TabBar from './TabBar';
-import QuestionPickBar from './QuestionPickBar';
+import PickBar from './QuestionPickBar';
+import withData from '../container/picker-bar-data-provider';
+
+const QuestionPickBar = withData(PickBar);
 
 const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
   style: { flex: `${flexGrow} 0 0` }

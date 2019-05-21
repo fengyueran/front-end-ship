@@ -16,17 +16,17 @@ const withData = WrappedComponent => {
     const [html, setHtml] = useState({ __html: null });
     const [activeTab, setActiveTab] = useState(tabs[0]);
 
-    const getHtml = async () => {
-      client.getQuestionHtml().then(htmlObj => {
+    const getHtml = useCallback(async () => {
+      client.getQuestionHtml(currentQuestion.id).then(htmlObj => {
         if (htmlObj.__html) {
           setHtml(htmlObj);
         }
       });
-    };
+    }, [currentQuestion.id]);
 
     useEffect(() => {
       getHtml();
-    }, []);
+    }, [currentQuestion.id, getHtml]);
 
     const onTabChange = useCallback(
       index => {
