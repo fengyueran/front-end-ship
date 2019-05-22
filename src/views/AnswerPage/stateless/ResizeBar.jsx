@@ -7,7 +7,10 @@ import useResizeBarStatus from '../container/use-resize-bar-status';
 const VerticalBar = styled(VerticalBox)`
   width: 10px;
   height: 100%;
-  background: ${props => (props.isMouseDown ? '#d1dff180' : '#f5f5f5')};
+  background: ${props =>
+    props.isMouseDown
+      ? '#d1dff180'
+      : 'linear-gradient(180deg,#f5f5f5 10%,#fff 90%)'};
   justify-content: center;
   align-items: center;
   :hover {
