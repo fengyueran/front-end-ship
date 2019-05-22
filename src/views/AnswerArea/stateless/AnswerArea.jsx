@@ -19,7 +19,8 @@ const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
 `;
 
 const Content = styled.div`
-  height: 100%;
+  display: flex;
+  flex-grow: 1;
   border: 1px solid #eee;
 `;
 

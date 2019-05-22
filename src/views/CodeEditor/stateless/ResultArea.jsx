@@ -36,4 +36,4 @@ const ResultArea = ({ result }) => (
 
 ResultArea.propTypes = propTypes;
 
-export default ResultArea;
+export default React.memo(ResultArea);

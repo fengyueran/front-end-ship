@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 const withData = WrappedComponent => {
@@ -11,18 +11,14 @@ const withData = WrappedComponent => {
     const [result, setResult] = useState();
     const [isShowConsole, setIsShowConsole] = useState(false);
 
-    const handleCodeChange = v => {
+    const handleCodeChange = useCallback(v => {
       setValue(v);
-    };
+    }, []);
 
-    const executeCode = () => {
+    const executeCode = useCallback(() => {
       const result = eval(value); //eslint-disable-line
       setResult(result);
-    };
-
-    const toggleConsole = () => {
-      setIsShowConsole(!isShowConsole);
-    };
+    }, [value]);
 
     return (
       <WrappedComponent
@@ -31,7 +27,7 @@ const withData = WrappedComponent => {
         getRef={getRef}
         isShowConsole={isShowConsole}
         executeCode={executeCode}
-        toggleConsole={toggleConsole}
+        toggleConsole={setIsShowConsole}
         handleCodeChange={handleCodeChange}
       />
     );

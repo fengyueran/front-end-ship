@@ -52,4 +52,4 @@ const CodeEditor = props => {
 
 CodeEditor.propTypes = propTypes;
 
-export default CodeEditor;
+export default React.memo(CodeEditor);

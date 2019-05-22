@@ -39,4 +39,4 @@ const Editor = ({ value, onChange }) => (
 
 Editor.propTypes = propTypes;
 
-export default Editor;
+export default React.memo(Editor);

@@ -28,9 +28,12 @@ const propTypes = {
 };
 
 const CodeActionBar = ({ executeCode, toggleConsole }) => {
+  const toggle = () => {
+    toggleConsole(isShowConsole => !isShowConsole);
+  };
   return (
     <Container>
-      <ConsoleBtn onClick={toggleConsole}>
+      <ConsoleBtn onClick={toggle}>
         {NAMES.CONSOLE}
         <CaretUp />
       </ConsoleBtn>
@@ -46,4 +49,4 @@ const CodeActionBar = ({ executeCode, toggleConsole }) => {
 
 CodeActionBar.propTypes = propTypes;
 
-export default CodeActionBar;
+export default React.memo(CodeActionBar);
