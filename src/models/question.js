@@ -1,4 +1,4 @@
-import { forEach } from 'lodash-es';
+import { forEach, random } from 'lodash-es';
 
 const defaultState = {
   currentQuestion: null,
@@ -42,6 +42,12 @@ const question = {
         const targetQuestion = questions[number - 2];
         this.updateQuestionParam({ currentQuestion: targetQuestion });
       }
+    },
+    randomQuestion(payload, state) {
+      const { questions } = state.question;
+      const number = random(0, questions.length - 1);
+      const targetQuestion = questions[number];
+      this.updateQuestionParam({ currentQuestion: targetQuestion });
     }
   })
 };

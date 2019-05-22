@@ -14,7 +14,8 @@ export const TABS_NAME = {
 
 export const BUTTONS_NAME = {
   NEXT_QUESTION: '下一题',
-  PRE_QUESTION: '上一题'
+  PRE_QUESTION: '上一题',
+  RANDOM_QUESTION: '随机选题'
 };
 
 export const TABS = {

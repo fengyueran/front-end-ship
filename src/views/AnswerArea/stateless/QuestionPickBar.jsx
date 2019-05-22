@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LineBox, Button, Sizer, utils } from '@xinghunm/widgets';
+import { LineBox, Sizer } from '@xinghunm/widgets';
+import ButtonBase from 'src/components/ButtonBase';
 import { BUTTONS_NAME } from 'src/utils/constants';
 
 const Container = styled(LineBox)`
@@ -11,53 +12,49 @@ const Container = styled(LineBox)`
   flex-shrink: 0;
 `;
 
-const StyledBtn = styled(Button).attrs(({ isDisable }) => ({
-  hasRipple: !isDisable
-}))`
-  font-size: ${props => `${props.fontSize || 13}px`};
-  color: ${props => (props.isDisable ? '#afaeae' : '#37464e')};
-  border: solid 1px;
-  border-color: ${props => (props.isDisable ? '#E8E9E9' : '#c9d6da')};
-  outline: none;
-  padding: 6px 18px;
-  border-radius: 3px;
-  margin: 0;
-  min-height: 34px;
-  background: ${props => props.background || 'none'};
+const RandomBtn = styled(ButtonBase)`
+  padding: 6px 8px;
+`;
 
-  :hover {
-    background: ${props =>
-      props.isDisable ? 'none' : utils.fade('#337ab7', 0.2)};
-    cursor: ${props => (props.isDisable ? 'not-allowed' : 'pointer')};
-  }
-  box-shadow: none;
+const RandomIcom = styled.i.attrs(() => ({
+  className: 'fa fa-random'
+}))`
+  margin-right: 5px;
+  margin-top: 1px;
 `;
 
 const propTypes = {
   questionsTotal: PropTypes.number.isRequired,
   currentQustionNum: PropTypes.number.isRequired,
   nextQuestion: PropTypes.func.isRequired,
-  preQuestion: PropTypes.func.isRequired
+  preQuestion: PropTypes.func.isRequired,
+  randomQuestion: PropTypes.func.isRequired
 };
 
 const QuestionPickBar = ({
   questionsTotal,
   currentQustionNum,
   nextQuestion,
-  preQuestion
+  preQuestion,
+  randomQuestion
 }) => {
   const isPreBtnDisable = currentQustionNum === 1;
   const isNextBtnDisable = currentQustionNum === questionsTotal;
   return (
     <Container>
       <Sizer />
-      <StyledBtn onClick={preQuestion} isDisable={isPreBtnDisable}>
+      <RandomBtn onClick={randomQuestion}>
+        <RandomIcom />
+        {BUTTONS_NAME.RANDOM_QUESTION}
+      </RandomBtn>
+      <Sizer.X size={30} />
+      <ButtonBase onClick={preQuestion} isDisable={isPreBtnDisable}>
         {BUTTONS_NAME.PRE_QUESTION}
-      </StyledBtn>
+      </ButtonBase>
       <Sizer.X size={25} />
-      <StyledBtn onClick={nextQuestion} isDisable={isNextBtnDisable}>
+      <ButtonBase onClick={nextQuestion} isDisable={isNextBtnDisable}>
         {BUTTONS_NAME.NEXT_QUESTION}
-      </StyledBtn>
+      </ButtonBase>
     </Container>
   );
 };

@@ -5,9 +5,12 @@ const mapState = state => ({
   currentQustionNum: state.question.currentQuestion.number
 });
 
-const mapDispatch = ({ question: { nextQuestion, preQuestion } }) => ({
+const mapDispatch = ({
+  question: { nextQuestion, preQuestion, randomQuestion }
+}) => ({
   nextQuestion,
-  preQuestion
+  preQuestion,
+  randomQuestion
 });
 
 const withData = WrappedComponent => {
