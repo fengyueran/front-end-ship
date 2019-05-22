@@ -23,6 +23,12 @@ const RandomIcom = styled.i.attrs(() => ({
   margin-top: 1px;
 `;
 
+const QuestionNum = styled.span`
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+`;
+
 const propTypes = {
   questionsTotal: PropTypes.number.isRequired,
   currentQustionNum: PropTypes.number.isRequired,
@@ -51,7 +57,7 @@ const QuestionPickBar = ({
       <ButtonBase onClick={preQuestion} isDisable={isPreBtnDisable}>
         {BUTTONS_NAME.PRE_QUESTION}
       </ButtonBase>
-      <Sizer.X size={25} />
+      <QuestionNum>{`${currentQustionNum} / ${questionsTotal}`}</QuestionNum>
       <ButtonBase onClick={nextQuestion} isDisable={isNextBtnDisable}>
         {BUTTONS_NAME.NEXT_QUESTION}
       </ButtonBase>
