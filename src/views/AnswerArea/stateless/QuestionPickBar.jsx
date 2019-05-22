@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LineBox, Sizer } from '@xinghunm/widgets';
 import ButtonBase from 'src/components/ButtonBase';
-import { BUTTONS_NAME } from 'src/utils/constants';
+import { NAMES } from 'src/utils/constants';
 
 const Container = styled(LineBox)`
   width: 100%;
   padding: 10px 20px;
-  box-shadow: inset 0 1px #eee;
   flex-shrink: 0;
 `;
 
@@ -16,7 +15,7 @@ const RandomBtn = styled(ButtonBase)`
   padding: 6px 8px;
 `;
 
-const RandomIcom = styled.i.attrs(() => ({
+const RandomIcon = styled.i.attrs(() => ({
   className: 'fa fa-random'
 }))`
   margin-right: 5px;
@@ -50,16 +49,16 @@ const QuestionPickBar = ({
     <Container>
       <Sizer />
       <RandomBtn onClick={randomQuestion}>
-        <RandomIcom />
-        {BUTTONS_NAME.RANDOM_QUESTION}
+        <RandomIcon />
+        {NAMES.RANDOM_QUESTION}
       </RandomBtn>
       <Sizer.X size={30} />
       <ButtonBase onClick={preQuestion} isDisable={isPreBtnDisable}>
-        {BUTTONS_NAME.PRE_QUESTION}
+        {NAMES.PRE_QUESTION}
       </ButtonBase>
       <QuestionNum>{`${currentQustionNum} / ${questionsTotal}`}</QuestionNum>
       <ButtonBase onClick={nextQuestion} isDisable={isNextBtnDisable}>
-        {BUTTONS_NAME.NEXT_QUESTION}
+        {NAMES.NEXT_QUESTION}
       </ButtonBase>
     </Container>
   );

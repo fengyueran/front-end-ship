@@ -12,10 +12,14 @@ export const TABS_NAME = {
   REFERENCE_ANSWER: '参考答案'
 };
 
-export const BUTTONS_NAME = {
+export const NAMES = {
   NEXT_QUESTION: '下一题',
   PRE_QUESTION: '上一题',
-  RANDOM_QUESTION: '随机选题'
+  RANDOM_QUESTION: '随机选题',
+  EXCUTE: '执行',
+  SUBMIT: '提交',
+  CONSOLE: '控制台',
+  EXCUTE_RESULT: '执行结果'
 };
 
 export const TABS = {
