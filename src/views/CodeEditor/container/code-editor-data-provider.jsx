@@ -9,14 +9,19 @@ const withData = WrappedComponent => {
   const Container = ({ getRef }) => {
     const [value, setValue] = useState('//按Tab键补全');
     const [result, setResult] = useState();
+    const [isShowConsole, setIsShowConsole] = useState(false);
 
     const handleCodeChange = v => {
       setValue(v);
     };
 
-    const excuteCode = () => {
+    const executeCode = () => {
       const result = eval(value); //eslint-disable-line
       setResult(result);
+    };
+
+    const toggleConsole = () => {
+      setIsShowConsole(!isShowConsole);
     };
 
     return (
@@ -24,7 +29,9 @@ const withData = WrappedComponent => {
         value={value}
         result={result}
         getRef={getRef}
-        excuteCode={excuteCode}
+        isShowConsole={isShowConsole}
+        executeCode={executeCode}
+        toggleConsole={toggleConsole}
         handleCodeChange={handleCodeChange}
       />
     );

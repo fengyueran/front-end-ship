@@ -20,6 +20,11 @@ const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
 
 const Content = styled.div`
   height: 100%;
+  border: 1px solid #eee;
+`;
+
+const Answer = styled.div`
+  height: 100%;
   padding: 1rem;
   overflow: auto;
   background: #fff;
@@ -46,7 +51,9 @@ const AnswerArea = ({
   return (
     <Container ref={getRef} flexGrow={flexGrow}>
       <TabBar tabs={tabs} onTabChange={onTabChange} />
-      {isShowAnswer ? <Content dangerouslySetInnerHTML={html} /> : <Editor />}
+      <Content>
+        {isShowAnswer ? <Answer dangerouslySetInnerHTML={html} /> : <Editor />}
+      </Content>
       <QuestionPickBar />
     </Container>
   );

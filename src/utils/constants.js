@@ -16,10 +16,10 @@ export const NAMES = {
   NEXT_QUESTION: '下一题',
   PRE_QUESTION: '上一题',
   RANDOM_QUESTION: '随机选题',
-  EXCUTE: '执行',
+  EXECUTE: '执行',
   SUBMIT: '提交',
   CONSOLE: '控制台',
-  EXCUTE_RESULT: '执行结果'
+  EXECUTE_RESULT: '执行结果'
 };
 
 export const TABS = {
