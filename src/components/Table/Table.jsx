@@ -5,6 +5,26 @@ import { Pagination } from '@xinghunm/widgets';
 
 const Container = styled.div``;
 
+const TableView = styled.div`
+  position: relative;
+  padding-top: 48px;
+  ::before {
+    content: '';
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 48px;
+    background: #fff;
+  }
+`;
+
+const TableViewHolder = styled.div`
+  overflow-y: auto;
+  max-height: 500px;
+`;
+
 const StyledTable = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -25,15 +45,21 @@ const TableRow = styled.tr`
     background: #fafafa;
   }
   :hover {
-    background: #6b9bda;
+    background: #cad2dc;
   }
 `;
 
 const TableHeadCell = styled.th`
-  text-align: left;
   padding: 0 8px;
-  border-bottom: 1px solid #e8e8e8;
-  width: ${props => props.width || 'auto'};
+  height: 0;
+  line-height: 0;
+  ::before {
+    top: 0;
+    height: 48px;
+    position: absolute;
+    content: attr(data-name);
+    line-height: 48px;
+  }
 `;
 
 const TableCell = styled.td`
@@ -89,30 +115,32 @@ const Table = ({ columns, dataSource, onPageChange, pagination }) => {
 
   return (
     <Container>
-      <StyledTable>
-        <TableHead>
-          <TableRow>
-            {columns.map(({ name, width }) => (
-              <TableHeadCell key={name} width={width}>
-                {name}
-              </TableHeadCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {currentPageData.map((rowData, index) => (
-            <TableRow key={index}>
-              {columns.map(({ dataIndex, width, render }, cellIndex) => (
-                <TableCell key={rowData.key || cellIndex} width={width}>
-                  {render
-                    ? render(rowData[dataIndex], rowData)
-                    : rowData[dataIndex]}
-                </TableCell>
+      <TableView>
+        <TableViewHolder>
+          <StyledTable>
+            <TableHead>
+              <tr>
+                {columns.map(({ name }) => (
+                  <TableHeadCell data-name={name} key={name} />
+                ))}
+              </tr>
+            </TableHead>
+            <TableBody>
+              {currentPageData.map((rowData, index) => (
+                <TableRow key={index}>
+                  {columns.map(({ dataIndex, width, render }, cellIndex) => (
+                    <TableCell key={rowData.key || cellIndex} width={width}>
+                      {render
+                        ? render(rowData[dataIndex], rowData)
+                        : rowData[dataIndex]}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </StyledTable>
+            </TableBody>
+          </StyledTable>
+        </TableViewHolder>
+      </TableView>
       <PaginationContainer>
         <Pagination
           total={dataSource && dataSource.length}
