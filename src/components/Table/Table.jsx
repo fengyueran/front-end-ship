@@ -33,6 +33,19 @@ const StyledTable = styled.table`
   background: #ffffff;
 `;
 
+const TableBody = styled.tbody`
+  :hover {
+    tr {
+      opacity: 0.6;
+      filter: blur(1px);
+    }
+    tr:hover {
+      opacity: 1;
+      filter: blur(0px);
+    }
+  }
+`;
+
 const TableHead = styled.thead`
   border-bottom: 1px solid #ddd6;
   font-weight: bold;
@@ -46,6 +59,9 @@ const TableRow = styled.tr`
   }
   :hover {
     background: #cad2dc;
+  }
+  & > * {
+    transition: opacity 0.2s;
   }
 `;
 
@@ -66,8 +82,6 @@ const TableCell = styled.td`
   padding: 0 8px;
   width: ${props => props.width || 'auto'};
 `;
-
-const TableBody = styled.tbody``;
 
 const PaginationContainer = styled.div`
   display: inline-block;
@@ -90,7 +104,7 @@ const TableDefaultPropTypes = {
 
 const DEFAULT_PAGE_SIZE = 10;
 
-const Table = ({ columns, dataSource, onPageChange, pagination }) => {
+const Table = ({ columns, dataSource = [], onPageChange, pagination }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const { current } = pagination;
 
@@ -112,6 +126,8 @@ const Table = ({ columns, dataSource, onPageChange, pagination }) => {
       onPageChange(page);
     }
   };
+
+  const isShowPagination = dataSource.length > pageSize;
 
   return (
     <Container>
@@ -141,14 +157,16 @@ const Table = ({ columns, dataSource, onPageChange, pagination }) => {
           </StyledTable>
         </TableViewHolder>
       </TableView>
-      <PaginationContainer>
-        <Pagination
-          total={dataSource && dataSource.length}
-          current={current}
-          pageSize={pageSize}
-          onPageChange={handlePageChange}
-        />
-      </PaginationContainer>
+      {isShowPagination && (
+        <PaginationContainer>
+          <Pagination
+            total={dataSource.length}
+            current={current}
+            pageSize={pageSize}
+            onPageChange={handlePageChange}
+          />
+        </PaginationContainer>
+      )}
     </Container>
   );
 };
