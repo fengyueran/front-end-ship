@@ -19,7 +19,8 @@ export const NAMES = {
   EXECUTE: '执行',
   SUBMIT: '提交',
   CONSOLE: '控制台',
-  EXECUTE_RESULT: '执行结果'
+  EXECUTE_RESULT: '执行结果',
+  SHORT_ANSWER: '简答题'
 };
 
 export const TABS = {

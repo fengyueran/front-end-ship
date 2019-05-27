@@ -1,4 +1,5 @@
 import React from 'react';
+import { NAMES } from 'src/utils/constants';
 import TitleCell from '../stateless/TitleCell';
 import withData from './title-cell-data-provider';
 
@@ -30,9 +31,10 @@ const columnsData = [
     width: '15%'
   },
   {
-    name: '难度',
-    dataIndex: 'difficulty',
-    width: '15%'
+    name: '类型',
+    dataIndex: 'type',
+    width: '15%',
+    render: type => <div>{NAMES[type]}</div>
   }
 ];
 
