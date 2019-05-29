@@ -7,10 +7,15 @@ const {
   useEslintRc
 } = require('customize-cra');
 
-const overrideOutput = () => config => {
-  config.output.filename = 'static/js/bundle.js';
-  delete config.optimization.splitChunks;
-  config.optimization.runtimeChunk = false;
+const CircularDependencyPlugin = require('circular-dependency-plugin');
+
+const addMyPlugin = () => config => {
+  const plugin = new CircularDependencyPlugin({
+    exclude: /node_modules/,
+    failOnError: true,
+    cwd: process.cwd()
+  });
+  config.plugins.push(plugin);
   return config;
 };
 
@@ -20,7 +25,7 @@ module.exports = {
     useBabelRc(),
     addDecoratorsLegacy(),
     addWebpackAlias({ src: path.join(__dirname, 'src') }),
-    // overrideOutput()
+    addMyPlugin()
   ),
   jest(config) {
     config.testMatch = ['**/__tests__/*.js?(x)'];
