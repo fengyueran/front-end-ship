@@ -1,6 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import ButtonSet from 'src/components/ButtonSet';
+import { ROUTES } from 'src/utils/constants';
 
 const Header = styled.header`
   display: flex;
@@ -55,17 +58,30 @@ Item.propTypes = {
   className: PropTypes.string.isRequired
 };
 
-class NavBar extends Component {
-  render() {
-    return (
-      <Header>
-        <Ul>
-          <Item className="fa fa-outdent" />
-          <Item className="fa fa-plus" value="New" />
-        </Ul>
-      </Header>
-    );
-  }
-}
+const propTypes = {
+  history: PropTypes.object.isRequired
+};
 
-export default NavBar;
+const buttons = ['题库', '博客', '前端资源'];
+
+const NavBar = ({ history }) => {
+  const handleBtnClick = index => {
+    let route = ROUTES.QUESTION;
+    if (index === 1) route = ROUTES.BLOG;
+    else if (index === 2) route = ROUTES.RESOURCE;
+    history.push(route);
+  };
+  return (
+    <Header>
+      <Ul>
+        <Item className="fa fa-outdent" />
+        <Item className="fa fa-plus" value="New" />
+        <ButtonSet buttons={buttons} onChange={handleBtnClick} />
+      </Ul>
+    </Header>
+  );
+};
+
+NavBar.propTypes = propTypes;
+
+export default withRouter(NavBar);

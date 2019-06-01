@@ -1,5 +1,8 @@
 export const ROUTES = {
   ROOT: '/',
+  QUESTION: '/qustion',
+  BLOG: '/blog',
+  RESOURCE: '/resource',
   ANSWER: '/answer'
 };
 
