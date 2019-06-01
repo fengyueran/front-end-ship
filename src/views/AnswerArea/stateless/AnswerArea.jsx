@@ -29,6 +29,9 @@ const Answer = styled.div`
   padding: 1rem;
   overflow: auto;
   background: #fff;
+  ul {
+    padding-left: 28px;
+  }
 `;
 
 const propTypes = {
