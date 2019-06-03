@@ -9,6 +9,7 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   height: 60px;
+  flex-shrink: 0;
   background-color: #30373e;
 `;
 
@@ -62,13 +63,24 @@ const propTypes = {
   history: PropTypes.object.isRequired
 };
 
-const buttons = ['题库', '博客', '前端资源'];
+const buttons = ['题库', '博客', '组件', '前端资源'];
 
 const NavBar = ({ history }) => {
   const handleBtnClick = index => {
-    let route = ROUTES.QUESTION;
-    if (index === 1) route = ROUTES.BLOG;
-    else if (index === 2) route = ROUTES.RESOURCE;
+    let route;
+    switch (index) {
+      case 0:
+        route = ROUTES.RESOURCE;
+        break;
+      case 1:
+        route = ROUTES.BLOG;
+        break;
+      case 2:
+        route = ROUTES.RESOURCE;
+        break;
+      default:
+        route = ROUTES.RESOURCE;
+    }
     history.push(route);
   };
   return (
