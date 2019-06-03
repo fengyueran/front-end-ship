@@ -70,7 +70,7 @@ const NavBar = ({ history }) => {
     let route;
     switch (index) {
       case 0:
-        route = ROUTES.RESOURCE;
+        route = ROUTES.QUESTION;
         break;
       case 1:
         route = ROUTES.BLOG;

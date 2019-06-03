@@ -29,3 +29,17 @@ export const NAMES = {
 export const TABS = {
   SHORT_ANSWER: [TABS_NAME.QUESTION_ANSWER, TABS_NAME.REFERENCE_ANSWER]
 };
+
+export const WEBSITE_TYPE = {
+  HTML: 'HTML',
+  CSS: 'CSS',
+  JS: 'JavaScript',
+  OTHER: 'Other'
+};
+
+export const ICON_CLASS = {
+  HTML: 'fa fa-html5',
+  CSS: 'fa fa-css3',
+  JS: 'fa fa-jsfiddle',
+  OTHER: 'fa fa-paper-plane-o'
+};
