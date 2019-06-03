@@ -8,7 +8,7 @@ const Container = styled.div`
   padding: 10px;
   overflow: auto;
   box-sizing: border-box;
-  span {
+  & > span {
     width: ${props => `${props.width}px`};
   }
 `;
@@ -54,14 +54,11 @@ const Masonry = ({ children }) => {
 
   const formateData = originChildren => {
     const containerHPadding = 10 * 2;
-    const columnHPadding = 10 * 2;
     const tmpData = originChildren.slice();
     const cardWidth = cardWidthRef.current;
     const ref = containerRef.current;
     const clientWidth = ref.clientWidth;
-    const columns = Math.floor(
-      (clientWidth - containerHPadding) / (cardWidth + columnHPadding)
-    );
+    const columns = Math.floor((clientWidth - containerHPadding) / cardWidth);
     const columnNum = Math.floor(tmpData.length / columns);
     const res = tmpData.length % columns;
     const formatedData = [tmpData.splice(0, columnNum + res)];
