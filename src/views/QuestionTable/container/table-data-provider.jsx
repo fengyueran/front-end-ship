@@ -28,16 +28,11 @@ const withData = WrappedComponent => {
       setSearchedQuestions(filteredData);
     };
 
-    const getQuestions = async () => {
+    useEffect(() => {
       client.getQuestions().then(data => {
         initQuestions(data);
       });
-    };
-
-    useEffect(() => {
-      getQuestions();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [initQuestions]);
 
     const questionsToShow = searchedQuestions || questions;
     return (

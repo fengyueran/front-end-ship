@@ -1,12 +1,11 @@
 import axios from 'axios';
 
 const client = (() => {
-  const HOST = 'http://localhost:8000';
   const getQuestions = async () => {
     try {
       const { data } = await axios({
         method: 'get',
-        url: `${HOST}/questions/all`
+        url: `${process.env.SERVICE_URL}/questions/all`
       });
       return data;
     } catch (e) {
@@ -19,7 +18,20 @@ const client = (() => {
     try {
       const { data } = await axios({
         method: 'get',
-        url: `${HOST}/question/${id}`
+        url: `${process.env.SERVICE_URL}/question/${id}`
+      });
+      return data;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  };
+
+  const getWebsites = async () => {
+    try {
+      const { data } = await axios({
+        method: 'get',
+        url: `${process.env.SERVICE_URL}/websites/all`
       });
       return data;
     } catch (e) {
@@ -30,7 +42,8 @@ const client = (() => {
 
   return {
     getQuestions,
-    getQuestionHtml
+    getQuestionHtml,
+    getWebsites
   };
 })();
 

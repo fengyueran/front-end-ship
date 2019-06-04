@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Masonry from 'src/components/Masonry';
 import Card from './Card';
+import withData from '../container/card-data-provider';
+
+const CardWithData = withData(Card);
 
 const Container = styled.div`
   width: 100%;
@@ -10,14 +13,15 @@ const Container = styled.div`
 `;
 
 const propTypes = {
-  sites: PropTypes.array.isRequired
+  websiteIds: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
-const WebNavigation = ({ sites }) => (
-  <Container>
+const WebNavigation = ({ websiteIds, onClick }) => (
+  <Container onClick={onClick}>
     <Masonry>
-      {sites.map(siteInfo => (
-        <Card key={siteInfo.title} siteInfo={siteInfo} />
+      {websiteIds.map(id => (
+        <CardWithData key={id} id={id} />
       ))}
     </Masonry>
   </Container>

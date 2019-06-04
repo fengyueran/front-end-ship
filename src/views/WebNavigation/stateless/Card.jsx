@@ -16,7 +16,7 @@ const Container = styled.div`
   }
 `;
 
-const Title = styled.div`
+const InfoBar = styled.div`
   background: #4780ca80;
   height: 32px;
   border-color: transparent;
@@ -87,7 +87,7 @@ const Introduction = styled.div`
   padding: 5px 5px 5px 10px;
 `;
 
-const Name = styled.span`
+const Title = styled.span`
   font-weight: 500;
   color: #4d585f;
   font-size: 16px;
@@ -131,15 +131,15 @@ const propTypes = {
 };
 
 const Card = ({ siteInfo }) => {
-  const { name, src, description } = siteInfo;
+  const { title, src, link, description } = siteInfo;
   return (
-    <Container>
-      <Title>
+    <Container data-link={link}>
+      <InfoBar>
         <TrapezoidShape />
         <SiteTypeIcon type="HTML" />
-        <Name>W3C</Name>
-      </Title>
-      <Img src={src || ''} data-name={name} />
+        <Title>{title}</Title>
+      </InfoBar>
+      <Img src={src || ''} data-name={title} />
       <SeparateBar />
       <Introduction>
         <Description>{description}</Description>

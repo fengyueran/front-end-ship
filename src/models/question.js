@@ -2,7 +2,7 @@ import { forEach, random } from 'lodash-es';
 
 const defaultState = {
   currentQuestion: null,
-  questionsObj: {},
+  questionById: {},
   questions: []
 };
 const question = {
@@ -10,14 +10,14 @@ const question = {
   reducers: {
     initQuestions: (state, data) => {
       if (data) {
-        const { questionsId, questionsObj } = data;
+        const { allIds, byId } = data;
         const formatedQuestions = [];
-        forEach(questionsId, (id, index) => {
-          const qt = questionsObj[id];
+        forEach(allIds, (id, index) => {
+          const qt = byId[id];
           qt.number = index + 1;
           formatedQuestions.push(qt);
         });
-        return { ...state, questionsObj, questions: formatedQuestions };
+        return { ...state, questionById: byId, questions: formatedQuestions };
       }
       return state;
     },
