@@ -19,13 +19,30 @@ const addMyPlugin = () => config => {
   return config;
 };
 
+const findWebpackPlugin = (plugins, pluginName) =>
+  plugins.find(plugin => plugin.constructor.name === pluginName);
+
+const overrideProcessEnv = value => config => {
+  const plugin = findWebpackPlugin(config.plugins, 'DefinePlugin');
+  const processEnv = plugin.definitions['process.env'] || {};
+
+  plugin.definitions['process.env'] = {
+    ...processEnv,
+    ...value
+  };
+  return config;
+};
+
 module.exports = {
   webpack: override(
     useEslintRc(),
     useBabelRc(),
     addDecoratorsLegacy(),
     addWebpackAlias({ src: path.join(__dirname, 'src') }),
-    addMyPlugin()
+    addMyPlugin(),
+    overrideProcessEnv({
+      SERVICE_URL: JSON.stringify('http://localhost:8000')
+    })
   ),
   jest(config) {
     config.testMatch = ['**/__tests__/*.js?(x)'];
