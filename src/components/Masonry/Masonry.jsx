@@ -59,11 +59,16 @@ const Masonry = ({ children }) => {
     const ref = containerRef.current;
     const clientWidth = ref.clientWidth;
     const columns = Math.floor((clientWidth - containerHPadding) / cardWidth);
-    const columnNum = Math.floor(tmpData.length / columns);
-    const res = tmpData.length % columns;
-    const formatedData = [tmpData.splice(0, columnNum + res)];
-    while (tmpData.length > 0) {
-      formatedData.push(tmpData.splice(0, columnNum));
+    let formatedData;
+    if (columns < tmpData.length) {
+      const columnNum = Math.floor(tmpData.length / columns);
+      const res = tmpData.length % columns;
+      formatedData = [tmpData.splice(0, columnNum + res)];
+      while (tmpData.length > 0) {
+        formatedData.push(tmpData.splice(0, columnNum));
+      }
+    } else {
+      formatedData = tmpData;
     }
     return formatedData;
   };
