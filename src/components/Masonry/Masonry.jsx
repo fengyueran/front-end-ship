@@ -32,11 +32,11 @@ const getCardWidth = () => {
   const screenWidth = window.innerWidth;
   let cardWidth = 100;
   if (screenWidth > 1200) {
-    cardWidth = 420;
+    cardWidth = 380;
   } else if (screenWidth > 992) {
-    cardWidth = 320;
+    cardWidth = 300;
   } else if (screenWidth > 768) {
-    cardWidth = 250;
+    cardWidth = 240;
   }
   return cardWidth;
 };

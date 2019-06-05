@@ -10,9 +10,9 @@ const Container = styled.div`
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
   background: #fff;
-  border-color: transparent;
   &:hover {
     cursor: pointer;
+    box-shadow: 0px 1px 5px #457fca;
   }
 `;
 
@@ -36,7 +36,7 @@ const IconWrapper = styled.div`
   align-items: center;
   position: absolute;
   left: 10px;
-  top: 0;
+  top: -1;
   height: 100%;
   color: red;
   font-size: 16px;
@@ -45,7 +45,7 @@ const IconWrapper = styled.div`
 const Img = styled.img`
   width: calc(100% - 10px);
   height: 150px;
-  border: none;
+  border: solid 1px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   position: relative;
   margin: 5px;
@@ -131,15 +131,15 @@ const propTypes = {
 };
 
 const Card = ({ siteInfo }) => {
-  const { title, src, link, description } = siteInfo;
+  const { title, thumbnail, link, description } = siteInfo;
   return (
     <Container data-link={link}>
-      <InfoBar>
+      <InfoBar id="infobar">
         <TrapezoidShape />
         <SiteTypeIcon type="HTML" />
         <Title>{title}</Title>
       </InfoBar>
-      <Img src={src || ''} data-name={title} />
+      <Img src={`${process.env.SERVICE_URL}/${thumbnail}`} data-name={title} />
       <SeparateBar />
       <Introduction>
         <Description>{description}</Description>
