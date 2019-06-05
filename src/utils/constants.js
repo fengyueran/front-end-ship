@@ -2,8 +2,9 @@ export const ROUTES = {
   ROOT: '/',
   QUESTION: '/qustion',
   BLOG: '/blog',
+  COMPONENT: '/component',
   RESOURCE: '/resource',
-  ANSWER: '/answer'
+  ANSWER: '/qustion/answer'
 };
 
 export const QUESTION_TYPES = {
