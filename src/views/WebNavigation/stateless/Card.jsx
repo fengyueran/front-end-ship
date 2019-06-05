@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { ICON_CLASS } from 'src/utils/constants';
+import { ICON_CLASS, WEBSITE_CARD_COLORS } from 'src/utils/constants';
 
 const Container = styled.div`
   margin-bottom: 20px;
@@ -113,11 +113,11 @@ SiteTypeIcon.propTypes = {
   type: PropTypes.string.isRequired
 };
 
-const TrapezoidShape = () => (
+const TrapezoidShape = ({ color }) => (
   <Trapezoid>
     <SVG width="50" height="32">
       <polygon
-        fill="#4BA3F9"
+        fill={color}
         stroke="none"
         strokeWidth="1"
         points="0,0 50,0 30,32 0,32 0,0"
@@ -126,17 +126,21 @@ const TrapezoidShape = () => (
   </Trapezoid>
 );
 
+TrapezoidShape.propTypes = {
+  color: PropTypes.string.isRequired
+};
+
 const propTypes = {
   siteInfo: PropTypes.object.isRequired
 };
 
 const Card = ({ siteInfo }) => {
-  const { title, thumbnail, link, description } = siteInfo;
+  const { title, type, thumbnail, link, description } = siteInfo;
   return (
     <Container data-link={link}>
-      <InfoBar id="infobar">
-        <TrapezoidShape />
-        <SiteTypeIcon type="HTML" />
+      <InfoBar>
+        <TrapezoidShape color={WEBSITE_CARD_COLORS[type]} />
+        <SiteTypeIcon type={type} />
         <Title>{title}</Title>
       </InfoBar>
       <Img src={`${process.env.SERVICE_URL}/${thumbnail}`} data-name={title} />

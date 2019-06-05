@@ -43,3 +43,10 @@ export const ICON_CLASS = {
   JS: 'fa fa-jsfiddle',
   OTHER: 'fa fa-paper-plane-o'
 };
+
+export const WEBSITE_CARD_COLORS = {
+  HTML: '#4BA3F9',
+  CSS: '#6356D4',
+  JS: '#8FB34C',
+  OTHER: '#FD8406'
+};
