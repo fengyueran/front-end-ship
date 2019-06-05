@@ -8,28 +8,27 @@ const Container = styled.div`
   padding: 10px;
   overflow: auto;
   box-sizing: border-box;
-  & > span {
-    width: ${props => `${props.width}px`};
-  }
 `;
 
 const ResizeDetectEl = styled.span`
   display: inline-block;
   vertical-align: top;
   font-size: 0;
+  width: ${props => `${props.width}px`};
 `;
 
 const Column = styled.span`
   display: inline-block;
   vertical-align: top;
   margin: 10px;
+  width: ${props => `${props.width}px`};
   & > * {
     width: ${props => `${props.width}px`};
   }
 `;
 
 const getCardWidth = () => {
-  const screenWidth = window.innerWidth;
+  const screenWidth = window.screen.availWidth;
   let cardWidth = 100;
   if (screenWidth > 1200) {
     cardWidth = 380;
@@ -54,18 +53,26 @@ const Masonry = ({ children }) => {
 
   const formateData = originChildren => {
     const containerHPadding = 10 * 2;
+    const cardHMargin = 10 * 2;
     const tmpData = originChildren.slice();
     const cardWidth = cardWidthRef.current;
     const ref = containerRef.current;
     const clientWidth = ref.clientWidth;
-    const columns = Math.floor((clientWidth - containerHPadding) / cardWidth);
+    const columns = Math.floor(
+      (clientWidth - containerHPadding) / (cardWidth + cardHMargin)
+    );
     let formatedData;
     if (columns < tmpData.length) {
       const columnNum = Math.floor(tmpData.length / columns);
-      const res = tmpData.length % columns;
-      formatedData = [tmpData.splice(0, columnNum + res)];
-      while (tmpData.length > 0) {
-        formatedData.push(tmpData.splice(0, columnNum));
+      let res = tmpData.length % columns;
+      formatedData = [];
+      while (tmpData.length > res) {
+        let num = columnNum;
+        if (res) {
+          num += 1;
+          res--;
+        }
+        formatedData.push(tmpData.splice(0, num));
       }
     } else {
       formatedData = tmpData;
@@ -108,7 +115,10 @@ const Masonry = ({ children }) => {
             {column}
           </Column>
         ))}
-      <ResizeDetectEl ref={resizeDetectElRef} />
+      <ResizeDetectEl
+        ref={resizeDetectElRef}
+        width={cardWidthRef.current + 20}
+      />
     </Container>
   );
 };
