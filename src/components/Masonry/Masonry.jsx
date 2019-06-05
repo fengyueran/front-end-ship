@@ -44,6 +44,9 @@ const propTypes = {
   children: PropTypes.node.isRequired
 };
 
+const containerHPadding = 10 * 2;
+const cardHMargin = 10 * 2;
+
 const Masonry = ({ children }) => {
   const [data, setData] = useState(children);
   const cardWidthRef = useRef(null);
@@ -52,8 +55,6 @@ const Masonry = ({ children }) => {
   const resizeDetectElOffset = useRef(null);
 
   const formateData = originChildren => {
-    const containerHPadding = 10 * 2;
-    const cardHMargin = 10 * 2;
     const tmpData = originChildren.slice();
     const cardWidth = cardWidthRef.current;
     const ref = containerRef.current;
@@ -117,7 +118,7 @@ const Masonry = ({ children }) => {
         ))}
       <ResizeDetectEl
         ref={resizeDetectElRef}
-        width={cardWidthRef.current + 20}
+        width={cardWidthRef.current + cardHMargin}
       />
     </Container>
   );

@@ -38,17 +38,17 @@ const IconWrapper = styled.div`
   left: 10px;
   top: -1;
   height: 100%;
-  color: red;
+  color: #fff;
   font-size: 16px;
 `;
 
 const Img = styled.img`
-  width: calc(100% - 10px);
+  width: calc(100% - 16px);
   height: 150px;
   border: solid 1px rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   position: relative;
-  margin: 5px;
+  margin: 8px;
   :before {
     content: '';
     display: block;
@@ -89,7 +89,7 @@ const Introduction = styled.div`
 
 const Title = styled.span`
   font-weight: 500;
-  color: #4d585f;
+  color: #000;
   font-size: 16px;
   margin-left: 46px;
   line-height: 32px;
@@ -154,4 +154,4 @@ const Card = ({ siteInfo }) => {
 
 Card.propTypes = propTypes;
 
-export default Card;
+export default React.memo(Card);

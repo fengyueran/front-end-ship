@@ -38,15 +38,15 @@ export const WEBSITE_TYPE = {
 };
 
 export const ICON_CLASS = {
-  HTML: 'fa fa-html5',
-  CSS: 'fa fa-css3',
-  JS: 'fa fa-jsfiddle',
+  HTML_CSS_JS: 'fa fa-html5',
+  MEDIUM: 'fa fa-medium',
+  TOOL: 'fa fa-briefcase',
   OTHER: 'fa fa-paper-plane-o'
 };
 
 export const WEBSITE_CARD_COLORS = {
-  HTML: '#4BA3F9',
-  CSS: '#6356D4',
-  JS: '#8FB34C',
+  HTML_CSS_JS: '#4BA3F9',
+  MEDIUM: '#6356D4',
+  TOOL: '#8FB34C',
   OTHER: '#FD8406'
 };
