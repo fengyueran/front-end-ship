@@ -16,11 +16,12 @@ const Button = styled(ButtonBase)`
 
 const propTypes = {
   buttons: PropTypes.array.isRequired,
+  defaultIndex: PropTypes.number,
   onChange: PropTypes.func
 };
 
-const ButtonSet = ({ buttons, onChange }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+const ButtonSet = ({ buttons, onChange, defaultIndex = 0 }) => {
+  const [activeIndex, setActiveIndex] = useState(defaultIndex);
   const handleClick = index => {
     setActiveIndex(index);
     if (onChange) onChange(index);

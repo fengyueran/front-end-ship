@@ -111,6 +111,7 @@ const Masonry = ({ children }) => {
   return (
     <Container ref={containerRef} width={cardWidthRef.current}>
       {data &&
+        containerRef.current &&
         data.map((column, index) => (
           <Column key={index} width={cardWidthRef.current}>
             {column}

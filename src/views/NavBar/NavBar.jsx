@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
 import ButtonSet from 'src/components/ButtonSet';
 import { ROUTES } from 'src/utils/constants';
 
@@ -60,12 +59,27 @@ Item.propTypes = {
 };
 
 const propTypes = {
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 const buttons = ['题库', '博客', '组件', '前端资源'];
 
-const NavBar = ({ history }) => {
+const getIndexOfButtons = pathname => {
+  let index = 0;
+  if (pathname.includes(ROUTES.BLOG)) {
+    index = 1;
+  } else if (pathname.includes(ROUTES.COMPONENT)) {
+    index = 2;
+  } else if (pathname.includes(ROUTES.RESOURCE)) {
+    index = 3;
+  }
+  return index;
+};
+
+const NavBar = ({ history, location }) => {
+  const { pathname } = location;
+  const defaultIndex = getIndexOfButtons(pathname);
   const handleBtnClick = index => {
     let route;
     switch (index) {
@@ -88,7 +102,11 @@ const NavBar = ({ history }) => {
       <Ul>
         <Item className="fa fa-outdent" />
         <Item className="fa fa-plus" value="New" />
-        <ButtonSet buttons={buttons} onChange={handleBtnClick} />
+        <ButtonSet
+          buttons={buttons}
+          onChange={handleBtnClick}
+          defaultIndex={defaultIndex}
+        />
       </Ul>
     </Header>
   );
@@ -96,4 +114,4 @@ const NavBar = ({ history }) => {
 
 NavBar.propTypes = propTypes;
 
-export default withRouter(NavBar);
+export default React.memo(NavBar);
