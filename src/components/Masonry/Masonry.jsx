@@ -102,9 +102,9 @@ const Masonry = ({ children }) => {
         setData(formatedData);
       }
       resizeDetectElOffset.current = offset;
-      return function cleanup() {
-        window.onresize = null;
-      };
+    };
+    return function cleanup() {
+      window.onresize = null;
     };
   }, [children]);
 
