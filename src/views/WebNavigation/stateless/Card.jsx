@@ -12,7 +12,9 @@ const Container = styled.div`
   background: #fff;
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 1px 5px #457fca;
+    transform: translate3d(0px, -2px, 0px);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+      rgba(0, 0, 0, 0.1) 0px 5px 15px 0px;
   }
 `;
 
