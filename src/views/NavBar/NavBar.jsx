@@ -90,7 +90,7 @@ const NavBar = ({ history, location }) => {
         route = ROUTES.BLOG;
         break;
       case 2:
-        route = ROUTES.RESOURCE;
+        route = ROUTES.COMPONENT;
         break;
       default:
         route = ROUTES.RESOURCE;

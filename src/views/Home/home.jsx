@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { VerticalBox } from '@xinghunm/widgets';
 import { ROUTES } from 'src/utils/constants';
 import NavBar from '../NavBar';
 import QuestionPage from '../QuestionPage';
+import ComponentPage from '../ComponentPage';
 import WebNavigation from '../WebNavigation';
 
 const Container = styled(VerticalBox)`
@@ -29,6 +30,7 @@ const Home = ({ history, location }) => (
     <Content>
       <Route exact path={ROUTES.ROOT} component={QuestionPage} />
       <Route path={ROUTES.QUESTION} component={QuestionPage} />
+      <Route path={ROUTES.COMPONENT} component={ComponentPage} />
       <Route path={ROUTES.RESOURCE} component={WebNavigation} />
     </Content>
   </Container>
