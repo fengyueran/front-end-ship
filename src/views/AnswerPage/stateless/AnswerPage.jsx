@@ -38,7 +38,7 @@ const AnswerPage = props => {
     flexGrow,
     onMouseDown
   } = props;
-  const { type } = currentQuestion;
+  const { type, template } = currentQuestion;
   const isShowTwoPanel = type === QUESTION_TYPES.CODE;
 
   return (
@@ -53,7 +53,7 @@ const AnswerPage = props => {
         {isShowTwoPanel && (
           <>
             <ResizeBar getRef={resizeBarEl} onMouseDown={onMouseDown} />
-            <CodeEditor getRef={codeEditorEl} />
+            <CodeEditor getRef={codeEditorEl} template={template} />
           </>
         )}
       </Content>

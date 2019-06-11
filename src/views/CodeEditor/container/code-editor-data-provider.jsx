@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
 const withData = WrappedComponent => {
   const propTypes = {
+    template: PropTypes.string,
     getRef: PropTypes.object.isRequired
   };
 
-  const Container = ({ getRef }) => {
-    const [value, setValue] = useState('//按Tab键补全');
+  const Container = ({ getRef, template }) => {
+    const [value, setValue] = useState(template);
     const [result, setResult] = useState();
     const [isShowConsole, setIsShowConsole] = useState(false);
 
@@ -15,10 +16,15 @@ const withData = WrappedComponent => {
       setValue(v);
     }, []);
 
-    const executeCode = useCallback(() => {
-      const result = eval(value); //eslint-disable-line
-      setResult(result);
-    }, [value]);
+    const executeCode = () => {
+      try {
+        const result = eval(value); //eslint-disable-line
+        setResult(result);
+        setIsShowConsole(true);
+      } catch (e) {
+        setResult(e.message);
+      }
+    };
 
     return (
       <WrappedComponent
