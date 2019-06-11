@@ -24,4 +24,4 @@ const TabBar = ({ tabs, onTabChange }) => (
 );
 
 TabBar.propTypes = propTypes;
-export default TabBar;
+export default React.memo(TabBar);

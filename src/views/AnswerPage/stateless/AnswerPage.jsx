@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LineBox, VerticalBox } from '@xinghunm/widgets';
+import { QUESTION_TYPES } from 'src/utils/constants';
 import QuestionInfoBar from './QuestionInfoBar';
 import CodeEditor from '../../CodeEditor';
 import AnswerArea from '../../AnswerArea';
@@ -37,6 +38,8 @@ const AnswerPage = props => {
     flexGrow,
     onMouseDown
   } = props;
+  const { type } = currentQuestion;
+  const isShowTwoPanel = type === QUESTION_TYPES.CODE;
 
   return (
     <Container>
@@ -47,8 +50,12 @@ const AnswerPage = props => {
           getRef={answerAreaEl}
           flexGrow={flexGrow}
         />
-        <ResizeBar getRef={resizeBarEl} onMouseDown={onMouseDown} />
-        <CodeEditor getRef={codeEditorEl} />
+        {isShowTwoPanel && (
+          <>
+            <ResizeBar getRef={resizeBarEl} onMouseDown={onMouseDown} />
+            <CodeEditor getRef={codeEditorEl} />
+          </>
+        )}
       </Content>
     </Container>
   );

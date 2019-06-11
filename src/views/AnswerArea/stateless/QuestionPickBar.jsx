@@ -47,7 +47,6 @@ const QuestionPickBar = ({
   const isNextBtnDisable = currentQustionNum === questionsTotal;
   return (
     <Container>
-      <Sizer />
       <RandomBtn onClick={randomQuestion}>
         <RandomIcon />
         {NAMES.RANDOM_QUESTION}

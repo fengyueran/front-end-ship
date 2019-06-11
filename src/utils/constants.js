@@ -8,7 +8,8 @@ export const ROUTES = {
 };
 
 export const QUESTION_TYPES = {
-  SHORT_ANSWER: 'SHORT_ANSWER'
+  SHORT_ANSWER: 'SHORT_ANSWER',
+  CODE: 'CODE'
 };
 
 export const TABS_NAME = {
@@ -24,7 +25,8 @@ export const NAMES = {
   SUBMIT: '提交',
   CONSOLE: '控制台',
   EXECUTE_RESULT: '执行结果',
-  SHORT_ANSWER: '简答题'
+  SHORT_ANSWER: '简答题',
+  CODE: '编程题'
 };
 
 export const TABS = {

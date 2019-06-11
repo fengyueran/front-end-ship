@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { VerticalBox } from '@xinghunm/widgets';
 import Editor from 'src/components/Editor';
-import { TABS_NAME } from 'src/utils/constants';
 import TabBar from './TabBar';
 import PickBar from './QuestionPickBar';
 import withData from '../container/picker-bar-data-provider';
@@ -24,7 +23,8 @@ const Content = styled.div`
   border: 1px solid #eee;
 `;
 
-const Answer = styled.div`
+const Article = styled.div`
+  width: 100%;
   height: 100%;
   padding: 1rem;
   overflow: auto;
@@ -35,33 +35,34 @@ const Answer = styled.div`
 `;
 
 const propTypes = {
-  html: PropTypes.object,
   tabs: PropTypes.array.isRequired,
-  activeTab: PropTypes.string.isRequired,
   flexGrow: PropTypes.number.isRequired,
+  isShowEditor: PropTypes.bool.isRequired,
+  content: PropTypes.object.isRequired,
   getRef: PropTypes.object.isRequired,
-  onTabChange: PropTypes.func.isRequired
+  onTabChange: PropTypes.func
 };
 
 const AnswerArea = ({
-  html,
-  activeTab,
+  isShowEditor,
+  content,
   tabs,
   flexGrow,
   getRef,
   onTabChange
-}) => {
-  const isShowAnswer = activeTab === TABS_NAME.REFERENCE_ANSWER;
-  return (
-    <Container ref={getRef} flexGrow={flexGrow}>
-      <TabBar tabs={tabs} onTabChange={onTabChange} />
-      <Content>
-        {isShowAnswer ? <Answer dangerouslySetInnerHTML={html} /> : <Editor />}
-      </Content>
-      <QuestionPickBar />
-    </Container>
-  );
-};
+}) => (
+  <Container ref={getRef} flexGrow={flexGrow}>
+    <TabBar tabs={tabs} onTabChange={onTabChange} />
+    <Content>
+      {isShowEditor ? (
+        <Editor />
+      ) : (
+        <Article dangerouslySetInnerHTML={content} />
+      )}
+    </Content>
+    <QuestionPickBar />
+  </Container>
+);
 
 AnswerArea.propTypes = propTypes;
 

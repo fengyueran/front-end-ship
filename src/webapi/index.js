@@ -1,12 +1,13 @@
 import axios from 'axios';
 
 const client = (() => {
-  const getQuestions = async () => {
+  const instance = axios.create({
+    baseURL: process.env.SERVICE_URL
+  });
+
+  const getData = async route => {
     try {
-      const { data } = await axios({
-        method: 'get',
-        url: `${process.env.SERVICE_URL}/questions/all`
-      });
+      const { data } = await instance.get(route);
       return data;
     } catch (e) {
       console.log(e);
@@ -14,35 +15,15 @@ const client = (() => {
     }
   };
 
-  const getQuestionHtml = async id => {
-    try {
-      const { data } = await axios({
-        method: 'get',
-        url: `${process.env.SERVICE_URL}/question/${id}`
-      });
-      return data;
-    } catch (e) {
-      console.log(e);
-      return null;
-    }
-  };
-
-  const getWebsites = async () => {
-    try {
-      const { data } = await axios({
-        method: 'get',
-        url: `${process.env.SERVICE_URL}/websites/all`
-      });
-      return data;
-    } catch (e) {
-      console.log(e);
-      return null;
-    }
-  };
+  const getQuestions = async () => getData('/questions/all');
+  const getQuestionHtml = async id => getData(`/question/${id}`);
+  const getAnswerHtml = async id => getData(`/answer/${id}`);
+  const getWebsites = async () => getData('/websites/all');
 
   return {
     getQuestions,
     getQuestionHtml,
+    getAnswerHtml,
     getWebsites
   };
 })();

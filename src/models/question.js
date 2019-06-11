@@ -1,4 +1,5 @@
 import { forEach, random } from 'lodash-es';
+import client from 'src/webapi';
 
 const defaultState = {
   currentQuestion: null,
@@ -48,6 +49,23 @@ const question = {
       const number = random(0, questions.length - 1);
       const targetQuestion = questions[number];
       this.updateQuestionParam({ currentQuestion: targetQuestion });
+    },
+    getQuestionData(payload, state) {
+      const { id, type } = payload;
+      let getData = client.getQuestionHtml;
+      if (type === 'answer') getData = client.getAnswerHtml;
+      getData(id).then(data => {
+        if (data) {
+          const { questionById } = state.question;
+          let currentQuestion = questionById[id];
+          currentQuestion = { ...currentQuestion, [type]: data };
+          questionById[id] = currentQuestion;
+          this.updateQuestionParam({
+            questionById,
+            currentQuestion
+          });
+        }
+      });
     }
   })
 };
