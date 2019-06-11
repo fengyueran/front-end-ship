@@ -38,7 +38,7 @@ const propTypes = {
   tabs: PropTypes.array.isRequired,
   flexGrow: PropTypes.number.isRequired,
   isShowEditor: PropTypes.bool.isRequired,
-  content: PropTypes.object.isRequired,
+  content: PropTypes.object,
   getRef: PropTypes.object.isRequired,
   onTabChange: PropTypes.func
 };
