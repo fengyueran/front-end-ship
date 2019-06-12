@@ -18,12 +18,15 @@ const withData = WrappedComponent => {
 
     const executeCode = () => {
       try {
-        const result = eval(value); //eslint-disable-line
-        setResult(result);
-        setIsShowConsole(true);
+        let res = eval(value); //eslint-disable-line
+        if (!res) {
+          res = 'function should have return value';
+        }
+        setResult(res);
       } catch (e) {
         setResult(e.message);
       }
+      setIsShowConsole(true);
     };
 
     return (
