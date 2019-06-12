@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Pagination } from '@xinghunm/widgets';
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  background: #fff;
+`;
 
 const TableView = styled.div`
+  width: 100%;
+  height: ${({ isShowPagination }) =>
+    isShowPagination ? 'calc(100% - 53px)' : '100%'};
   position: relative;
   padding-top: 48px;
   ::before {
@@ -16,13 +23,12 @@ const TableView = styled.div`
     right: 0;
     top: 0;
     height: 48px;
-    background: #fff;
   }
 `;
 
 const TableViewHolder = styled.div`
   overflow-y: auto;
-  max-height: 500px;
+  height: 100%;
 `;
 
 const StyledTable = styled.table`
@@ -30,7 +36,6 @@ const StyledTable = styled.table`
   border-collapse: collapse;
   border-spacing: 0;
   overflow: hidden;
-  background: #ffffff;
 `;
 
 const TableBody = styled.tbody`
@@ -85,8 +90,8 @@ const TableCell = styled.td`
 
 const PaginationContainer = styled.div`
   display: inline-block;
-  background: white;
   width: 100%;
+  height: 53px;
   border-top: 1px solid rgba(221, 221, 221, 0.5);
   text-align: right;
 `;
@@ -131,7 +136,7 @@ const Table = ({ columns, dataSource = [], onPageChange, pagination }) => {
 
   return (
     <Container>
-      <TableView>
+      <TableView isShowPagination={isShowPagination}>
         <TableViewHolder>
           <StyledTable>
             <TableHead>

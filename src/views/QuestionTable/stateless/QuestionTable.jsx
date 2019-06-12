@@ -11,6 +11,7 @@ const Content = styled(VerticalBox)`
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  height: 100%;
   @media (min-width: 768px) {
     width: 750px;
   }
@@ -66,6 +67,10 @@ const Input = styled.input`
   }
 `;
 
+const TableContainer = styled.div`
+  height: calc(100% - 63px);
+`;
+
 const FilterItems = [
   { name: '状态', items: ['未做', '未完成', '已完成'] },
   { name: '标签', items: ['JS', 'CSS', '其他'] }
@@ -91,7 +96,13 @@ const QuestionTable = ({ columnsData, questions, onChange }) => (
         <DropDown key={name} name={name} items={items} />
       ))}
     </Header>
-    <Table columns={columnsData} dataSource={questions} />
+    <TableContainer>
+      <Table
+        columns={columnsData}
+        dataSource={questions}
+        pagination={{ pageSize: 14 }}
+      />
+    </TableContainer>
   </Content>
 );
 
