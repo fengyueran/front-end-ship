@@ -11,7 +11,6 @@ import ResizeBar from './ResizeBar';
 const Container = styled(VerticalBox)`
   width: 100%;
   height: 100%;
-  padding: 20px;
   align-items: flex-start;
 `;
 
