@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { Spin } from '@xinghunm/widgets';
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
 
 const Iframe = styled.iframe`
+  width: 100%;
   height: 100%;
 `;
 
+const SpinWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
+
 const ComponentPage = () => {
-  return <Iframe src="http://localhost:3000" />;
+  const [iframeReady, setIframeReady] = useState();
+  const iframeRef = useRef();
+  useEffect(() => {
+    iframeRef.current.onload = () => {
+      setIframeReady(true);
+    };
+  }, []);
+
+  return (
+    <Container>
+      <Iframe ref={iframeRef} src="http://localhost:3000" />
+      {!iframeReady && (
+        <SpinWrapper>
+          <Spin />
+        </SpinWrapper>
+      )}
+    </Container>
+  );
 };
 
 export default ComponentPage;

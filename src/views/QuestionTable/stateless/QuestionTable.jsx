@@ -4,7 +4,7 @@ import { map } from 'lodash-es';
 import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
-import { LineBox, VerticalBox, Sizer } from '@xinghunm/widgets';
+import { LineBox, VerticalBox, Sizer, Spin } from '@xinghunm/widgets';
 
 const Content = styled(VerticalBox)`
   padding-right: 15px;
@@ -69,6 +69,7 @@ const Input = styled.input`
 
 const TableContainer = styled.div`
   height: calc(100% - 63px);
+  background: #fff;
 `;
 
 const FilterItems = [
@@ -97,11 +98,15 @@ const QuestionTable = ({ columnsData, questions, onChange }) => (
       ))}
     </Header>
     <TableContainer>
-      <Table
-        columns={columnsData}
-        dataSource={questions}
-        pagination={{ pageSize: 14 }}
-      />
+      {questions.length > 0 ? (
+        <Table
+          columns={columnsData}
+          dataSource={questions}
+          pagination={{ pageSize: 14 }}
+        />
+      ) : (
+        <Spin />
+      )}
     </TableContainer>
   </Content>
 );

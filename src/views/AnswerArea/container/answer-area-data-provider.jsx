@@ -11,8 +11,8 @@ const withData = WrappedComponent => {
 
   const Container = props => {
     const { currentQuestion, getQuestionData } = props;
-    const { id, questionType, questionDetail, answer, type } = currentQuestion;
-    const tabs = TABS[questionType] || TABS[QUESTION_TYPES.SHORT_ANSWER];
+    const { id, questionDetail, answer, type } = currentQuestion;
+    const tabs = TABS[type] || TABS[QUESTION_TYPES.SHORT_ANSWER];
 
     const [activeTab, setActiveTab] = useState(tabs[0]);
 

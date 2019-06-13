@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { VerticalBox } from '@xinghunm/widgets';
+import { VerticalBox, Spin } from '@xinghunm/widgets';
 import Editor from 'src/components/Editor';
 import TabBar from './TabBar';
 import PickBar from './QuestionPickBar';
@@ -50,19 +50,22 @@ const AnswerArea = ({
   flexGrow,
   getRef,
   onTabChange
-}) => (
-  <Container ref={getRef} flexGrow={flexGrow}>
-    <TabBar tabs={tabs} onTabChange={onTabChange} />
-    <Content>
-      {isShowEditor ? (
-        <Editor />
-      ) : (
-        <Article dangerouslySetInnerHTML={content} />
-      )}
-    </Content>
-    <QuestionPickBar />
-  </Container>
-);
+}) => {
+  let contentChild = <Spin />;
+  if (isShowEditor) {
+    contentChild = <Editor />;
+  } else if (content) {
+    contentChild = <Article dangerouslySetInnerHTML={content} />;
+  }
+
+  return (
+    <Container ref={getRef} flexGrow={flexGrow}>
+      <TabBar tabs={tabs} onTabChange={onTabChange} />
+      <Content>{contentChild}</Content>
+      <QuestionPickBar />
+    </Container>
+  );
+};
 
 AnswerArea.propTypes = propTypes;
 
