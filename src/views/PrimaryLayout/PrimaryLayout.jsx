@@ -24,7 +24,7 @@ const propTypes = {
   location: PropTypes.object.isRequired
 };
 
-const Home = ({ history, location }) => (
+const PrimaryLayout = ({ history, location }) => (
   <Container>
     <NavBar history={history} location={location} />
     <Content>
@@ -35,5 +35,5 @@ const Home = ({ history, location }) => (
     </Content>
   </Container>
 );
-Home.propTypes = propTypes;
-export default Home;
+PrimaryLayout.propTypes = propTypes;
+export default PrimaryLayout;
