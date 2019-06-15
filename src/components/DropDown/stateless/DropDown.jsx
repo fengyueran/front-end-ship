@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { map } from 'lodash-es';
 
 const UlWrapper = styled.a`
   position: relative;
@@ -17,8 +16,8 @@ const UlBtn = styled.div`
   display: inline-block;
   padding: 6px 12px;
   font-size: 14px;
+  color: #525252;
   cursor: pointer;
-  color: #333;
   border-radius: 4px;
 `;
 
@@ -47,36 +46,46 @@ const ListGroup = styled.ul`
 
 const ListGroupItem = styled.li`
   display: block;
-  padding: .75rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,.125);
-  color: #333;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  color: #525252;
   :hover {
-    background: #6b9bda;
+    background: #eaedf1;
   }
-}
 `;
 
 const CheckedIcon = styled.i`
   margin-right: 5px;
-  visibility: hidden;
+  color: #457fca;
+  visibility: ${({ selected }) => (selected ? 'visible' : 'hidden')};
 `;
 
 const Caret = styled.span`
   margin-left: 3px;
 `;
 
-const DropDown = ({ name, items }) => (
+const propTypes = {
+  name: PropTypes.string.isRequired,
+  items: PropTypes.array.isRequired,
+  selectedItems: PropTypes.object.isRequired,
+  onSelect: PropTypes.func.isRequired
+};
+
+const DropDown = ({ name, items, selectedItems, onSelect }) => (
   <UlWrapper href="#">
     <UlBtn>
       {name}
       <Caret className="fa fa-caret-down" />
     </UlBtn>
-    <ListGroup>
-      {map(items, item => (
-        <ListGroupItem key={item}>
-          <CheckedIcon className="fa fa-check" />
+    <ListGroup onClick={onSelect}>
+      {items.map((item, index) => (
+        <ListGroupItem key={item} data-index={index}>
+          <CheckedIcon
+            className="fa fa-check"
+            selected={selectedItems[index]}
+          />
           {item}
         </ListGroupItem>
       ))}
@@ -84,9 +93,6 @@ const DropDown = ({ name, items }) => (
   </UlWrapper>
 );
 
-DropDown.propTypes = {
-  name: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired
-};
+DropDown.propTypes = propTypes;
 
 export default DropDown;
