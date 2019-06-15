@@ -4,21 +4,31 @@ import client from 'src/webapi';
 const defaultState = {
   currentQuestion: null,
   questionById: {},
-  questions: []
+  questions: [],
+  record: {
+    unfinished: [],
+    finished: []
+  }
 };
 const question = {
   state: defaultState,
   reducers: {
     initQuestions: (state, data) => {
       if (data) {
-        const { allIds, byId } = data;
+        const { record, questions } = data;
+        const { allIds, byId } = questions;
         const formatedQuestions = [];
         forEach(allIds, (id, index) => {
           const qt = byId[id];
           qt.number = index + 1;
           formatedQuestions.push(qt);
         });
-        return { ...state, questionById: byId, questions: formatedQuestions };
+        return {
+          ...state,
+          questionById: byId,
+          questions: formatedQuestions,
+          record
+        };
       }
       return state;
     },

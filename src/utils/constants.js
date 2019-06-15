@@ -1,6 +1,6 @@
 export const ROUTES = {
   ROOT: '/',
-  QUESTION: '/qustion',
+  QUESTION: '/question',
   BLOG: '/blog',
   COMPONENT: '/component',
   RESOURCE: '/resource',
@@ -55,3 +55,24 @@ export const WEBSITE_CARD_COLORS = {
   TOOL: '#8FB34C',
   OTHER: '#FD8406'
 };
+
+export const OPTIONS = {
+  STATUS: '状态',
+  TAG: '标签',
+  TYPE: '题型'
+};
+
+export const TAGS = {
+  UNFINISHED: '未完成',
+  FINISHED: '已完成'
+};
+
+export const FilterItems = [
+  { name: OPTIONS.STATUS, items: [TAGS.UNFINISHED, TAGS.FINISHED] },
+  {
+    name: OPTIONS.TAG,
+    multiSelect: true,
+    items: ['JavaScript', 'CSS', 'HTML', 'HTTP', '其他']
+  },
+  { name: OPTIONS.TYPE, items: ['简答题', '编程题', '其他'] }
+];

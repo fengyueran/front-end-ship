@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
 import { LineBox, VerticalBox, Sizer, Spin } from '@xinghunm/widgets';
+import { FilterItems } from 'src/utils/constants';
 
 const Content = styled(VerticalBox)`
   padding-right: 15px;
@@ -72,18 +73,21 @@ const TableContainer = styled.div`
   background: #fff;
 `;
 
-const FilterItems = [
-  { name: '状态', items: ['未做', '未完成', '已完成'] },
-  { name: '标签', items: ['JS', 'CSS', '其他'] }
-];
-
 const propTypes = {
   columnsData: PropTypes.array.isRequired,
   questions: PropTypes.array.isRequired,
-  onChange: PropTypes.func.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  questionTypeChange: PropTypes.func.isRequired
 };
 
-const QuestionTable = ({ columnsData, questions, onChange }) => (
+const QuestionTable = ({
+  columnsData,
+  questions,
+  isLoading,
+  onChange,
+  questionTypeChange
+}) => (
   <Content>
     <Header>
       <HeaderTitle>
@@ -93,19 +97,25 @@ const QuestionTable = ({ columnsData, questions, onChange }) => (
         <Input placeholder="搜索题目" onChange={onChange} />
       </SearchBox>
       <Sizer />
-      {map(FilterItems, ({ name, items }) => (
-        <DropDown key={name} name={name} items={items} />
+      {map(FilterItems, ({ name, items, multiSelect }) => (
+        <DropDown
+          key={name}
+          name={name}
+          items={items}
+          multiSelect={multiSelect}
+          onClick={questionTypeChange}
+        />
       ))}
     </Header>
     <TableContainer>
-      {questions.length > 0 ? (
+      {isLoading ? (
+        <Spin />
+      ) : (
         <Table
           columns={columnsData}
           dataSource={questions}
           pagination={{ pageSize: 14 }}
         />
-      ) : (
-        <Spin />
       )}
     </TableContainer>
   </Content>
