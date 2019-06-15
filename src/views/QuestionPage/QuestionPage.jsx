@@ -7,6 +7,7 @@ import AnswerPage from '../AnswerPage';
 
 const Container = styled.div`
   height: 100%;
+  overflow: auto;
   padding: 20px;
 `;
 

@@ -4,7 +4,7 @@ import { map } from 'lodash-es';
 import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
-import { LineBox, VerticalBox, Sizer, Spin } from '@xinghunm/widgets';
+import { LineBox, VerticalBox, Spin } from '@xinghunm/widgets';
 import { FilterItems } from 'src/utils/constants';
 
 const Content = styled(VerticalBox)`
@@ -12,7 +12,11 @@ const Content = styled(VerticalBox)`
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  height: 100%;
+  overflow: auto;
+  @media (min-width: 768px) {
+    height: 100%;
+  }
+
   @media (min-width: 768px) {
     width: 750px;
   }
@@ -25,10 +29,11 @@ const Content = styled(VerticalBox)`
 `;
 
 const Header = styled(LineBox)`
-  padding: 15px;
+  padding: 0 15px;
   border-radius: 3px 3px 0 0;
   background: #ffffff;
   overflow: visible;
+  flex-wrap: wrap;
 `;
 
 const SeparateBar = styled.div`
@@ -57,6 +62,7 @@ const SearchBox = styled.div`
 
 const Input = styled.input`
   border: none;
+  width: 100%;
   background-image: linear-gradient(#457fca, #457fca),
     linear-gradient(#000, #d2d2d2);
   background-size: 0 2px, 100% 1px;
@@ -70,6 +76,15 @@ const Input = styled.input`
     transition: background 0.3s ease-out;
     background-size: 100% 2px, 100% 1px;
     outline: none;
+  }
+`;
+
+const FilterItemsWrapper = styled.div`
+  flex-grow: 1;
+  padding: 10px 0;
+  padding: 6px 0;
+  & > a {
+    float: right;
   }
 `;
 
@@ -129,16 +144,17 @@ const QuestionTable = ({
       <SearchBox>
         <Input placeholder="搜索题目" onChange={onChange} />
       </SearchBox>
-      <Sizer />
-      {map(FilterItems, ({ name, items, multiSelect }) => (
-        <DropDown
-          key={name}
-          name={name}
-          items={items}
-          multiSelect={multiSelect}
-          onClick={questionTypeChange}
-        />
-      ))}
+      <FilterItemsWrapper>
+        {map(FilterItems, ({ name, items, multiSelect }) => (
+          <DropDown
+            key={name}
+            name={name}
+            items={items}
+            multiSelect={multiSelect}
+            onClick={questionTypeChange}
+          />
+        ))}
+      </FilterItemsWrapper>
     </Header>
     {selectedTags.length > 0 && (
       <Tags>

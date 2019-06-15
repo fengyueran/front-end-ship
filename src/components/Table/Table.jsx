@@ -59,12 +59,16 @@ const TableHead = styled.thead`
 const TableRow = styled.tr`
   height: 48px;
   transition: background 0.1s ease;
+
   &:nth-of-type(odd) {
     background: #fafafa;
   }
-  :hover {
-    background: #cad2dc;
+  @media (min-width: 512px) {
+    :hover {
+      background: #cad2dc;
+    }
   }
+
   & > * {
     transition: opacity 0.2s;
   }

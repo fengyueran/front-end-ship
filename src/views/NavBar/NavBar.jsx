@@ -101,7 +101,6 @@ const NavBar = ({ history, location }) => {
     <Header>
       <Ul>
         <Item className="fa fa-outdent" />
-        <Item className="fa fa-plus" value="New" />
         <ButtonSet
           buttons={buttons}
           onChange={handleBtnClick}
