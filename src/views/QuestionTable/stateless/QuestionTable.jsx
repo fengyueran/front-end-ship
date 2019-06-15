@@ -28,8 +28,13 @@ const Header = styled(LineBox)`
   padding: 15px;
   border-radius: 3px 3px 0 0;
   background: #ffffff;
-  border-bottom: 1px solid #ddd;
   overflow: visible;
+`;
+
+const SeparateBar = styled.div`
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+  height: 1px;
 `;
 
 const HeaderTitle = styled.div`
@@ -73,19 +78,47 @@ const TableContainer = styled.div`
   background: #fff;
 `;
 
+const Tags = styled.div`
+  width: 100%;
+  padding-left: 15px;
+  padding-bottom: 10px;
+  background: #fff;
+`;
+
+const Tag = styled.span`
+  background: #6a94ca;
+  color: #fff;
+  margin-right: 10px;
+  padding: 2px 5px;
+  font-size: 11px;
+  font-weight: bold;
+  border-radius: 3px;
+`;
+
+const Fork = styled.span`
+  margin-left: 3px;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 const propTypes = {
   columnsData: PropTypes.array.isRequired,
   questions: PropTypes.array.isRequired,
+  selectedTags: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
   questionTypeChange: PropTypes.func.isRequired
 };
 
 const QuestionTable = ({
   columnsData,
   questions,
+  selectedTags,
   isLoading,
   onChange,
+  deleteTag,
   questionTypeChange
 }) => (
   <Content>
@@ -107,6 +140,17 @@ const QuestionTable = ({
         />
       ))}
     </Header>
+    {selectedTags.length > 0 && (
+      <Tags>
+        {map(selectedTags, tag => (
+          <Tag onClick={deleteTag} key={tag}>
+            {tag}
+            <Fork className="fa fa-times" data-tag={tag} />
+          </Tag>
+        ))}
+      </Tags>
+    )}
+    <SeparateBar />
     <TableContainer>
       {isLoading ? (
         <Spin />

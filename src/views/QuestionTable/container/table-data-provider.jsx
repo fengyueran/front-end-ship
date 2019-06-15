@@ -15,6 +15,40 @@ const mapDispatch = ({ question: { initQuestions } }) => ({
   initQuestions
 });
 
+const filterQuestions = (questions, selectedTags, record) => {
+  let filteredData = questions;
+  forEach(selectedTags, (tags, key) => {
+    switch (key) {
+      case OPTIONS.STATUS:
+        if (tags.indexOf(TAGS.FINISHED) >= 0) {
+          filteredData = record.finished;
+        }
+        break;
+      case OPTIONS.TAG:
+        if (tags.length > 0) {
+          filteredData = filter(filteredData, ({ tags: questionTags }) => {
+            for (let i = 0; i < questionTags.length; i++) {
+              const currentTag = questionTags[i];
+              const found = find(tags, tag => currentTag === tag);
+              if (found) return true;
+            }
+            return false;
+          });
+        }
+        break;
+      default: {
+        if (tags.length > 0) {
+          filteredData = filter(
+            filteredData,
+            ({ type }) => NAMES[type] === tags[0]
+          );
+        }
+      }
+    }
+  });
+  return filteredData;
+};
+
 const withData = WrappedComponent => {
   const propTypes = {
     record: PropTypes.object.isRequired,
@@ -25,7 +59,7 @@ const withData = WrappedComponent => {
   const Wrapper = ({ questions, record, initQuestions }) => {
     const [searchedQuestions, setSearchedQuestions] = useState();
     const isLoading = useRef(true);
-    const selectedTypes = useRef({});
+    const selectedTagsRef = useRef({});
 
     const handleSearch = useCallback(
       e => {
@@ -37,9 +71,32 @@ const withData = WrappedComponent => {
       [questions]
     );
 
+    const deleteTag = useCallback(
+      e => {
+        const tag = e.target.getAttribute('data-tag');
+        const keys = Object.keys(selectedTagsRef.current);
+        for (let i = 0; i < keys.length; i++) {
+          const type = keys[i];
+          const tags = selectedTagsRef.current[type];
+          const foundIndex = findIndex(tags, tagName => tagName === tag);
+          if (foundIndex >= 0) {
+            tags.splice(foundIndex, 1);
+            break;
+          }
+        }
+        const filteredData = filterQuestions(
+          questions,
+          selectedTagsRef.current,
+          record
+        );
+        setSearchedQuestions(filteredData);
+      },
+      [questions, record]
+    );
+
     const questionTypeChange = useCallback(
       ({ name, item, multiSelect }) => {
-        const option = selectedTypes.current[name] || [];
+        const option = selectedTagsRef.current[name] || [];
         const foundIndex = findIndex(option, v => item === v);
         if (multiSelect) {
           if (foundIndex >= 0) {
@@ -47,47 +104,19 @@ const withData = WrappedComponent => {
           } else {
             option.push(item);
           }
-          selectedTypes.current[name] = option;
+          selectedTagsRef.current[name] = option;
         } else {
-          selectedTypes.current[name] = foundIndex >= 0 ? [] : [item];
+          selectedTagsRef.current[name] = foundIndex >= 0 ? [] : [item];
         }
 
-        let filteredData = questions;
-        forEach(selectedTypes.current, (tags, key) => {
-          switch (key) {
-            case OPTIONS.STATUS:
-              if (tags.indexOf(TAGS.FINISHED) >= 0) {
-                filteredData = record.finished;
-              }
-              break;
-            case OPTIONS.TAG:
-              if (tags.length > 0) {
-                filteredData = filter(
-                  filteredData,
-                  ({ tags: questionTags }) => {
-                    for (let i = 0; i < questionTags.length; i++) {
-                      const currentTag = questionTags[i];
-                      const found = find(tags, tag => currentTag === tag);
-                      if (found) return true;
-                    }
-                    return false;
-                  }
-                );
-              }
-              break;
-            default: {
-              if (tags.length > 0) {
-                filteredData = filter(
-                  filteredData,
-                  ({ type }) => NAMES[type] === tags[0]
-                );
-              }
-            }
-          }
-        });
+        const filteredData = filterQuestions(
+          questions,
+          selectedTagsRef.current,
+          record
+        );
         setSearchedQuestions(filteredData);
       },
-      [questions, record.finished]
+      [questions, record]
     );
 
     useEffect(() => {
@@ -98,12 +127,19 @@ const withData = WrappedComponent => {
     }, [initQuestions]);
 
     const questionsToShow = searchedQuestions || questions;
+    let selectedTags = [];
+    forEach(selectedTagsRef.current, tags => {
+      selectedTags = selectedTags.concat(tags);
+    });
+
     return (
       <WrappedComponent
         columnsData={columnsData}
         questions={questionsToShow}
         isLoading={isLoading.current}
         onChange={handleSearch}
+        deleteTag={deleteTag}
+        selectedTags={selectedTags}
         questionTypeChange={questionTypeChange}
       />
     );
