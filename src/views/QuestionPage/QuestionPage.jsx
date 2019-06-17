@@ -7,8 +7,10 @@ import AnswerPage from '../AnswerPage';
 
 const Container = styled.div`
   height: 100%;
-  overflow: auto;
   padding: 20px;
+  @media (hover: none) {
+    padding: 0;
+  }
 `;
 
 const QuestionPage = () => (

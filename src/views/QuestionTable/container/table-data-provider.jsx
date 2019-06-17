@@ -60,6 +60,8 @@ const withData = WrappedComponent => {
     const [searchedQuestions, setSearchedQuestions] = useState();
     const isLoading = useRef(true);
     const selectedTagsRef = useRef({});
+    const isMobile = window.innerWidth < 500;
+    const column = isMobile ? columnsData.slice(0, 3) : columnsData;
 
     const handleSearch = useCallback(
       e => {
@@ -134,7 +136,7 @@ const withData = WrappedComponent => {
 
     return (
       <WrappedComponent
-        columnsData={columnsData}
+        columnsData={column}
         questions={questionsToShow}
         isLoading={isLoading.current}
         onChange={handleSearch}

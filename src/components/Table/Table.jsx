@@ -28,6 +28,7 @@ const TableView = styled.div`
 
 const TableViewHolder = styled.div`
   overflow-y: auto;
+  width: 100%;
   height: 100%;
 `;
 
@@ -39,14 +40,16 @@ const StyledTable = styled.table`
 `;
 
 const TableBody = styled.tbody`
-  :hover {
-    tr {
-      opacity: 0.6;
-      filter: blur(1px);
-    }
-    tr:hover {
-      opacity: 1;
-      filter: blur(0px);
+  @media (hover: hover) {
+    :hover {
+      tr {
+        opacity: 0.6;
+        filter: blur(1px);
+      }
+      tr:hover {
+        opacity: 1;
+        filter: blur(0px);
+      }
     }
   }
 `;
@@ -63,7 +66,7 @@ const TableRow = styled.tr`
   &:nth-of-type(odd) {
     background: #fafafa;
   }
-  @media (min-width: 512px) {
+  @media (hover: hover) {
     :hover {
       background: #cad2dc;
     }

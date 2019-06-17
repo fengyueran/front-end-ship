@@ -8,16 +8,13 @@ import { LineBox, VerticalBox, Spin } from '@xinghunm/widgets';
 import { FilterItems } from 'src/utils/constants';
 
 const Content = styled(VerticalBox)`
-  padding-right: 15px;
-  padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  overflow: auto;
+  @media (hover: none) {
+    padding: 0;
+  }
   @media (min-width: 768px) {
     height: 100%;
-  }
-
-  @media (min-width: 768px) {
     width: 750px;
   }
   @media (min-width: 992px) {
@@ -89,8 +86,12 @@ const FilterItemsWrapper = styled.div`
 `;
 
 const TableContainer = styled.div`
-  height: calc(100% - 63px);
+  height: calc(100% - 98px);
   background: #fff;
+  width: 100%;
+  & > div {
+    overflow-x: hidden;
+  }
 `;
 
 const Tags = styled.div`

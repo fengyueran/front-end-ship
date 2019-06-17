@@ -11,12 +11,26 @@ import WebNavigation from '../WebNavigation';
 
 const Container = styled(VerticalBox)`
   width: 100%;
-  height: 100%;
+  @media (hover: hover) {
+    height: 100%;
+  }
 `;
 
 const Content = styled(VerticalBox)`
   width: 100%;
   flex-grow: 1;
+  @media (hover: none) {
+    overflow-y: auto;
+  }
+  @media (hover: none) {
+    overflow-y: auto;
+  }
+`;
+
+const Sizer = styled.div`
+  width: 100%;
+  height: 60px;
+  flex-shrink: 0;
 `;
 
 const propTypes = {
@@ -28,6 +42,7 @@ const PrimaryLayout = ({ history, location }) => (
   <Container>
     <NavBar history={history} location={location} />
     <Content>
+      <Sizer />
       <Route exact path={ROUTES.ROOT} component={QuestionPage} />
       <Route path={ROUTES.QUESTION} component={QuestionPage} />
       <Route path={ROUTES.COMPONENT} component={ComponentPage} />

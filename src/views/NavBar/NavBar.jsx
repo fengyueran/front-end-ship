@@ -6,10 +6,15 @@ import { ROUTES } from 'src/utils/constants';
 
 const Header = styled.header`
   display: flex;
+  width: 100%;
   align-items: center;
   height: 60px;
   flex-shrink: 0;
   background-color: #30373e;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 2000;
 `;
 
 const Ul = styled.ul`
