@@ -25,10 +25,30 @@ log(){
   echo "$DATE ${SCRIPT_NAME} : ${LOG_INFO}" >> ${SHELL_LOG}
 }
 
+build(){
+  echo "Build..."
+  yarn build
+}
+
+pack(){
+  echo "Pack..."
+  tar -czvf "${APP_NAME}.tar.gz" build
+}
+
+upload(){
+  echo "Upload to server..."
+  scp ${APP_NAME}.tar.gz ${REMOTE}:/root/www
+}
+
 deploy(){
-  echo "Deploy Server"
+  echo "Deploy Server..."
   log "Deploy Server"
-  ssh ${REMOTE} "cd /root/project/front-end-ship && git pull && yarn build && cp -r build/. ../../www"
+  ssh ${REMOTE} "cd www && tar -xzvf ./${APP_NAME}.tar.gz && cp -r build/. ./"
+}
+
+delete(){
+  echo "Delete pkg..."
+  rm ${APP_NAME}.tar.gz
 }
 
 main(){
@@ -37,7 +57,11 @@ main(){
      echo "${SCRIPT_NAME} is running" && exit
   fi
   lock
+  build
+  pack
+  upload
   deploy
+  delete
   unlock
 }
 
