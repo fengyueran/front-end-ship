@@ -175,6 +175,7 @@ const QuestionTable = ({
         <Table
           columns={columnsData}
           dataSource={questions}
+          tableClass="overflow-x: hidden;"
           pagination={{ pageSize: 14 }}
         />
       )}

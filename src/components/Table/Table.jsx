@@ -30,6 +30,7 @@ const TableViewHolder = styled.div`
   overflow-y: auto;
   width: 100%;
   height: 100%;
+  ${props => props.tableClass}
 `;
 
 const StyledTable = styled.table`
@@ -97,29 +98,38 @@ const TableCell = styled.td`
 
 const PaginationContainer = styled.div`
   display: inline-block;
+  padding: 0 5px;
   width: 100%;
   height: 53px;
   border-top: 1px solid rgba(221, 221, 221, 0.5);
-  text-align: right;
+  text-align: ${props => props.align || 'right'};
 `;
 
 const TablePropTypes = {
   columns: PropTypes.array.isRequired,
   dataSource: PropTypes.array.isRequired,
   onPageChange: PropTypes.func,
-  pagination: PropTypes.object
+  pagination: PropTypes.object,
+  tableClass: PropTypes.string
 };
 
 const TableDefaultPropTypes = {
-  pagination: {}
+  pagination: {
+    align: 'right'
+  }
 };
 
 const DEFAULT_PAGE_SIZE = 10;
 
-const Table = ({ columns, dataSource = [], onPageChange, pagination }) => {
+const Table = ({
+  columns,
+  dataSource = [],
+  onPageChange,
+  pagination,
+  tableClass
+}) => {
   const [currentPage, setCurrentPage] = useState(0);
-  const { current } = pagination;
-
+  const { current, align } = pagination;
   if (current && current !== currentPage) {
     setCurrentPage(current);
   }
@@ -144,7 +154,7 @@ const Table = ({ columns, dataSource = [], onPageChange, pagination }) => {
   return (
     <Container>
       <TableView isShowPagination={isShowPagination}>
-        <TableViewHolder>
+        <TableViewHolder tableClass={tableClass}>
           <StyledTable>
             <TableHead>
               <tr>
@@ -170,7 +180,7 @@ const Table = ({ columns, dataSource = [], onPageChange, pagination }) => {
         </TableViewHolder>
       </TableView>
       {isShowPagination && (
-        <PaginationContainer>
+        <PaginationContainer align={align}>
           <Pagination
             total={dataSource.length}
             current={current}
