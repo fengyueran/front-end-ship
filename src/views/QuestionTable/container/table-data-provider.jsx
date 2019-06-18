@@ -15,7 +15,7 @@ const mapDispatch = ({ question: { initQuestions } }) => ({
   initQuestions
 });
 
-const filterQuestions = (questions, selectedTags, record) => {
+const filterQuestionsByTag = (questions, selectedTags, record) => {
   let filteredData = questions;
   forEach(selectedTags, (tags, key) => {
     switch (key) {
@@ -57,7 +57,9 @@ const withData = WrappedComponent => {
   };
 
   const Wrapper = ({ questions, record, initQuestions }) => {
-    const [searchedQuestions, setSearchedQuestions] = useState();
+    const [questionsToShow, setQuestionsToShow] = useState(questions);
+    const searchQuestionKeyRef = useRef();
+
     const isLoading = useRef(true);
     const selectedTagsRef = useRef({});
     const isMobile = window.innerWidth < 500;
@@ -65,12 +67,21 @@ const withData = WrappedComponent => {
 
     const handleSearch = useCallback(
       e => {
-        const filteredData = filter(questions, ({ title }) =>
+        searchQuestionKeyRef.current = e.target.value;
+        let filteredData = filter(questions, ({ title }) =>
           title.includes(e.target.value)
         );
-        setSearchedQuestions(filteredData);
+        if (Object.keys(selectedTagsRef.current).length > 0) {
+          filteredData = filterQuestionsByTag(
+            filteredData,
+            selectedTagsRef.current,
+            record
+          );
+        }
+
+        setQuestionsToShow(filteredData);
       },
-      [questions]
+      [questions, record]
     );
 
     const deleteTag = useCallback(
@@ -86,12 +97,20 @@ const withData = WrappedComponent => {
             break;
           }
         }
-        const filteredData = filterQuestions(
+
+        let filteredData = filterQuestionsByTag(
           questions,
           selectedTagsRef.current,
           record
         );
-        setSearchedQuestions(filteredData);
+
+        if (searchQuestionKeyRef.current) {
+          filteredData = filter(filteredData, ({ title }) =>
+            title.includes(searchQuestionKeyRef.current)
+          );
+        }
+
+        setQuestionsToShow(filteredData);
       },
       [questions, record]
     );
@@ -111,12 +130,19 @@ const withData = WrappedComponent => {
           selectedTagsRef.current[name] = foundIndex >= 0 ? [] : [item];
         }
 
-        const filteredData = filterQuestions(
+        let filteredData = filterQuestionsByTag(
           questions,
           selectedTagsRef.current,
           record
         );
-        setSearchedQuestions(filteredData);
+
+        if (searchQuestionKeyRef.current) {
+          filteredData = filter(filteredData, ({ title }) =>
+            title.includes(searchQuestionKeyRef.current)
+          );
+        }
+
+        setQuestionsToShow(filteredData);
       },
       [questions, record]
     );
@@ -128,7 +154,6 @@ const withData = WrappedComponent => {
       });
     }, [initQuestions]);
 
-    const questionsToShow = searchedQuestions || questions;
     let selectedTags = [];
     forEach(selectedTagsRef.current, tags => {
       selectedTags = selectedTags.concat(tags);
