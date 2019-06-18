@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const UlWrapper = styled.a`
   position: relative;
-  &:focus {
-    outline: none;
-    ul {
-      display: block;
-    }
+  :hover {
+    cursor: pointer;
   }
 `;
 
@@ -22,12 +19,11 @@ const UlBtn = styled.div`
 `;
 
 const ListGroup = styled.ul`
-  display: none;
+  display: ${props => (props.isShow ? 'block' : 'none')};
   position: absolute;
   top: 100%;
   right: 0;
   z-index: 1000;
-  display: none;
   min-width: 160px;
   padding: 0;
   margin: 2px 0 0;
@@ -73,25 +69,54 @@ const propTypes = {
   onSelect: PropTypes.func.isRequired
 };
 
-const DropDown = ({ name, items, selectedItems, onSelect }) => (
-  <UlWrapper href="#">
-    <UlBtn>
-      {name}
-      <Caret className="fa fa-caret-down" />
-    </UlBtn>
-    <ListGroup onClick={onSelect}>
-      {items.map((item, index) => (
-        <ListGroupItem key={item} data-index={index}>
-          <CheckedIcon
-            className="fa fa-check"
-            selected={selectedItems[index]}
-          />
-          {item}
-        </ListGroupItem>
-      ))}
-    </ListGroup>
-  </UlWrapper>
-);
+const DropDown = ({ name, items, selectedItems, onSelect }) => {
+  const [isShow, setIsShow] = useState(false);
+  const ulWrapperRef = useRef();
+  const isShowRef = useRef(false);
+  const onClick = () => {
+    if (!isShow) {
+      isShowRef.current = true;
+      setIsShow(true);
+    }
+  };
+  useEffect(() => {
+    const hiddleClickOutside = e => {
+      if (isShowRef.current) {
+        const isClickOutside = !ulWrapperRef.current.contains(e.target);
+        if (isClickOutside) {
+          isShowRef.current = false;
+          setIsShow(false);
+        }
+      }
+    };
+    document.addEventListener('click', hiddleClickOutside);
+    document.addEventListener('touchstart', hiddleClickOutside); // for mobile phone
+    return () => {
+      document.removeEventListener('click', hiddleClickOutside);
+      document.removeEventListener('touchstart', hiddleClickOutside);
+    };
+  }, []);
+
+  return (
+    <UlWrapper ref={ulWrapperRef}>
+      <UlBtn onClick={onClick}>
+        {name}
+        <Caret className="fa fa-caret-down" />
+      </UlBtn>
+      <ListGroup onClick={onSelect} isShow={isShow}>
+        {items.map((item, index) => (
+          <ListGroupItem key={item} data-index={index}>
+            <CheckedIcon
+              className="fa fa-check"
+              selected={selectedItems[index]}
+            />
+            {item}
+          </ListGroupItem>
+        ))}
+      </ListGroup>
+    </UlWrapper>
+  );
+};
 
 DropDown.propTypes = propTypes;
 
