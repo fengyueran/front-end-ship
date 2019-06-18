@@ -4,7 +4,7 @@ export const ROUTES = {
   BLOG: '/blog',
   COMPONENT: '/component',
   RESOURCE: '/resource',
-  ANSWER: '/qustion/answer'
+  ANSWER: '/question/answer'
 };
 
 export const QUESTION_TYPES = {
