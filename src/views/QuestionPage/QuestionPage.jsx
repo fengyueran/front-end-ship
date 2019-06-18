@@ -6,7 +6,7 @@ import QuestionTable from '../QuestionTable';
 import AnswerPage from '../AnswerPage';
 
 const Container = styled.div`
-  height: 100%;
+  height: calc(100% - 60px);
   padding: 20px;
   @media (hover: none) {
     padding: 0;

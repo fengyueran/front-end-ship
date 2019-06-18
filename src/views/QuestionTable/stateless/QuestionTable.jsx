@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { map } from 'lodash-es';
 import styled from 'styled-components';
@@ -86,7 +86,8 @@ const FilterItemsWrapper = styled.div`
 `;
 
 const TableContainer = styled.div`
-  height: calc(100% - 98px);
+  height: ${props => `calc(100% - ${props.resHeight}px)`};
+  min-height: ${props => `calc(100vh - ${props.resHeight}px - 100px)`};
   background: #fff;
   width: 100%;
   & > div {
@@ -136,52 +137,61 @@ const QuestionTable = ({
   onChange,
   deleteTag,
   questionTypeChange
-}) => (
-  <Content>
-    <Header>
-      <HeaderTitle>
-        <strong>练习题</strong>
-      </HeaderTitle>
-      <SearchBox>
-        <Input placeholder="搜索题目" onChange={onChange} />
-      </SearchBox>
-      <FilterItemsWrapper>
-        {map(FilterItems, ({ name, items, multiSelect }) => (
-          <DropDown
-            key={name}
-            name={name}
-            items={items}
-            multiSelect={multiSelect}
-            onClick={questionTypeChange}
+}) => {
+  const headerRef = useRef();
+  const headHeight = 45;
+  let resHeight = headHeight;
+  if (headerRef.current) {
+    resHeight = headerRef.current.clientHeight;
+  }
+  return (
+    <Content>
+      <Header ref={headerRef}>
+        <HeaderTitle>
+          <strong>练习题</strong>
+        </HeaderTitle>
+        <SearchBox>
+          <Input placeholder="搜索题目" onChange={onChange} />
+        </SearchBox>
+        <FilterItemsWrapper>
+          {map(FilterItems, ({ name, items, multiSelect }) => (
+            <DropDown
+              key={name}
+              name={name}
+              items={items}
+              multiSelect={multiSelect}
+              onClick={questionTypeChange}
+            />
+          ))}
+        </FilterItemsWrapper>
+        {selectedTags.length > 0 && (
+          <Tags>
+            {map(selectedTags, tag => (
+              <Tag onClick={deleteTag} key={tag}>
+                {tag}
+                <Fork className="fa fa-times" data-tag={tag} />
+              </Tag>
+            ))}
+          </Tags>
+        )}
+        <SeparateBar />
+      </Header>
+
+      <TableContainer resHeight={resHeight}>
+        {isLoading ? (
+          <Spin />
+        ) : (
+          <Table
+            columns={columnsData}
+            dataSource={questions}
+            tableClass="overflow-x: hidden;"
+            pagination={{ pageSize: 14 }}
           />
-        ))}
-      </FilterItemsWrapper>
-    </Header>
-    {selectedTags.length > 0 && (
-      <Tags>
-        {map(selectedTags, tag => (
-          <Tag onClick={deleteTag} key={tag}>
-            {tag}
-            <Fork className="fa fa-times" data-tag={tag} />
-          </Tag>
-        ))}
-      </Tags>
-    )}
-    <SeparateBar />
-    <TableContainer>
-      {isLoading ? (
-        <Spin />
-      ) : (
-        <Table
-          columns={columnsData}
-          dataSource={questions}
-          tableClass="overflow-x: hidden;"
-          pagination={{ pageSize: 14 }}
-        />
-      )}
-    </TableContainer>
-  </Content>
-);
+        )}
+      </TableContainer>
+    </Content>
+  );
+};
 
 QuestionTable.propTypes = propTypes;
 
