@@ -7,7 +7,8 @@
   "parser": "babel-eslint",
   "plugins": ["react-hooks"],
   "rules": {
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-debugger": "warn"
   },
   "env": {
     "browser": true,
