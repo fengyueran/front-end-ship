@@ -122,6 +122,7 @@ const propTypes = {
   currentPage: PropTypes.number.isRequired,
   selectedTagsObj: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  searchBoxRef: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
   onPageChange: PropTypes.func.isRequired,
@@ -135,6 +136,7 @@ const QuestionTable = ({
   isLoading,
   onChange,
   currentPage,
+  searchBoxRef,
   deleteTag,
   onPageChange,
   questionTypeChange
@@ -151,7 +153,11 @@ const QuestionTable = ({
           <strong>练习题</strong>
         </HeaderTitle>
         <SearchBox>
-          <Input placeholder="搜索题目" onChange={onChange} />
+          <Input
+            placeholder="搜索题目"
+            onChange={onChange}
+            ref={searchBoxRef}
+          />
         </SearchBox>
         <FilterItemsWrapper>
           {map(FilterItems, ({ name, items, multiSelect }) => (

@@ -36,14 +36,15 @@ const filterQuestionsByTag = (questions, selectedTags, record) => {
           });
         }
         break;
-      default: {
+      case OPTIONS.TYPE:
         if (tags.length > 0) {
           filteredData = filter(
             filteredData,
             ({ type }) => NAMES[type] === tags[0]
           );
         }
-      }
+        break;
+      default:
     }
   });
   return filteredData;
@@ -60,6 +61,7 @@ const withData = WrappedComponent => {
     const [questionsToShow, setQuestionsToShow] = useState(questions);
     const [currentPage, setCurrentPage] = useState(1);
     const searchQuestionKeyRef = useRef();
+    const searchBoxRef = useRef();
 
     const isLoading = useRef(true);
     const selectedTagsRef = useRef({});
@@ -73,15 +75,18 @@ const withData = WrappedComponent => {
     const handleSearch = useCallback(
       e => {
         searchQuestionKeyRef.current = e.target.value;
+
         let filteredData = filter(questions, ({ title }) =>
           title.includes(e.target.value)
         );
-        if (Object.keys(selectedTagsRef.current).length > 0) {
-          filteredData = filterQuestionsByTag(
-            filteredData,
-            selectedTagsRef.current,
-            record
-          );
+        const { searchValue, ...tags } = selectedTagsRef.current;
+        if (Object.keys(tags).length > 0) {
+          filteredData = filterQuestionsByTag(filteredData, tags, record);
+        }
+        if (searchQuestionKeyRef.current) {
+          selectedTagsRef.current.searchValue = [searchQuestionKeyRef.current];
+        } else {
+          delete selectedTagsRef.current.searchValue;
         }
 
         setQuestionsToShow(filteredData);
@@ -99,6 +104,10 @@ const withData = WrappedComponent => {
           const foundIndex = findIndex(tags, tagName => tagName === tag);
           if (foundIndex >= 0) {
             tags.splice(foundIndex, 1);
+            if (type === 'searchValue') {
+              searchQuestionKeyRef.current = null;
+              searchBoxRef.current.value = '';
+            }
             break;
           }
         }
@@ -168,6 +177,7 @@ const withData = WrappedComponent => {
         deleteTag={deleteTag}
         currentPage={currentPage}
         onPageChange={onPageChange}
+        searchBoxRef={searchBoxRef}
         selectedTagsObj={selectedTagsRef.current}
         questionTypeChange={questionTypeChange}
       />
