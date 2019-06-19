@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -65,58 +65,40 @@ const Caret = styled.span`
 const propTypes = {
   name: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
+  isShowMenus: PropTypes.bool.isRequired,
   selectedItems: PropTypes.array.isRequired,
+  dropDownRef: PropTypes.object.isRequired,
+  onDropDown: PropTypes.func.isRequired,
   onSelect: PropTypes.func.isRequired
 };
 
-const DropDown = ({ name, items, selectedItems, onSelect }) => {
-  const [isShow, setIsShow] = useState(false);
-  const ulWrapperRef = useRef();
-  const isShowRef = useRef(false);
-  const onClick = () => {
-    if (!isShow) {
-      isShowRef.current = true;
-      setIsShow(true);
-    }
-  };
-  useEffect(() => {
-    const hiddleClickOutside = e => {
-      if (isShowRef.current) {
-        const isClickOutside = !ulWrapperRef.current.contains(e.target);
-        if (isClickOutside) {
-          isShowRef.current = false;
-          setIsShow(false);
-        }
-      }
-    };
-    document.addEventListener('click', hiddleClickOutside);
-    document.addEventListener('touchstart', hiddleClickOutside); // for mobile phone
-    return () => {
-      document.removeEventListener('click', hiddleClickOutside);
-      document.removeEventListener('touchstart', hiddleClickOutside);
-    };
-  }, []);
-
-  return (
-    <UlWrapper ref={ulWrapperRef}>
-      <UlBtn onClick={onClick}>
-        {name}
-        <Caret className="fa fa-caret-down" />
-      </UlBtn>
-      <ListGroup onClick={onSelect} isShow={isShow}>
-        {items.map((item, index) => (
-          <ListGroupItem key={item} data-index={index}>
-            <CheckedIcon
-              className="fa fa-check"
-              selected={selectedItems.indexOf(item) >= 0}
-            />
-            {item}
-          </ListGroupItem>
-        ))}
-      </ListGroup>
-    </UlWrapper>
-  );
-};
+const DropDown = ({
+  name,
+  items,
+  isShowMenus,
+  selectedItems,
+  dropDownRef,
+  onSelect,
+  onDropDown
+}) => (
+  <UlWrapper ref={dropDownRef}>
+    <UlBtn onClick={onDropDown}>
+      {name}
+      <Caret className="fa fa-caret-down" />
+    </UlBtn>
+    <ListGroup onClick={onSelect} isShow={isShowMenus}>
+      {items.map((item, index) => (
+        <ListGroupItem key={item} data-index={index}>
+          <CheckedIcon
+            className="fa fa-check"
+            selected={selectedItems.indexOf(item) >= 0}
+          />
+          {item}
+        </ListGroupItem>
+      ))}
+    </ListGroup>
+  </UlWrapper>
+);
 
 DropDown.propTypes = propTypes;
 
