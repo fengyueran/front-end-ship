@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { map, forEach } from 'lodash-es';
 import styled from 'styled-components';
@@ -86,13 +86,10 @@ const FilterItemsWrapper = styled.div`
 `;
 
 const TableContainer = styled.div`
-  height: ${props => `calc(100% - ${props.resHeight}px)`};
-  min-height: ${props => `calc(100vh - ${props.resHeight}px - 100px)`};
+  overflow: hidden;
   background: #fff;
   width: 100%;
-  & > div {
-    overflow-x: hidden;
-  }
+  height: 100%;
 `;
 
 const Tags = styled.div`
@@ -142,15 +139,9 @@ const QuestionTable = ({
   forEach(selectedTagsObj, tags => {
     selectedTags = selectedTags.concat(tags);
   });
-  const headerRef = useRef();
-  const headHeight = 45;
-  let resHeight = headHeight;
-  if (headerRef.current) {
-    resHeight = headerRef.current.clientHeight;
-  }
   return (
     <Content>
-      <Header ref={headerRef}>
+      <Header>
         <HeaderTitle>
           <strong>练习题</strong>
         </HeaderTitle>
@@ -181,8 +172,7 @@ const QuestionTable = ({
         )}
         <SeparateBar />
       </Header>
-
-      <TableContainer resHeight={resHeight}>
+      <TableContainer>
         {isLoading ? (
           <Spin />
         ) : (

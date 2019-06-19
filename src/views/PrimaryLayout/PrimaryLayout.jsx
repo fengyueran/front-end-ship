@@ -19,11 +19,8 @@ const Container = styled(VerticalBox)`
 const Content = styled(VerticalBox)`
   width: 100%;
   flex-grow: 1;
-  @media (hover: none) {
-    overflow-y: auto;
-  }
-  @media (hover: none) {
-    overflow-y: auto;
+  @media (hover: hover) {
+    height: 100%;
   }
 `;
 

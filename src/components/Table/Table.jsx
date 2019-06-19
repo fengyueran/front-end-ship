@@ -41,7 +41,7 @@ const StyledTable = styled.table`
 `;
 
 const TableBody = styled.tbody`
-  @media (hover: hover) {
+  /* @media (hover: hover) {
     :hover {
       tr {
         opacity: 0.6;
@@ -52,7 +52,7 @@ const TableBody = styled.tbody`
         filter: blur(0px);
       }
     }
-  }
+  } */
 `;
 
 const TableHead = styled.thead`
