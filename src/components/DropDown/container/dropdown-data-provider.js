@@ -6,19 +6,32 @@ const withData = WrappedComponent => {
     name: PropTypes.string.isRequired,
     items: PropTypes.array.isRequired,
     multiSelect: PropTypes.bool,
+    selectedItems: PropTypes.array,
     onClick: PropTypes.func
   };
 
-  const Container = ({ name, items, multiSelect = false, onClick }) => {
-    const [selectedItems, setSelectedItems] = useState({});
+  const Container = ({
+    name,
+    items,
+    multiSelect = false,
+    selectedItems,
+    onClick
+  }) => {
+    const [_selectedItems, setSelectedItems] = useState([]);
     const onSelect = e => {
-      const selectedIndex = e.target.getAttribute('data-index');
-      const selectedItem = selectedItems[selectedIndex];
-      selectedItems[selectedIndex] = !selectedItem;
-      const newItems = multiSelect
-        ? { ...selectedItems }
-        : { [selectedIndex]: !selectedItem };
-      setSelectedItems(newItems);
+      let tmpSelected = [..._selectedItems];
+      const selectedIndex = +e.target.getAttribute('data-index');
+      const foundIndex = _selectedItems.findIndex(
+        index => index === selectedIndex
+      );
+      if (foundIndex >= 0) {
+        tmpSelected.splice(foundIndex, 1);
+      } else if (multiSelect) {
+        tmpSelected.push(items[selectedIndex]);
+      } else {
+        tmpSelected = [items[selectedIndex]];
+      }
+      setSelectedItems(tmpSelected);
       if (onClick) {
         onClick({ name, item: items[selectedIndex], multiSelect });
       }
@@ -29,7 +42,7 @@ const withData = WrappedComponent => {
         name={name}
         items={items}
         onSelect={onSelect}
-        selectedItems={selectedItems}
+        selectedItems={selectedItems || _selectedItems}
       />
     );
   };

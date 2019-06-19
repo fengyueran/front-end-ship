@@ -65,7 +65,7 @@ const Caret = styled.span`
 const propTypes = {
   name: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
-  selectedItems: PropTypes.object.isRequired,
+  selectedItems: PropTypes.array.isRequired,
   onSelect: PropTypes.func.isRequired
 };
 
@@ -108,7 +108,7 @@ const DropDown = ({ name, items, selectedItems, onSelect }) => {
           <ListGroupItem key={item} data-index={index}>
             <CheckedIcon
               className="fa fa-check"
-              selected={selectedItems[index]}
+              selected={selectedItems.indexOf(item) >= 0}
             />
             {item}
           </ListGroupItem>

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { map } from 'lodash-es';
+import { map, forEach } from 'lodash-es';
 import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
@@ -122,7 +122,7 @@ const Fork = styled.span`
 const propTypes = {
   columnsData: PropTypes.array.isRequired,
   questions: PropTypes.array.isRequired,
-  selectedTags: PropTypes.array.isRequired,
+  selectedTagsObj: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
@@ -132,12 +132,16 @@ const propTypes = {
 const QuestionTable = ({
   columnsData,
   questions,
-  selectedTags,
+  selectedTagsObj,
   isLoading,
   onChange,
   deleteTag,
   questionTypeChange
 }) => {
+  let selectedTags = [];
+  forEach(selectedTagsObj, tags => {
+    selectedTags = selectedTags.concat(tags);
+  });
   const headerRef = useRef();
   const headHeight = 45;
   let resHeight = headHeight;
@@ -159,6 +163,7 @@ const QuestionTable = ({
               key={name}
               name={name}
               items={items}
+              selectedItems={selectedTagsObj[name]}
               multiSelect={multiSelect}
               onClick={questionTypeChange}
             />

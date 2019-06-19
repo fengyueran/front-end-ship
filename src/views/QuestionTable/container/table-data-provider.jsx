@@ -118,7 +118,7 @@ const withData = WrappedComponent => {
     const questionTypeChange = useCallback(
       ({ name, item, multiSelect }) => {
         const option = selectedTagsRef.current[name] || [];
-        const foundIndex = findIndex(option, v => item === v);
+        const foundIndex = option.indexOf(item);
         if (multiSelect) {
           if (foundIndex >= 0) {
             option.splice(foundIndex, 1);
@@ -154,11 +154,6 @@ const withData = WrappedComponent => {
       });
     }, [initQuestions]);
 
-    let selectedTags = [];
-    forEach(selectedTagsRef.current, tags => {
-      selectedTags = selectedTags.concat(tags);
-    });
-
     return (
       <WrappedComponent
         columnsData={column}
@@ -166,7 +161,7 @@ const withData = WrappedComponent => {
         isLoading={isLoading.current}
         onChange={handleSearch}
         deleteTag={deleteTag}
-        selectedTags={selectedTags}
+        selectedTagsObj={selectedTagsRef.current}
         questionTypeChange={questionTypeChange}
       />
     );
