@@ -58,12 +58,17 @@ const withData = WrappedComponent => {
 
   const Wrapper = ({ questions, record, initQuestions }) => {
     const [questionsToShow, setQuestionsToShow] = useState(questions);
+    const [currentPage, setCurrentPage] = useState(1);
     const searchQuestionKeyRef = useRef();
 
     const isLoading = useRef(true);
     const selectedTagsRef = useRef({});
     const isMobile = window.innerWidth < 500;
     const column = isMobile ? columnsData.slice(0, 3) : columnsData;
+
+    const onPageChange = useCallback(page => {
+      setCurrentPage(page);
+    }, []);
 
     const handleSearch = useCallback(
       e => {
@@ -161,6 +166,8 @@ const withData = WrappedComponent => {
         isLoading={isLoading.current}
         onChange={handleSearch}
         deleteTag={deleteTag}
+        currentPage={currentPage}
+        onPageChange={onPageChange}
         selectedTagsObj={selectedTagsRef.current}
         questionTypeChange={questionTypeChange}
       />

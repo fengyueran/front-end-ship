@@ -119,10 +119,12 @@ const Fork = styled.span`
 const propTypes = {
   columnsData: PropTypes.array.isRequired,
   questions: PropTypes.array.isRequired,
+  currentPage: PropTypes.number.isRequired,
   selectedTagsObj: PropTypes.object.isRequired,
   isLoading: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   deleteTag: PropTypes.func.isRequired,
+  onPageChange: PropTypes.func.isRequired,
   questionTypeChange: PropTypes.func.isRequired
 };
 
@@ -132,13 +134,16 @@ const QuestionTable = ({
   selectedTagsObj,
   isLoading,
   onChange,
+  currentPage,
   deleteTag,
+  onPageChange,
   questionTypeChange
 }) => {
   let selectedTags = [];
   forEach(selectedTagsObj, tags => {
     selectedTags = selectedTags.concat(tags);
   });
+
   return (
     <Content>
       <Header>
@@ -180,7 +185,11 @@ const QuestionTable = ({
             columns={columnsData}
             dataSource={questions}
             tableClass="overflow-x: hidden;"
-            pagination={{ pageSize: 14 }}
+            pagination={{
+              pageSize: 14,
+              current: selectedTags.length > 0 ? 1 : currentPage
+            }}
+            onPageChange={onPageChange}
           />
         )}
       </TableContainer>

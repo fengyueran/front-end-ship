@@ -136,8 +136,8 @@ const Table = ({
 
   const pageSize = pagination.pageSize || DEFAULT_PAGE_SIZE;
   const currentPageData = dataSource.slice(
-    currentPage * pageSize,
-    (currentPage + 1) * pageSize
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
   );
 
   const handlePageChange = page => {
