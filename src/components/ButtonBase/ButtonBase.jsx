@@ -14,11 +14,15 @@ const ButtonBase = styled(Button).attrs(({ isDisable }) => ({
   margin: 0;
   min-height: 34px;
   background: ${props => props.background || 'none'};
-
   :hover {
     background: ${props =>
       props.isDisable ? 'none' : utils.fade('#337ab7', 0.2)};
     cursor: ${props => (props.isDisable ? 'not-allowed' : 'pointer')};
+  }
+  @media (hover: none) {
+    :hover {
+      background: none;
+    }
   }
   box-shadow: none;
 `;

@@ -17,6 +17,10 @@ const Container = styled(VerticalBox)`
 const Content = styled(LineBox)`
   height: 100%;
   width: 100%;
+  flex-wrap: wrap;
+  @media (hover: hover) {
+    min-width: 890px;
+  }
 `;
 
 const propTypes = {

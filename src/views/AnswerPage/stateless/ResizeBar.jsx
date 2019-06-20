@@ -17,6 +17,9 @@ const VerticalBar = styled(VerticalBox)`
     cursor: col-resize;
     background: #d1dff180;
   }
+  @media (hover: none) {
+    display: none;
+  }
 `;
 
 const Ellipsis = styled.span`

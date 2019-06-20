@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { LineBox, Sizer } from '@xinghunm/widgets';
 import ButtonBase from 'src/components/ButtonBase';
-import { NAMES } from 'src/utils/constants';
+import { NAMES, VIEW_SIZE } from 'src/utils/constants';
 
 const Container = styled(LineBox)`
   width: 100%;
+  height: ${VIEW_SIZE.CODE_ACTION_BAR}px;
   padding: 10px 20px;
   flex-shrink: 0;
   background: #fff;

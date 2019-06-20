@@ -3,10 +3,23 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { VerticalBox, Spin } from '@xinghunm/widgets';
 import Editor from 'src/components/Editor';
+import { VIEW_SIZE } from 'src/utils/constants';
 import TabBar from './TabBar';
 import PickBar from './QuestionPickBar';
 import withData from '../container/picker-bar-data-provider';
 
+const {
+  NAV_BAR_HEIGHT,
+  QUESTION_INFO_BAR_HEIGHT,
+  ANSWER_PAGE_TAB_BAR_HEIGHT,
+  QUESTION_PICKER_BAR_HEIGHT
+} = VIEW_SIZE;
+
+const resHeight =
+  NAV_BAR_HEIGHT +
+  QUESTION_INFO_BAR_HEIGHT +
+  ANSWER_PAGE_TAB_BAR_HEIGHT +
+  QUESTION_PICKER_BAR_HEIGHT;
 const QuestionPickBar = withData(PickBar);
 
 const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
@@ -15,12 +28,19 @@ const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
   height: 100%;
   overflow: auto;
   background: #fff;
+  @media (hover: none) {
+    min-width: 100vw;
+  }
 `;
 
 const Content = styled.div`
   display: flex;
   flex-grow: 1;
+  height: 100%;
   border: 1px solid #eee;
+  @media (hover: none) {
+    min-height: calc(100vh - ${resHeight}px);
+  }
 `;
 
 const Article = styled.div`
@@ -32,6 +52,7 @@ const Article = styled.div`
   ul {
     padding-left: 28px;
   }
+  -webkit-overflow-scrolling: touch;
 `;
 
 const propTypes = {

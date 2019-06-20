@@ -16,6 +16,7 @@ const CodeArea = styled(VerticalBox)`
 const Content = styled(VerticalBox)`
   height: 100%;
   border: 1px solid #eee;
+  min-height: 300px;
 `;
 
 const propTypes = {

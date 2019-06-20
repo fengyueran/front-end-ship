@@ -76,3 +76,12 @@ export const FilterItems = [
   },
   { name: OPTIONS.TYPE, items: ['简答题', '编程题', '其他'] }
 ];
+
+export const VIEW_SIZE = {
+  NAV_BAR_HEIGHT: 60,
+  ANSWER_PAGE_PADING: 20,
+  QUESTION_INFO_BAR_HEIGHT: 56,
+  ANSWER_PAGE_TAB_BAR_HEIGHT: 40,
+  QUESTION_PICKER_BAR_HEIGHT: 54,
+  CODE_ACTION_BAR: 54
+};
