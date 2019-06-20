@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const mapState = state => ({
+  isFullScreen: state.question.isFullScreen,
   currentQuestion: state.question.currentQuestion
 });
 
 const withData = WrappedComponent => {
   const propTypes = {
+    isFullScreen: PropTypes.bool.isRequired,
     currentQuestion: PropTypes.object.isRequired
   };
-  const Wrapper = ({ currentQuestion }) => {
+  const Wrapper = ({ isFullScreen, currentQuestion }) => {
     const [flexGrow, setFlexGrow] = useState(1);
     const answerAreaEl = useRef(null);
     const codeEditorEl = useRef(null);
@@ -54,6 +56,7 @@ const withData = WrappedComponent => {
 
     return (
       <WrappedComponent
+        isFullScreen={isFullScreen}
         flexGrow={flexGrow}
         answerAreaEl={answerAreaEl}
         codeEditorEl={codeEditorEl}

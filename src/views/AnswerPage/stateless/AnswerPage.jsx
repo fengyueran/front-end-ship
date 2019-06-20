@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { LineBox, VerticalBox } from '@xinghunm/widgets';
 import { QUESTION_TYPES } from 'src/utils/constants';
 import QuestionInfoBar from './QuestionInfoBar';
@@ -14,6 +14,13 @@ const Container = styled(VerticalBox)`
   align-items: flex-start;
 `;
 
+const fullScreenCss = css`
+  position: fixed;
+  top: 0;
+  z-index: 2000;
+  left: 0;
+`;
+
 const Content = styled(LineBox)`
   height: 100%;
   width: 100%;
@@ -21,9 +28,11 @@ const Content = styled(LineBox)`
   @media (hover: hover) {
     min-width: 890px;
   }
+  ${props => props.isFullScreen && fullScreenCss}
 `;
 
 const propTypes = {
+  isFullScreen: PropTypes.bool.isRequired,
   currentQuestion: PropTypes.object.isRequired,
   answerAreaEl: PropTypes.object.isRequired,
   codeEditorEl: PropTypes.object.isRequired,
@@ -34,6 +43,7 @@ const propTypes = {
 
 const AnswerPage = props => {
   const {
+    isFullScreen,
     currentQuestion,
     answerAreaEl,
     codeEditorEl,
@@ -47,7 +57,7 @@ const AnswerPage = props => {
   return (
     <Container>
       <QuestionInfoBar currentQuestion={currentQuestion} />
-      <Content>
+      <Content isFullScreen={isFullScreen}>
         <AnswerArea
           currentQuestion={currentQuestion}
           getRef={answerAreaEl}

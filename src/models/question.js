@@ -8,7 +8,8 @@ const defaultState = {
   record: {
     unfinished: [],
     finished: []
-  }
+  },
+  isFullScreen: false
 };
 const question = {
   state: defaultState,
@@ -76,6 +77,10 @@ const question = {
           });
         }
       });
+    },
+    toggleFullScreen(payload, state) {
+      const { isFullScreen } = state.question;
+      this.updateQuestionParam({ isFullScreen: !isFullScreen });
     }
   })
 };
