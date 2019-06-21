@@ -24,6 +24,7 @@
     "start": "PORT=1989 react-app-rewired start",
     "build": "react-app-rewired build",
     "pub": "./utils/deploy.sh",
+    "pub-with-storybook": "./utils/deploy.sh storybook",
     "test": "react-app-rewired test",
     "coverage": "react-app-rewired test --coverage",
     "analyze": "source-map-explorer 'build/static/js/*.js'"

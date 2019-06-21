@@ -30,6 +30,11 @@ build(){
   yarn build
 }
 
+cpStoryBook(){
+  echo "copy story book..." 
+  cp -r ../OnePiece/packages/xh-widgets/storybook-static ./build
+}
+
 pack(){
   echo "Pack..."
   tar -czvf "${APP_NAME}.tar.gz" build
@@ -52,12 +57,17 @@ delete(){
 }
 
 main(){
+  isUpdateStoryBook=$1
   if [ -f "$LOCK_FILE" ];then
      log "${SCRIPT_NAME} is running"
      echo "${SCRIPT_NAME} is running" && exit
   fi
   lock
   build
+  if [ $isUpdateStoryBook ];then
+     log "storybook is updating"
+     cpStoryBook
+  fi
   pack
   upload
   deploy
@@ -65,4 +75,4 @@ main(){
   unlock
 }
 
-main
+main $1
