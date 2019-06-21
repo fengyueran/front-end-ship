@@ -20,11 +20,22 @@ const client = (() => {
   const getAnswerHtml = async id => getData(`/answer/${id}`);
   const getWebsites = async () => getData('/websites/all');
 
+  const submitQuestion = async id => {
+    try {
+      const { data } = await instance.post(`/questiondone/${id}`);
+      return data;
+    } catch (e) {
+      console.log(e);
+      return null;
+    }
+  };
+
   return {
     getQuestions,
     getQuestionHtml,
     getAnswerHtml,
-    getWebsites
+    getWebsites,
+    submitQuestion
   };
 })();
 

@@ -1,5 +1,6 @@
-import { forEach, random } from 'lodash-es';
 import client from 'src/webapi';
+import { forEach, filter, find, map, random } from 'lodash-es';
+import { OPTIONS, TAGS, NAMES } from 'src/utils/constants';
 
 const defaultState = {
   currentQuestion: null,
@@ -81,6 +82,63 @@ const question = {
     toggleFullScreen(payload, state) {
       const { isFullScreen } = state.question;
       this.updateQuestionParam({ isFullScreen: !isFullScreen });
+    },
+    submitQuestion(id, state) {
+      const { record, questionById } = state.question;
+      const index = record.finished.indexOf(id);
+      if (index < 0) {
+        client.submitQuestion(id).then(isSuccess => {
+          if (isSuccess) {
+            const currentQuestion = questionById[id];
+            if (question) {
+              record.finished.push(currentQuestion);
+              this.updateQuestionParam(record);
+            }
+          }
+        });
+      }
+    },
+    filterQuestionsByTag(selectedTags, state) {
+      const { questions, questionById, record } = state.question;
+      let filteredData = questions;
+      forEach(selectedTags, (tags, key) => {
+        switch (key) {
+          case OPTIONS.STATUS:
+            if (tags.indexOf(TAGS.FINISHED) >= 0) {
+              filteredData = record.finished;
+              filteredData = map(filteredData, id => questionById[id]);
+            } else if (tags.indexOf(TAGS.UNFINISHED) >= 0) {
+              filteredData = filter(
+                filteredData,
+                ({ id }) => record.finished.indexOf(id) < 0
+              );
+            }
+            break;
+          case OPTIONS.TAG:
+            if (tags.length > 0) {
+              filteredData = filter(filteredData, ({ tags: questionTags }) => {
+                for (let i = 0; i < questionTags.length; i++) {
+                  const currentTag = questionTags[i];
+                  const found = find(tags, tag => currentTag === tag);
+                  if (found) return true;
+                }
+                return false;
+              });
+            }
+            break;
+          case OPTIONS.TYPE:
+            if (tags.length > 0) {
+              filteredData = filter(
+                filteredData,
+                ({ type }) => NAMES[type] === tags[0]
+              );
+            }
+            break;
+          default:
+        }
+      });
+
+      return filteredData;
     }
   })
 };

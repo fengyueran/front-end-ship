@@ -4,9 +4,11 @@ import styled from 'styled-components';
 import { VerticalBox } from '@xinghunm/widgets';
 import Editor from 'src/components/Editor';
 import ToolBar from './ToolBar';
+import withData from '../container/code-action-bar-data-provider';
 import CodeActionBar from './CodeActionBar';
 import ResultArea from './ResultArea';
 
+const CodeActionBarContainer = withData(CodeActionBar);
 const CodeArea = styled(VerticalBox)`
   flex: 1 0 0;
   min-width: 200px;
@@ -46,7 +48,10 @@ const CodeEditor = props => {
         <Editor value={value} onChange={handleCodeChange} />
         {isShowConsole && <ResultArea result={result} />}
       </Content>
-      <CodeActionBar executeCode={executeCode} toggleConsole={toggleConsole} />
+      <CodeActionBarContainer
+        executeCode={executeCode}
+        toggleConsole={toggleConsole}
+      />
     </CodeArea>
   );
 };

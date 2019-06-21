@@ -25,10 +25,18 @@ const CaretUp = styled.i.attrs(() => ({
 
 const propTypes = {
   executeCode: PropTypes.func.isRequired,
-  toggleConsole: PropTypes.func.isRequired
+  toggleConsole: PropTypes.func.isRequired,
+  currentQuestion: PropTypes.object.isRequired,
+  submitQuestion: PropTypes.func.isRequired
 };
 
-const CodeActionBar = ({ executeCode, toggleConsole }) => {
+const CodeActionBar = ({
+  executeCode,
+  toggleConsole,
+  currentQuestion,
+  submitQuestion
+}) => {
+  const questionId = currentQuestion.id;
   const toggle = () => {
     toggleConsole(isShowConsole => !isShowConsole);
   };
@@ -41,7 +49,7 @@ const CodeActionBar = ({ executeCode, toggleConsole }) => {
       <Sizer />
       <ButtonBase onClick={executeCode}>{NAMES.EXECUTE}</ButtonBase>
       <Sizer.X size={25} />
-      <ButtonBase background="#ddd" onClick={executeCode}>
+      <ButtonBase background="#ddd" onClick={() => submitQuestion(questionId)}>
         {NAMES.SUBMIT}
       </ButtonBase>
     </Container>

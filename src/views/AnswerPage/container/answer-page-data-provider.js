@@ -8,6 +8,10 @@ const mapState = state => ({
   currentQuestion: state.question.currentQuestion
 });
 
+const mapDispatch = ({ question: { submitQuestion } }) => ({
+  submitQuestion
+});
+
 const withData = WrappedComponent => {
   const propTypes = {
     isFullScreen: PropTypes.bool.isRequired,
@@ -67,7 +71,10 @@ const withData = WrappedComponent => {
     );
   };
   Wrapper.propTypes = propTypes;
-  const Container = connect(mapState)(Wrapper);
+  const Container = connect(
+    mapState,
+    mapDispatch
+  )(Wrapper);
   return Container;
 };
 
