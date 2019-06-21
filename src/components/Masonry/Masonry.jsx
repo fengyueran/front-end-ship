@@ -28,8 +28,12 @@ const Column = styled.span`
 `;
 
 const getCardWidth = () => {
-  const screenWidth = window.screen.availWidth;
-  let cardWidth = 100;
+  const cardHMargin = 10 * 2;
+  const containerHPadding = 10 * 2;
+  const screenWidth =
+    window.screen.availWidth - cardHMargin - containerHPadding;
+
+  let cardWidth = screenWidth;
   if (screenWidth > 1200) {
     cardWidth = 380;
   } else if (screenWidth > 992) {
@@ -59,9 +63,11 @@ const Masonry = ({ children }) => {
     const cardWidth = cardWidthRef.current;
     const ref = containerRef.current;
     const clientWidth = ref.clientWidth;
-    const columns = Math.floor(
-      (clientWidth - containerHPadding) / (cardWidth + cardHMargin)
-    );
+
+    const columns =
+      Math.floor(
+        (clientWidth - containerHPadding) / (cardWidth + cardHMargin)
+      ) || 1;
     let formatedData;
     if (columns < tmpData.length) {
       const columnNum = Math.floor(tmpData.length / columns);
