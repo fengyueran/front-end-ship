@@ -32,7 +32,7 @@ const ComponentPage = () => {
 
   return (
     <Container>
-      <Iframe ref={iframeRef} src="http://localhost:3000" />
+      <Iframe ref={iframeRef} src={process.env.STORYBOOK_URL} />
       {!iframeReady && (
         <SpinWrapper>
           <Spin />

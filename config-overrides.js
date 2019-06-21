@@ -28,6 +28,9 @@ const overrideProcessEnv = () => config => {
 
   if (processEnv.NODE_ENV === `"production"`) {
     processEnv.SERVICE_URL = JSON.stringify('http://140.82.48.232:8000');
+    processEnv.STORYBOOK_URL = JSON.stringify(
+      'http://140.82.48.232:80/storybook-static'
+    );
   } else {
     processEnv.SERVICE_URL = JSON.stringify('http://localhost:8000');
   }
