@@ -54,21 +54,24 @@ const BtnName = styled.span`
 
 const propTypes = {
   questionsTotal: PropTypes.number.isRequired,
-  currentQustionNum: PropTypes.number.isRequired,
+  currentQustion: PropTypes.object.isRequired,
   nextQuestion: PropTypes.func.isRequired,
   preQuestion: PropTypes.func.isRequired,
-  randomQuestion: PropTypes.func.isRequired
+  randomQuestion: PropTypes.func.isRequired,
+  submitQuestion: PropTypes.func.isRequired
 };
 
 const QuestionPickBar = ({
   questionsTotal,
-  currentQustionNum,
+  currentQustion,
   nextQuestion,
   preQuestion,
-  randomQuestion
+  randomQuestion,
+  submitQuestion
 }) => {
-  const isPreBtnDisable = currentQustionNum === 1;
-  const isNextBtnDisable = currentQustionNum === questionsTotal;
+  const { number, id } = currentQustion;
+  const isPreBtnDisable = number === 1;
+  const isNextBtnDisable = number === questionsTotal;
   return (
     <Container>
       <RandomBtn onClick={randomQuestion}>
@@ -80,10 +83,14 @@ const QuestionPickBar = ({
         <PreIcon isDisable={isPreBtnDisable} />
         <BtnName>{NAMES.PRE_QUESTION}</BtnName>
       </ButtonBase>
-      <QuestionNum>{`${currentQustionNum} / ${questionsTotal}`}</QuestionNum>
+      <QuestionNum>{`${number} / ${questionsTotal}`}</QuestionNum>
       <ButtonBase onClick={nextQuestion} isDisable={isNextBtnDisable}>
         <BtnName>{NAMES.NEXT_QUESTION}</BtnName>
         <NextIcon isDisable={isNextBtnDisable} />
+      </ButtonBase>
+      <Sizer.X size={50} />
+      <ButtonBase background="#ddd" onClick={() => submitQuestion(id)}>
+        {NAMES.SUBMIT}
       </ButtonBase>
     </Container>
   );

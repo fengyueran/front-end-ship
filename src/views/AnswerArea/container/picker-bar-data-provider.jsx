@@ -2,15 +2,16 @@ import { connect } from 'react-redux';
 
 const mapState = state => ({
   questionsTotal: state.question.questions.length,
-  currentQustionNum: state.question.currentQuestion.number
+  currentQustion: state.question.currentQuestion
 });
 
 const mapDispatch = ({
-  question: { nextQuestion, preQuestion, randomQuestion }
+  question: { nextQuestion, preQuestion, randomQuestion, submitQuestion }
 }) => ({
   nextQuestion,
   preQuestion,
-  randomQuestion
+  randomQuestion,
+  submitQuestion
 });
 
 const withData = WrappedComponent => {
