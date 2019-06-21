@@ -20,6 +20,7 @@ const resHeight =
   QUESTION_INFO_BAR_HEIGHT +
   ANSWER_PAGE_TAB_BAR_HEIGHT +
   QUESTION_PICKER_BAR_HEIGHT;
+
 const QuestionPickBar = withData(PickBar);
 
 const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
@@ -41,6 +42,10 @@ const Content = styled.div`
   @media (hover: none) {
     min-height: calc(100vh - ${resHeight}px);
   }
+`;
+
+const SpinWrapper = styled.div`
+  width: 100%;
 `;
 
 const Article = styled.div`
@@ -72,7 +77,11 @@ const AnswerArea = ({
   getRef,
   onTabChange
 }) => {
-  let contentChild = <Spin />;
+  let contentChild = (
+    <SpinWrapper>
+      <Spin />
+    </SpinWrapper>
+  );
   if (isShowEditor) {
     contentChild = <Editor />;
   } else if (content) {

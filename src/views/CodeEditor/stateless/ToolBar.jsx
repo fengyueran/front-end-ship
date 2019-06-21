@@ -13,6 +13,9 @@ const Container = styled(LineBox)`
   background: #f5f5f5;
   flex-shrink: 0;
   box-shadow: inset 0 -1px #eee;
+  @media (hover: none) {
+    display: none;
+  }
 `;
 
 const Button = styled(ButtonBase)`

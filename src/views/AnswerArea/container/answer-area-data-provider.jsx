@@ -17,6 +17,10 @@ const withData = WrappedComponent => {
     const [activeTab, setActiveTab] = useState(tabs[0]);
 
     useEffect(() => {
+      setActiveTab(tabs[0]);
+    }, [tabs]);
+
+    useEffect(() => {
       if (type === QUESTION_TYPES.CODE && !questionDetail) {
         getQuestionData({ id, type: 'questionDetail' });
       }

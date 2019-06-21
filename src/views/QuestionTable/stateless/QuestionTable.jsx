@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
 import { LineBox, VerticalBox, Spin } from '@xinghunm/widgets';
-import { FilterItems } from 'src/utils/constants';
+import { FilterItems, VIEW_SIZE } from 'src/utils/constants';
 
 const Content = styled(VerticalBox)`
   margin-right: auto;
@@ -64,7 +64,7 @@ const Input = styled.input`
     linear-gradient(#000, #d2d2d2);
   background-size: 0 2px, 100% 1px;
   background-repeat: no-repeat;
-  background-position: center bottom, center calc(100% - 0px);
+  background-position: center bottom, center 100%;
   background-color: transparent;
   transition: background 0s ease-out;
   font-weight: 400;
@@ -90,6 +90,12 @@ const TableContainer = styled.div`
   background: #fff;
   width: 100%;
   height: 100%;
+  @media (hover: none) {
+    min-height: calc(
+      100vh - ${VIEW_SIZE.NAV_BAR_HEIGHT}px -
+        ${VIEW_SIZE.MOBILE_TAB_BAR_HEIGHT}px
+    );
+  }
 `;
 
 const Tags = styled.div`
@@ -114,6 +120,13 @@ const Fork = styled.span`
   :hover {
     cursor: pointer;
   }
+`;
+
+const SpinWrapper = styled.div`
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
 `;
 
 const propTypes = {
@@ -185,7 +198,9 @@ const QuestionTable = ({
       </Header>
       <TableContainer>
         {isLoading ? (
-          <Spin />
+          <SpinWrapper>
+            <Spin />
+          </SpinWrapper>
         ) : (
           <Table
             columns={columnsData}
