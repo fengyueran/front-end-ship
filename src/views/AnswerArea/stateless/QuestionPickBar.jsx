@@ -29,6 +29,7 @@ const NextIcon = styled.i.attrs(() => ({
   margin-left: 7px;
   margin-top: 1px;
   color: #5e7e8e;
+  color: ${props => (props.isDisable ? '#afaeae' : ' #5e7e8e')};
 `;
 
 const PreIcon = styled.i.attrs(() => ({
@@ -36,7 +37,7 @@ const PreIcon = styled.i.attrs(() => ({
 }))`
   margin-right: 7px;
   margin-top: 1px;
-  color: #5e7e8e;
+  color: ${props => (props.isDisable ? '#afaeae' : ' #5e7e8e')};
 `;
 
 const QuestionNum = styled.span`
@@ -76,13 +77,13 @@ const QuestionPickBar = ({
       </RandomBtn>
       <Sizer.X size={30} />
       <ButtonBase onClick={preQuestion} isDisable={isPreBtnDisable}>
-        <PreIcon />
+        <PreIcon isDisable={isPreBtnDisable} />
         <BtnName>{NAMES.PRE_QUESTION}</BtnName>
       </ButtonBase>
       <QuestionNum>{`${currentQustionNum} / ${questionsTotal}`}</QuestionNum>
       <ButtonBase onClick={nextQuestion} isDisable={isNextBtnDisable}>
         <BtnName>{NAMES.NEXT_QUESTION}</BtnName>
-        <NextIcon />
+        <NextIcon isDisable={isNextBtnDisable} />
       </ButtonBase>
     </Container>
   );
