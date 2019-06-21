@@ -28,6 +28,9 @@ const Container = styled(LineBox)`
 
 const Title = styled.h4`
   color: rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const propTypes = {
