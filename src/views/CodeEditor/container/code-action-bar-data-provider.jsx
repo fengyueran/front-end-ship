@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -24,8 +24,6 @@ const withData = WrappedComponent => {
     executeCode,
     toggleConsole
   }) => {
-    const [isShowConsole, setIsShowConsole] = useState(false);
-
     return (
       <WrappedComponent
         currentQuestion={currentQuestion}

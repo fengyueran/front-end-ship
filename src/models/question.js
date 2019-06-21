@@ -1,6 +1,9 @@
 import client from 'src/webapi';
+
 import { forEach, filter, find, map, random } from 'lodash-es';
 import { OPTIONS, TAGS, NAMES } from 'src/utils/constants';
+import { showDialog, closeDialogByName } from 'src/components/Modal';
+import Spin from 'src/components/Spin';
 
 const defaultState = {
   currentQuestion: null,
@@ -85,18 +88,18 @@ const question = {
     },
     submitQuestion(id, state) {
       const { record, questionById } = state.question;
-      const index = record.finished.indexOf(id);
-      if (index < 0) {
-        client.submitQuestion(id).then(isSuccess => {
-          if (isSuccess) {
-            const currentQuestion = questionById[id];
-            if (question) {
-              record.finished.push(currentQuestion);
-              this.updateQuestionParam(record);
-            }
+      showDialog({ component: Spin, name: 'spin' });
+      client.submitQuestion(id).then(isSuccess => {
+        if (isSuccess) {
+          const currentQuestion = questionById[id];
+          const index = record.finished.indexOf(id);
+          if (index < 0) {
+            record.finished.push(currentQuestion);
+            this.updateQuestionParam(record);
           }
-        });
-      }
+        }
+        closeDialogByName('spin');
+      });
     },
     filterQuestionsByTag(selectedTags, state) {
       const { questions, questionById, record } = state.question;
