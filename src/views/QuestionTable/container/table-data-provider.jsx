@@ -43,9 +43,11 @@ const withData = WrappedComponent => {
       async e => {
         searchQuestionKeyRef.current = e.target.value;
 
-        let filteredData = filter(questions, ({ title }) =>
-          title.includes(e.target.value)
-        );
+        let filteredData = filter(questions, ({ title }) => {
+          const lowerTitle = title.toLocaleLowerCase();
+          const lowerTarget = e.target.value.toLocaleLowerCase();
+          return lowerTitle.includes(lowerTarget);
+        });
         const { searchValue, ...tags } = selectedTagsRef.current;
         if (Object.keys(tags).length > 0) {
           filteredData = await filterQuestionsByTag(tags);
@@ -129,7 +131,6 @@ const withData = WrappedComponent => {
       setQuestionsToShow(questions);
     }, [questions]);
 
-    console.log('questionsToShow', questionsToShow);
     return (
       <WrappedComponent
         columnsData={column}

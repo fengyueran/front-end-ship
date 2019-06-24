@@ -151,7 +151,7 @@ const QuestionTable = ({
           <SearchBox
             placeholder="搜索题目"
             onChange={onChange}
-            ref={searchBoxRef}
+            inputRef={searchBoxRef}
           />
         </SearchBoxWrapper>
         <FilterItemsWrapper>
