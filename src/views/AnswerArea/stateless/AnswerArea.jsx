@@ -62,6 +62,7 @@ const Article = styled.div`
 
 const propTypes = {
   tabs: PropTypes.array.isRequired,
+  activeTabIndex: PropTypes.number.isRequired,
   flexGrow: PropTypes.number.isRequired,
   isShowEditor: PropTypes.bool.isRequired,
   content: PropTypes.object,
@@ -73,6 +74,7 @@ const AnswerArea = ({
   isShowEditor,
   content,
   tabs,
+  activeTabIndex,
   flexGrow,
   getRef,
   onTabChange
@@ -90,7 +92,11 @@ const AnswerArea = ({
 
   return (
     <Container ref={getRef} flexGrow={flexGrow}>
-      <TabBar tabs={tabs} onTabChange={onTabChange} />
+      <TabBar
+        tabs={tabs}
+        onTabChange={onTabChange}
+        activeTabIndex={activeTabIndex}
+      />
       <Content>{contentChild}</Content>
       <QuestionPickBar />
     </Container>

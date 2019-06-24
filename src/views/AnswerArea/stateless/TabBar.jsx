@@ -15,12 +15,17 @@ const Container = styled(LineBox)`
 
 const propTypes = {
   tabs: PropTypes.array.isRequired,
+  activeTabIndex: PropTypes.number.isRequired,
   onTabChange: PropTypes.func.isRequired
 };
 
-const TabBar = ({ tabs, onTabChange }) => (
+const TabBar = ({ tabs, activeTabIndex, onTabChange }) => (
   <Container>
-    <Tabs tabs={tabs} onTabChange={onTabChange} />
+    <Tabs
+      tabs={tabs}
+      onTabChange={onTabChange}
+      activeTabIndex={activeTabIndex}
+    />
   </Container>
 );
 

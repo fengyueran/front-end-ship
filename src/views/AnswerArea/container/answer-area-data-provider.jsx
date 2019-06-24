@@ -14,11 +14,11 @@ const withData = WrappedComponent => {
     const { id, questionDetail, answer, type } = currentQuestion;
     const tabs = TABS[type] || TABS[QUESTION_TYPES.SHORT_ANSWER];
 
-    const [activeTab, setActiveTab] = useState(tabs[0]);
+    const [activeTabIndex, setActiveTabIndex] = useState(0);
 
     useEffect(() => {
-      setActiveTab(tabs[0]);
-    }, [tabs]);
+      setActiveTabIndex(0);
+    }, [tabs, id]);
 
     useEffect(() => {
       if (type === QUESTION_TYPES.CODE && !questionDetail) {
@@ -28,15 +28,16 @@ const withData = WrappedComponent => {
 
     const onTabChange = useCallback(
       index => {
-        setActiveTab(tabs[index]);
+        setActiveTabIndex(index);
         const isAnswerTab = index === 1;
         if (isAnswerTab && !answer) {
           getQuestionData({ id, type: 'answer' });
         }
       },
-      [answer, getQuestionData, id, tabs]
+      [answer, getQuestionData, id]
     );
 
+    const activeTab = tabs[activeTabIndex];
     const content =
       activeTab === TABS_NAME.REFERENCE_ANSWER ? answer : questionDetail;
     const isShowEditor =
@@ -46,6 +47,7 @@ const withData = WrappedComponent => {
     return (
       <WrappedComponent
         tabs={tabs}
+        activeTabIndex={activeTabIndex}
         content={content}
         isShowEditor={isShowEditor}
         onTabChange={onTabChange}
