@@ -4,6 +4,7 @@ import { map, forEach } from 'lodash-es';
 import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
+import SearchBox from 'src/components/SearchBox';
 import { LineBox, VerticalBox, Spin } from '@xinghunm/widgets';
 import { FilterItems, VIEW_SIZE } from 'src/utils/constants';
 
@@ -53,27 +54,8 @@ const HeaderTitle = styled.div`
   }
 `;
 
-const SearchBox = styled.div`
+const SearchBoxWrapper = styled.div`
   margin-left: 50px;
-`;
-
-const Input = styled.input`
-  border: none;
-  width: 100%;
-  background-image: linear-gradient(#457fca, #457fca),
-    linear-gradient(#000, #d2d2d2);
-  background-size: 0 2px, 100% 1px;
-  background-repeat: no-repeat;
-  background-position: center bottom, center 100%;
-  background-color: transparent;
-  transition: background 0s ease-out;
-  font-weight: 400;
-  padding: 6px 12px;
-  &:focus {
-    transition: background 0.3s ease-out;
-    background-size: 100% 2px, 100% 1px;
-    outline: none;
-  }
 `;
 
 const FilterItemsWrapper = styled.div`
@@ -165,13 +147,13 @@ const QuestionTable = ({
         <HeaderTitle>
           <strong>练习题</strong>
         </HeaderTitle>
-        <SearchBox>
-          <Input
+        <SearchBoxWrapper>
+          <SearchBox
             placeholder="搜索题目"
             onChange={onChange}
             ref={searchBoxRef}
           />
-        </SearchBox>
+        </SearchBoxWrapper>
         <FilterItemsWrapper>
           {map(FilterItems, ({ name, items, multiSelect }) => (
             <DropDown
