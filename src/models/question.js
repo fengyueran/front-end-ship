@@ -8,7 +8,7 @@ import Spin from 'src/components/Spin';
 const defaultState = {
   currentQuestion: null,
   questionById: {},
-  questions: [],
+  questionIds: [],
   record: {
     unfinished: [],
     finished: []
@@ -22,16 +22,10 @@ const question = {
       if (data) {
         const { record, questions } = data;
         const { allIds, byId } = questions;
-        const formatedQuestions = [];
-        forEach(allIds, (id, index) => {
-          const qt = byId[id];
-          qt.number = index + 1;
-          formatedQuestions.push(qt);
-        });
         return {
           ...state,
           questionById: byId,
-          questions: formatedQuestions,
+          questionIds: allIds,
           record
         };
       }
@@ -44,25 +38,28 @@ const question = {
   },
   effects: () => ({
     nextQuestion(payload, state) {
-      const { currentQuestion, questions } = state.question;
+      const { currentQuestion, questionIds, questionById } = state.question;
       const { number } = currentQuestion;
-      if (number < questions.length) {
-        const targetQuestion = questions[number];
+      if (number < questionIds.length) {
+        const id = questionIds[number];
+        const targetQuestion = questionById[id];
         this.updateQuestionParam({ currentQuestion: targetQuestion });
       }
     },
     preQuestion(payload, state) {
-      const { currentQuestion, questions } = state.question;
+      const { currentQuestion, questionIds, questionById } = state.question;
       const { number } = currentQuestion;
       if (number >= 2) {
-        const targetQuestion = questions[number - 2];
+        const id = questionIds[number - 2];
+        const targetQuestion = questionById[id];
         this.updateQuestionParam({ currentQuestion: targetQuestion });
       }
     },
     randomQuestion(payload, state) {
-      const { questions } = state.question;
-      const number = random(0, questions.length - 1);
-      const targetQuestion = questions[number];
+      const { questionIds, questionById } = state.question;
+      const number = random(0, questionIds.length - 1);
+      const id = questionIds[number];
+      const targetQuestion = questionById[id];
       this.updateQuestionParam({ currentQuestion: targetQuestion });
     },
     getQuestionData(payload, state) {
