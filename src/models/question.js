@@ -99,8 +99,8 @@ const question = {
       });
     },
     filterQuestionsByTag(selectedTags, state) {
-      const { questions, questionById, record } = state.question;
-      let filteredData = questions;
+      const { questionIds, questionById, record } = state.question;
+      let filteredData = map(questionIds, id => questionById[id]);
       forEach(selectedTags, (tags, key) => {
         switch (key) {
           case OPTIONS.STATUS:

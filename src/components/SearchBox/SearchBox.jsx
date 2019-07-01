@@ -28,7 +28,7 @@ const propTypes = {
 };
 
 const SearchBox = ({ placeholder, onChange, inputRef }) => (
-  <Input placeholder={placeholder} onChange={onChange} inputRef={inputRef} />
+  <Input placeholder={placeholder} onChange={onChange} ref={inputRef} />
 );
 SearchBox.propTypes = propTypes;
 
