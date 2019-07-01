@@ -84,14 +84,13 @@ const question = {
       this.updateQuestionParam({ isFullScreen: !isFullScreen });
     },
     submitQuestion(id, state) {
-      const { record, questionById } = state.question;
+      const { record } = state.question;
       showDialog({ component: Spin, name: 'spin' });
       client.submitQuestion(id).then(isSuccess => {
         if (isSuccess) {
-          const currentQuestion = questionById[id];
           const index = record.finished.indexOf(id);
           if (index < 0) {
-            record.finished.push(currentQuestion);
+            record.finished.push(id);
             this.updateQuestionParam(record);
           }
         }
