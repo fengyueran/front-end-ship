@@ -1,12 +1,19 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef
+} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { filter, findIndex } from 'lodash-es';
+import { filter, findIndex, forEach } from 'lodash-es';
 import client from 'src/webapi';
 import columnsData from './column';
 
 const mapState = state => ({
-  questions: state.question.questions,
+  questionIds: state.question.questions,
+  questionById: state.question.questionById,
   record: state.question.record
 });
 
@@ -19,12 +26,27 @@ const mapDispatch = ({
 
 const withData = WrappedComponent => {
   const propTypes = {
-    questions: PropTypes.array.isRequired,
+    questionIds: PropTypes.array.isRequired,
+    questionById: PropTypes.object.isRequired,
     initQuestions: PropTypes.func.isRequired,
     filterQuestionsByTag: PropTypes.func.isRequired
   };
 
-  const Wrapper = ({ questions, initQuestions, filterQuestionsByTag }) => {
+  const Wrapper = ({
+    questionIds,
+    questionById,
+    initQuestions,
+    filterQuestionsByTag
+  }) => {
+    const questions = useMemo(() => {
+      const formatedQuestions = [];
+      forEach(questionIds, (id, index) => {
+        const qt = questionById[id];
+        qt.number = index + 1;
+        formatedQuestions.push(qt);
+      });
+      return formatedQuestions;
+    }, [questionById, questionIds]);
     const [questionsToShow, setQuestionsToShow] = useState(questions);
     const [currentPage, setCurrentPage] = useState(1);
     const searchQuestionKeyRef = useRef();
