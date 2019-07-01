@@ -12,7 +12,7 @@ import client from 'src/webapi';
 import columnsData from './column';
 
 const mapState = state => ({
-  questionIds: state.question.questions,
+  questionIds: state.question.questionIds,
   questionById: state.question.questionById,
   record: state.question.record
 });
