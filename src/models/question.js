@@ -139,6 +139,17 @@ const question = {
       });
 
       return filteredData;
+    },
+    updateAnswer(payload, state) {
+      const { id, anwserDraft } = payload;
+      const { questionById } = state.question;
+      let currentQuestion = questionById[id];
+      currentQuestion = { ...currentQuestion, anwserDraft };
+      questionById[id] = currentQuestion;
+      this.updateQuestionParam({
+        questionById,
+        currentQuestion
+      });
     }
   })
 };

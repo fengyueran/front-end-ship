@@ -16,14 +16,16 @@ const StyledEditor = styled.div`
 `;
 
 const propTypes = {
+  id: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func
 };
 
-const Editor = ({ value, onChange }) => (
+const Editor = ({ id, value, onChange }) => (
   <StyledEditor>
     <CodeMirror
       value={value}
+      key={id}
       options={{
         mode: 'javascript',
         lineNumbers: true,

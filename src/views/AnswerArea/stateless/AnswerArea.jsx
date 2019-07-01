@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { VerticalBox, Spin } from '@xinghunm/widgets';
-import Editor from 'src/components/Editor';
 import { VIEW_SIZE } from 'src/utils/constants';
 import TabBar from './TabBar';
 import PickBar from './QuestionPickBar';
+import Editor from '../../EditorView';
 import withData from '../container/picker-bar-data-provider';
 
 const {
