@@ -20,6 +20,7 @@ const ButtonBase = styled(Button).attrs(({ isDisable }) => ({
     cursor: ${props => (props.isDisable ? 'not-allowed' : 'pointer')};
   }
   @media (hover: none) {
+    min-width: 50px;
     :hover {
       background: none;
     }

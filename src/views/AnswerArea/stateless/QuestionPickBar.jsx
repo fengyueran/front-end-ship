@@ -19,7 +19,6 @@ const RandomBtn = styled(ButtonBase)`
 const RandomIcon = styled.i.attrs(() => ({
   className: 'fa fa-random'
 }))`
-  margin-right: 5px;
   margin-top: 1px;
 `;
 
@@ -27,6 +26,9 @@ const NextIcon = styled.i.attrs(() => ({
   className: 'fa fa-angle-right'
 }))`
   margin-left: 7px;
+  @media (hover: none) {
+    margin-left: 0;
+  }
   margin-top: 1px;
   color: #5e7e8e;
   color: ${props => (props.isDisable ? '#afaeae' : ' #5e7e8e')};
@@ -36,6 +38,9 @@ const PreIcon = styled.i.attrs(() => ({
   className: 'fa fa-angle-left'
 }))`
   margin-right: 7px;
+  @media (hover: none) {
+    margin-right: 0;
+  }
   margin-top: 1px;
   color: ${props => (props.isDisable ? '#afaeae' : ' #5e7e8e')};
 `;
@@ -47,9 +52,15 @@ const QuestionNum = styled.span`
 `;
 
 const BtnName = styled.span`
-  @media screen and (max-width: 512px) {
+  margin-left: 5px;
+  @media (hover: none) {
     display: none;
   }
+`;
+
+const SubmitBtn = styled(ButtonBase)`
+  background: '#ddd';
+  flex-shrink: 0;
 `;
 
 const propTypes = {
@@ -89,9 +100,7 @@ const QuestionPickBar = ({
         <NextIcon isDisable={isNextBtnDisable} />
       </ButtonBase>
       <Sizer.X size={50} />
-      <ButtonBase background="#ddd" onClick={() => submitQuestion(id)}>
-        {NAMES.SUBMIT}
-      </ButtonBase>
+      <SubmitBtn onClick={() => submitQuestion(id)}>{NAMES.SUBMIT}</SubmitBtn>
     </Container>
   );
 };
