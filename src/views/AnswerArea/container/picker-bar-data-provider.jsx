@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 const mapState = state => ({
-  questionsTotal: state.question.questions.length,
+  questionsTotal: state.question.questionIds.length,
   currentQustion: state.question.currentQuestion
 });
 
