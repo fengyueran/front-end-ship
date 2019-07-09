@@ -6,6 +6,7 @@ import { VerticalBox } from '@xinghunm/widgets';
 import { ModelDialog } from 'src/components/Modal';
 import { ROUTES } from 'src/utils/constants';
 import NavBar from '../NavBar';
+import BlogPage from '../BlogPage';
 import QuestionPage from '../QuestionPage';
 import ComponentPage from '../ComponentPage';
 import WebNavigation from '../WebNavigation';
@@ -42,6 +43,7 @@ const PrimaryLayout = ({ history, location }) => (
     <Content>
       <Sizer />
       <Route exact path={ROUTES.ROOT} component={QuestionPage} />
+      <Route path={ROUTES.BLOG} component={BlogPage} />
       <Route path={ROUTES.QUESTION} component={QuestionPage} />
       <Route path={ROUTES.COMPONENT} component={ComponentPage} />
       <Route path={ROUTES.RESOURCE} component={WebNavigation} />
