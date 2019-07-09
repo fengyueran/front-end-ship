@@ -5,26 +5,9 @@ import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
 import SearchBox from 'src/components/SearchBox';
-import { LineBox, VerticalBox, Spin } from '@xinghunm/widgets';
+import Container from 'src/components/Container';
+import { LineBox, Spin } from '@xinghunm/widgets';
 import { FilterItems, VIEW_SIZE } from 'src/utils/constants';
-
-const Content = styled(VerticalBox)`
-  margin-right: auto;
-  margin-left: auto;
-  @media (hover: none) {
-    padding: 0;
-  }
-  @media (min-width: 768px) {
-    height: 100%;
-    width: 750px;
-  }
-  @media (min-width: 992px) {
-    width: 970px;
-  }
-  @media (min-width: 1200px) {
-    width: 1170px;
-  }
-`;
 
 const Header = styled(LineBox)`
   padding: 0 15px;
@@ -142,7 +125,7 @@ const QuestionTable = ({
   });
 
   return (
-    <Content>
+    <Container>
       <Header>
         <HeaderTitle>
           <strong>练习题</strong>
@@ -196,7 +179,7 @@ const QuestionTable = ({
           />
         )}
       </TableContainer>
-    </Content>
+    </Container>
   );
 };
 
