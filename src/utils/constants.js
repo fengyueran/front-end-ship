@@ -2,6 +2,7 @@ export const ROUTES = {
   ROOT: '/',
   QUESTION: '/question',
   BLOG: '/blog',
+  BLOG_HTML: '/blog/html',
   COMPONENT: '/component',
   RESOURCE: '/resource',
   ANSWER: '/question/answer'

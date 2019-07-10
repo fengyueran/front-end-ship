@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { filter } from 'lodash-es';
 import { connect } from 'react-redux';
 import client from 'src/webapi';
+import { getArribute } from 'src/utils/get-arribute';
 
 const mapState = state => ({
   websiteIds: state.website.websiteIds,
@@ -45,12 +46,7 @@ const withData = WrappedComponent => {
     }, [initWebsites]);
 
     const handleCardClick = e => {
-      let target = e.target;
-      let link;
-      while (target) {
-        link = target.getAttribute('data-link');
-        target = link ? null : target.parentElement;
-      }
+      const link = getArribute(e, 'data-link');
       if (link) {
         window.open(link);
       }

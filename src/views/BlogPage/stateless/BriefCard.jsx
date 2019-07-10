@@ -41,13 +41,14 @@ const Time = styled.time`
 `;
 
 const propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired
 };
 
-const BriefCard = ({ title, description, date }) => (
-  <Container>
+const BriefCard = ({ id, title, description, date }) => (
+  <Container data-id={id}>
     <Title>{title}</Title>
     <Description>{description}</Description>
     <Time dateTime={date}>{date}</Time>

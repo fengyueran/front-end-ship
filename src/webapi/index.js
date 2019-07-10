@@ -16,6 +16,7 @@ const client = (() => {
   };
   const getBlogs = async () => getData('/blogs/all');
   const getQuestions = async () => getData('/questions/all');
+  const getBlogHtml = async id => getData(`/blog/${id}`);
   const getQuestionHtml = async id => getData(`/question/${id}`);
   const getAnswerHtml = async id => getData(`/answer/${id}`);
   const getWebsites = async () => getData('/websites/all');
@@ -33,6 +34,7 @@ const client = (() => {
   return {
     getBlogs,
     getQuestions,
+    getBlogHtml,
     getQuestionHtml,
     getAnswerHtml,
     getWebsites,

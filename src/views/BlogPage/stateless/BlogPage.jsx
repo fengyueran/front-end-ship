@@ -1,11 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Container from 'src/components/Container';
-import withData from '../container/brief-card-data-provider';
-import BriefCard from './BriefCard';
+import { Route } from 'react-router-dom';
+import { ROUTES } from 'src/utils/constants';
+import blogListDataProvider from '../container/blog-list-data-provider';
+import blogArticleDataProvider from '../container/blog-article-data-provider';
+import BlogList from './BlogList';
+import BlogArticle from './BlogArticle';
 
-const BriefCardWithData = withData(BriefCard);
+const BlogListWithData = blogListDataProvider(BlogList);
+const BlogArticleWithData = blogArticleDataProvider(BlogArticle);
 
 const BlogsContainer = styled.div`
   overflow: auto;
@@ -13,25 +16,11 @@ const BlogsContainer = styled.div`
   background: #ddd;
 `;
 
-const BlogsWrapper = styled(Container)`
-  padding: 40px 0;
-  height: auto;
-`;
-
-const propTypes = {
-  blogIds: PropTypes.array.isRequired
-};
-
-const BlogPage = ({ blogIds }) => (
+const BlogPage = () => (
   <BlogsContainer>
-    <BlogsWrapper>
-      {blogIds.map(id => (
-        <BriefCardWithData id={id} />
-      ))}
-    </BlogsWrapper>
+    <Route exact path={ROUTES.BLOG} component={BlogListWithData} />
+    <Route path={ROUTES.BLOG_HTML} component={BlogArticleWithData} />
   </BlogsContainer>
 );
-
-BlogPage.propTypes = propTypes;
 
 export default BlogPage;
