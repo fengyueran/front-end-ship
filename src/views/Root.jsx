@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Switch, Router } from 'react-router-dom';
-import { createHashHistory } from 'history';
+import { createBrowserHistory } from 'history';
 
 import { ROUTES } from 'src/utils/constants';
 import PrimaryLayout from './PrimaryLayout';
 
-const history = createHashHistory();
+const history = createBrowserHistory();
 
 const App = () => (
   <Router history={history}>
