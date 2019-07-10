@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Container from 'src/components/Container';
+import withData from '../container/brief-card-data-provider';
 import BriefCard from './BriefCard';
+
+const BriefCardWithData = withData(BriefCard);
 
 const BlogsContainer = styled.div`
   overflow: auto;
@@ -22,8 +25,8 @@ const propTypes = {
 const BlogPage = ({ blogIds }) => (
   <BlogsContainer>
     <BlogsWrapper>
-      {[1, 2, 3, 1, 2, 3].map(() => (
-        <BriefCard />
+      {blogIds.map(id => (
+        <BriefCardWithData id={id} />
       ))}
     </BlogsWrapper>
   </BlogsContainer>
