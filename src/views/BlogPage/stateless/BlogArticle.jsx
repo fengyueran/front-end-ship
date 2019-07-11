@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import Container from 'src/components/Container';
 
 const BlogsWrapper = styled(Container)`
-  padding: 20px;
+  padding: 10px 20px 20px;
   height: auto;
   display: block;
   background: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const propTypes = {
