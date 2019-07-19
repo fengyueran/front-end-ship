@@ -54,6 +54,9 @@ const Article = styled.div`
   padding: 1rem;
   overflow: auto;
   background: #fff;
+  img {
+    max-width: 100%;
+  }
   ul {
     padding-left: 28px;
   }

@@ -10,6 +10,9 @@ const BlogsWrapper = styled(Container)`
   background: #fff;
   margin-top: 20px;
   margin-bottom: 20px;
+  img {
+    max-width: 100%;
+  }
 `;
 
 const propTypes = {
