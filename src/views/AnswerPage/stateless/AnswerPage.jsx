@@ -66,7 +66,11 @@ const AnswerPage = props => {
         {isShowTwoPanel && (
           <>
             <ResizeBar getRef={resizeBarEl} onMouseDown={onMouseDown} />
-            <CodeEditor getRef={codeEditorEl} template={template} />
+            <CodeEditor
+              getRef={codeEditorEl}
+              template={template}
+              currentQuestion={currentQuestion}
+            />
           </>
         )}
       </Content>

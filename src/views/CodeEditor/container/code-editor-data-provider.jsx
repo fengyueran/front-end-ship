@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 
 const withData = WrappedComponent => {
   const propTypes = {
-    getRef: PropTypes.object.isRequired
+    getRef: PropTypes.object.isRequired,
+    currentQuestion: PropTypes.object.isRequired
   };
 
-  const Container = ({ getRef }) => {
+  const Container = ({ getRef, currentQuestion }) => {
     const [result, setResult] = useState();
     const [isShowConsole, setIsShowConsole] = useState(false);
 
     const executeCode = () => {
       try {
-        let res = eval(value); //eslint-disable-line
+        let res = eval(currentQuestion.anwserDraft); //eslint-disable-line
         if (!res) {
           res = 'function should have return value';
         }
