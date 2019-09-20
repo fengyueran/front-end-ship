@@ -9,7 +9,7 @@ SCRIPT_NAME="deploy.sh"
 BASE_DIR="/tmp"
 LOCK_FILE="${BASE_DIR}/${APP_NAME}.lock"
 SHELL_LOG="${BASE_DIR}/${APP_NAME}.log"
-REMOTE="root@140.82.48.232"
+REMOTE="root@139.180.215.117"
 
 
 lock(){
