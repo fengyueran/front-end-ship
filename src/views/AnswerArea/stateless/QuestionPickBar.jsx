@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LineBox, Sizer } from '@xinghunm/widgets';
+import { Row, Sizer } from '@xinghunm/widgets';
 import ButtonBase from 'src/components/ButtonBase';
 import { NAMES, VIEW_SIZE } from 'src/utils/constants';
 
-const Container = styled(LineBox)`
+const Container = styled(Row)`
   width: 100%;
   height: ${VIEW_SIZE.QUESTION_PICKER_BAR_HEIGHT}px;
   padding: 10px 20px;

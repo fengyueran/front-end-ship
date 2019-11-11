@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { VerticalBox, Spin } from '@xinghunm/widgets';
+import { Col, Spin } from '@xinghunm/widgets';
 import { VIEW_SIZE } from 'src/utils/constants';
 import TabBar from './TabBar';
 import PickBar from './QuestionPickBar';
@@ -23,7 +23,7 @@ const resHeight =
 
 const QuestionPickBar = withData(PickBar);
 
-const Container = styled(VerticalBox).attrs(({ flexGrow }) => ({
+const Container = styled(Col).attrs(({ flexGrow }) => ({
   style: { flex: `${flexGrow} 0 0` }
 }))`
   height: 100%;

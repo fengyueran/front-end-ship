@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LineBox } from '@xinghunm/widgets';
+import { Row } from '@xinghunm/widgets';
 import { VIEW_SIZE } from 'src/utils/constants';
 
-const Container = styled(LineBox)`
+const Container = styled(Row)`
   width: 100%;
   height: ${VIEW_SIZE.QUESTION_INFO_BAR_HEIGHT}px;
   padding: 15px;

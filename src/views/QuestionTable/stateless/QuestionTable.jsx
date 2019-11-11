@@ -6,10 +6,10 @@ import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
 import SearchBox from 'src/components/SearchBox';
 import Container from 'src/components/Container';
-import { LineBox, Spin } from '@xinghunm/widgets';
+import { Row, Spin } from '@xinghunm/widgets';
 import { FilterItems, VIEW_SIZE } from 'src/utils/constants';
 
-const Header = styled(LineBox)`
+const Header = styled(Row)`
   padding: 0 15px;
   border-radius: 3px 3px 0 0;
   background: #ffffff;

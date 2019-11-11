@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { VerticalBox } from '@xinghunm/widgets';
+import { Col } from '@xinghunm/widgets';
 import { NAMES } from 'src/utils/constants';
 
-const Container = styled(VerticalBox)`
+const Container = styled(Col)`
   background: #fff;
 `;
 

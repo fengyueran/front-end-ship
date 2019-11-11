@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { VerticalBox } from '@xinghunm/widgets';
+import { Col } from '@xinghunm/widgets';
 
-const Container = styled(VerticalBox)`
+const Container = styled(Col)`
   width: 100%;
   border-left: 7px solid #ccc;
   transition: border-left 0.45s;

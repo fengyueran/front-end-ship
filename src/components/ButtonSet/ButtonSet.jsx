@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LineBox } from '@xinghunm/widgets';
+import { Row } from '@xinghunm/widgets';
 import ButtonBase from '../ButtonBase';
 
 const Button = styled(ButtonBase)`
@@ -28,7 +28,7 @@ const ButtonSet = ({ buttons, onChange, defaultIndex = 0 }) => {
   };
 
   return (
-    <LineBox>
+    <Row>
       {buttons.map((name, index) => (
         <Button
           key={name}
@@ -38,7 +38,7 @@ const ButtonSet = ({ buttons, onChange, defaultIndex = 0 }) => {
           {name}
         </Button>
       ))}
-    </LineBox>
+    </Row>
   );
 };
 

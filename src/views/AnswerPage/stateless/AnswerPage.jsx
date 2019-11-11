@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import { LineBox, VerticalBox } from '@xinghunm/widgets';
+import { Row, Col } from '@xinghunm/widgets';
 import { QUESTION_TYPES } from 'src/utils/constants';
 import QuestionInfoBar from './QuestionInfoBar';
 import CodeEditor from '../../CodeEditor';
 import AnswerArea from '../../AnswerArea';
 import ResizeBar from './ResizeBar';
 
-const Container = styled(VerticalBox)`
+const Container = styled(Col)`
   width: 100%;
   height: 100%;
   align-items: flex-start;
@@ -21,7 +21,7 @@ const fullScreenCss = css`
   left: 0;
 `;
 
-const Content = styled(LineBox)`
+const Content = styled(Row)`
   height: 100%;
   width: 100%;
   flex-wrap: wrap;

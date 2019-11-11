@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { VerticalBox } from '@xinghunm/widgets';
+import { Col } from '@xinghunm/widgets';
 import useResizeBarStatus from '../container/use-resize-bar-status';
 
-const VerticalBar = styled(VerticalBox)`
+const VerticalBar = styled(Col)`
   width: 10px;
   height: 100%;
   background: ${props =>

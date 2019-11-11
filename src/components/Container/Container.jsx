@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { VerticalBox } from '@xinghunm/widgets';
+import { Col } from '@xinghunm/widgets';
 
-const Container = styled(VerticalBox)`
+const Container = styled(Col)`
   margin-right: auto;
   margin-left: auto;
   height: 100%;
