@@ -36,10 +36,7 @@ const withData = WrappedComponent => {
 
   Wrapper.propTypes = propTypes;
 
-  const Container = connect(
-    mapState,
-    mapDispatch
-  )(Wrapper);
+  const Container = connect(mapState, mapDispatch)(Wrapper);
 
   return React.memo(Container);
 };

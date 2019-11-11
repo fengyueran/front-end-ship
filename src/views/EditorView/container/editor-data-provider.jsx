@@ -40,10 +40,7 @@ const withData = WrappedComponent => {
     updateAnswer
   });
 
-  const Wrapper = connect(
-    mapState,
-    mapDispatch
-  )(Container);
+  const Wrapper = connect(mapState, mapDispatch)(Container);
 
   return Wrapper;
 };

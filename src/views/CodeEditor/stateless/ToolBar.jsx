@@ -53,9 +53,6 @@ const mapDispatch = ({ question: { toggleFullScreen } }) => ({
   toggleFullScreen
 });
 
-const ToolBarContainer = connect(
-  null,
-  mapDispatch
-)(ToolBar);
+const ToolBarContainer = connect(null, mapDispatch)(ToolBar);
 
 export default ToolBarContainer;

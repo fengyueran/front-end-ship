@@ -30,10 +30,7 @@ const withData = WrappedComponent => {
     getBlogHtml
   });
 
-  const Wrapper = connect(
-    mapState,
-    mapDispatch
-  )(Container);
+  const Wrapper = connect(mapState, mapDispatch)(Container);
 
   return Wrapper;
 };

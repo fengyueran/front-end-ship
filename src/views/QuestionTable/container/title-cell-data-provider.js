@@ -5,10 +5,7 @@ const mapDispatch = ({ question: { updateQuestionParam } }) => ({
 });
 
 const withData = WrappedComponent => {
-  const container = connect(
-    null,
-    mapDispatch
-  )(WrappedComponent);
+  const container = connect(null, mapDispatch)(WrappedComponent);
   return container;
 };
 export default withData;

@@ -15,10 +15,7 @@ const mapDispatch = ({
 });
 
 const withData = WrappedComponent => {
-  const Container = connect(
-    mapState,
-    mapDispatch
-  )(WrappedComponent);
+  const Container = connect(mapState, mapDispatch)(WrappedComponent);
   return Container;
 };
 

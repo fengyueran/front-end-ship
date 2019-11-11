@@ -61,10 +61,7 @@ const withData = WrappedComponent => {
     getQuestionData
   });
 
-  const Wrapper = connect(
-    null,
-    mapDispatch
-  )(Container);
+  const Wrapper = connect(null, mapDispatch)(Container);
 
   return Wrapper;
 };
