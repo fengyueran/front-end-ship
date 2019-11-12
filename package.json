@@ -5,7 +5,7 @@
   "dependencies": {
     "@rematch/core": "^1.1.0",
     "@rematch/persist": "^1.1.6",
-    "@xinghunm/widgets": "^0.0.28",
+    "@xinghunm/widgets": "^0.0.29",
     "axios": "^0.18.0",
     "codemirror": "^5.46.0",
     "history": "^4.9.0",
@@ -15,7 +15,6 @@
     "react": "^16.8.5",
     "react-codemirror": "^1.0.0",
     "react-dom": "^16.8.5",
-    "react-modal": "^3.8.1",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
     "redux-persist": "^5.10.0",

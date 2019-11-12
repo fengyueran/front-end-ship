@@ -2,8 +2,10 @@ import client from 'src/webapi';
 
 import { forEach, filter, find, map, random } from 'lodash-es';
 import { OPTIONS, TAGS, NAMES } from 'src/utils/constants';
-import { showDialog, closeDialogByName } from 'src/components/Modal';
+import { Modal } from '@xinghunm/widgets';
 import Spin from 'src/components/Spin';
+
+const { dialogMgr } = Modal;
 
 const defaultState = {
   currentQuestion: null,
@@ -85,7 +87,11 @@ const question = {
     },
     submitQuestion(id, state) {
       const { record } = state.question;
-      showDialog({ component: Spin, name: 'spin' });
+      dialogMgr.showDialog({
+        component: Spin,
+        name: 'spin',
+        props: { dialogStyle: { animation: 'none' } }
+      });
       client.submitQuestion(id).then(isSuccess => {
         if (isSuccess) {
           const index = record.finished.indexOf(id);
@@ -94,7 +100,7 @@ const question = {
             this.updateQuestionParam(record);
           }
         }
-        closeDialogByName('spin');
+        dialogMgr.closeDialogByName('spin');
       });
     },
     filterQuestionsByTag(selectedTags, state) {

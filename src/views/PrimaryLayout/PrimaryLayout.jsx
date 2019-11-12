@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { Col } from '@xinghunm/widgets';
-import { ModelDialog } from 'src/components/Modal';
 import { ROUTES } from 'src/utils/constants';
 import NavBar from '../NavBar';
 import BlogPage from '../BlogPage';
@@ -48,7 +47,6 @@ const PrimaryLayout = ({ history, location }) => (
       <Route path={ROUTES.COMPONENT} component={ComponentPage} />
       <Route path={ROUTES.RESOURCE} component={WebNavigation} />
     </Content>
-    <ModelDialog />
   </Container>
 );
 PrimaryLayout.propTypes = propTypes;
