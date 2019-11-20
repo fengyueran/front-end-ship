@@ -38,7 +38,7 @@ const CodeActionBar = ({
 }) => {
   const questionId = currentQuestion.id;
   const toggle = () => {
-    toggleConsole(isShowConsole => !isShowConsole);
+    toggleConsole(consoleVisible => !consoleVisible);
   };
   return (
     <Container>

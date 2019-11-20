@@ -23,20 +23,20 @@ const Content = styled(Col)`
 
 const propTypes = {
   result: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  isShowConsole: PropTypes.bool.isRequired,
+  consoleVisible: PropTypes.bool.isRequired,
   executeCode: PropTypes.func.isRequired,
   getRef: PropTypes.object.isRequired,
   toggleConsole: PropTypes.func.isRequired
 };
 
 const CodeEditor = props => {
-  const { result, isShowConsole, executeCode, getRef, toggleConsole } = props;
+  const { result, consoleVisible, executeCode, getRef, toggleConsole } = props;
   return (
     <CodeArea ref={getRef}>
       <ToolBar />
       <Content>
         <Editor />
-        {isShowConsole && <ResultArea result={result} />}
+        {consoleVisible && <ResultArea result={result} />}
       </Content>
       <CodeActionBarContainer
         executeCode={executeCode}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const withData = WrappedComponent => {
@@ -9,9 +9,9 @@ const withData = WrappedComponent => {
 
   const Container = ({ getRef, currentQuestion }) => {
     const [result, setResult] = useState();
-    const [isShowConsole, setIsShowConsole] = useState(false);
+    const [consoleVisible, setConsoleVisible] = useState(false);
 
-    const executeCode = () => {
+    const executeCode = useCallback(() => {
       try {
         let res = eval(currentQuestion.anwserDraft); //eslint-disable-line
         if (!res) {
@@ -21,16 +21,21 @@ const withData = WrappedComponent => {
       } catch (e) {
         setResult(e.message);
       }
-      setIsShowConsole(true);
-    };
+      setConsoleVisible(true);
+    }, [currentQuestion]);
+
+    useEffect(() => {
+      setConsoleVisible(false);
+      setResult();
+    }, [currentQuestion.number]);
 
     return (
       <WrappedComponent
         result={result}
         getRef={getRef}
-        isShowConsole={isShowConsole}
+        consoleVisible={consoleVisible}
         executeCode={executeCode}
-        toggleConsole={setIsShowConsole}
+        toggleConsole={setConsoleVisible}
       />
     );
   };
