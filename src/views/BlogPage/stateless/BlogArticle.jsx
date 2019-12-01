@@ -7,7 +7,6 @@ const BlogsWrapper = styled(Container)`
   height: auto;
   display: block;
   background: #fff;
-  margin-bottom: 20px;
   img {
     max-width: 100%;
   }
@@ -26,6 +25,12 @@ const BlogsWrapper = styled(Container)`
     color: #333;
   }
   color: #333;
+  pre {
+    text-align: left;
+  }
+  pre code {
+    text-align: left;
+  }
 `;
 
 const propTypes = {
