@@ -14,7 +14,6 @@ const BlogsContainer = styled.div`
   overflow: auto;
   height: 100%;
   background: #ddd;
-  padding: 20px;
   line-height: 1.75;
 `;
 
