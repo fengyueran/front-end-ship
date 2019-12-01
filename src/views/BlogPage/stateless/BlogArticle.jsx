@@ -4,15 +4,28 @@ import styled from 'styled-components';
 import Container from 'src/components/Container';
 
 const BlogsWrapper = styled(Container)`
-  padding: 10px 20px 20px;
   height: auto;
   display: block;
   background: #fff;
-  margin-top: 20px;
   margin-bottom: 20px;
   img {
     max-width: 100%;
   }
+  padding: 10px 20px 20px !important;
+  @media (hover: none) {
+    h3 {
+      font-size: 18px;
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #333;
+  }
+  color: #333;
 `;
 
 const propTypes = {
