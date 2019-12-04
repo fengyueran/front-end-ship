@@ -15,6 +15,7 @@ const BlogsContainer = styled.div`
   height: 100%;
   background: #ddd;
   line-height: 1.75;
+  font-size: 15px;
 `;
 
 const BlogPage = () => (

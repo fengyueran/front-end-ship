@@ -34,7 +34,7 @@ const BlogsWrapper = styled(Container)`
 `;
 
 const propTypes = {
-  blogHtml: PropTypes.string.isRequired
+  blogHtml: PropTypes.instanceOf(Object).isRequired
 };
 
 const BlogArticle = ({ blogHtml }) => (
