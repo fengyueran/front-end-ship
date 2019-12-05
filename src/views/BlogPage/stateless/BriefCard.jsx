@@ -43,7 +43,7 @@ const Time = styled.time`
 const propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   date: PropTypes.string.isRequired
 };
 

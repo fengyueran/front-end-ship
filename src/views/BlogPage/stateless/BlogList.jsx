@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Container from 'src/components/Container';
+import SearchBar from 'src/components/SearchBar';
 import withData from '../container/brief-card-data-provider';
+
 import BriefCard from './BriefCard';
 
 const BriefCardWithData = withData(BriefCard);
@@ -12,16 +14,26 @@ const BlogsWrapper = styled(Container)`
   height: auto;
 `;
 
+const BlogListContainer = styled.div``;
+
 const propTypes = {
   blogIds: PropTypes.array.isRequired,
   handleBlogClick: PropTypes.func.isRequired
 };
 
 const BlogList = ({ blogIds, handleBlogClick }) => (
-  <BlogsWrapper onClick={handleBlogClick}>
-    {blogIds.map(id => (
-      <BriefCardWithData key={id} id={id} />
-    ))}
+  <BlogsWrapper>
+    <SearchBar
+      style={{ height: 45 }}
+      title="我的博客"
+      placeholder="搜索标题"
+      Change={() => {}}
+    />
+    <BlogListContainer onClick={handleBlogClick}>
+      {blogIds.map(id => (
+        <BriefCardWithData key={id} id={id} />
+      ))}
+    </BlogListContainer>
   </BlogsWrapper>
 );
 

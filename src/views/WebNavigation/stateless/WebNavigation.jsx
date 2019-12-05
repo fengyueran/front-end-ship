@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Spin } from '@xinghunm/widgets';
 import Masonry from 'src/components/Masonry';
-import SearchBox from 'src/components/SearchBox';
+import SearchBar from 'src/components/SearchBar';
 import { VIEW_SIZE } from 'src/utils/constants';
 import Card from './Card';
 import withData from '../container/card-data-provider';
@@ -16,20 +16,15 @@ const Container = styled.div`
   padding-bottom: 20px;
 `;
 
+const SearchBarWrapper = styled.div`
+  margin: 20px 20px 0 20px;
+`;
+
 const MasonryWrapper = styled.div`
-  width: 100%;
   height: calc(100% - ${VIEW_SIZE.SEARCH_BAR_HEIGHT}px);
-`;
-
-const SearchBar = styled.div`
-  width: 100%;
-  height: ${VIEW_SIZE.SEARCH_BAR_HEIGHT}px;
-  background: #fff;
-`;
-
-const SearchBoxWrapper = styled.div`
-  width: 200px;
-  margin-left: 50px;
+  background: #c3daec;
+  width: calc(100% - 40px);
+  margin: 0 20px;
 `;
 
 const propTypes = {
@@ -45,11 +40,13 @@ const WebNavigation = ({ websiteIds, onClick, isLoading, handleSearch }) => (
       <Spin />
     ) : (
       <>
-        <SearchBar>
-          <SearchBoxWrapper>
-            <SearchBox placeholder="搜索网站" onChange={handleSearch} />
-          </SearchBoxWrapper>
-        </SearchBar>
+        <SearchBarWrapper>
+          <SearchBar
+            title="资源集合"
+            placeholder="搜索网站"
+            onChange={handleSearch}
+          />
+        </SearchBarWrapper>
         <MasonryWrapper>
           <Masonry>
             {websiteIds.map(id => (

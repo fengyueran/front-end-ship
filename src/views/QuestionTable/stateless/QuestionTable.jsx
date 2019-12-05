@@ -4,42 +4,10 @@ import { map, forEach } from 'lodash-es';
 import styled from 'styled-components';
 import Table from 'src/components/Table';
 import DropDown from 'src/components/DropDown';
-import SearchBox from 'src/components/SearchBox';
+import SearchBar from 'src/components/SearchBar';
 import Container from 'src/components/Container';
-import { Row, Spin } from '@xinghunm/widgets';
+import { Spin } from '@xinghunm/widgets';
 import { FilterItems, VIEW_SIZE } from 'src/utils/constants';
-
-const Header = styled(Row)`
-  padding: 0 15px;
-  border-radius: 3px 3px 0 0;
-  background: #ffffff;
-  overflow: visible;
-  flex-wrap: wrap;
-`;
-
-const SeparateBar = styled.div`
-  border-bottom: 1px solid #ddd;
-  width: 100%;
-  height: 1px;
-`;
-
-const HeaderTitle = styled.div`
-  position: relative;
-  color: #457fca;
-  ::before {
-    position: absolute;
-    width: 2px;
-    height: 26px;
-    left: -15px;
-    top: 0;
-    content: '';
-    background-color: #457fca;
-  }
-`;
-
-const SearchBoxWrapper = styled.div`
-  margin-left: 50px;
-`;
 
 const FilterItemsWrapper = styled.div`
   flex-grow: 1;
@@ -126,17 +94,12 @@ const QuestionTable = ({
 
   return (
     <Container>
-      <Header>
-        <HeaderTitle>
-          <strong>练习题</strong>
-        </HeaderTitle>
-        <SearchBoxWrapper>
-          <SearchBox
-            placeholder="搜索题目"
-            onChange={onChange}
-            inputRef={searchBoxRef}
-          />
-        </SearchBoxWrapper>
+      <SearchBar
+        title="练习题"
+        placeholder="搜索题目"
+        onChange={onChange}
+        inputRef={searchBoxRef}
+      >
         <FilterItemsWrapper>
           {map(FilterItems, ({ name, items, multiSelect }) => (
             <DropDown
@@ -159,8 +122,7 @@ const QuestionTable = ({
             ))}
           </Tags>
         )}
-        <SeparateBar />
-      </Header>
+      </SearchBar>
       <TableContainer>
         {isLoading ? (
           <SpinWrapper>

@@ -17,8 +17,10 @@ const withData = WrappedComponent => {
 
     const handleBlogClick = e => {
       const blogId = getArribute(e, 'data-id');
-      setCurrentBlog(blogId);
-      history.push(ROUTES.BLOG_HTML);
+      if (blogId) {
+        setCurrentBlog(blogId);
+        history.push(ROUTES.BLOG_HTML);
+      }
     };
 
     useEffect(() => {
