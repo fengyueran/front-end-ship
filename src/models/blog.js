@@ -39,6 +39,19 @@ const blog = {
           });
         }
       });
+    },
+    searchBlog: (blogTitle, state) => {
+      const { blogById } = state.blog;
+      const ids = Object.keys(blogById);
+      const target = [];
+      for (let i = 0; i < ids.length; i += 1) {
+        const key = ids[i];
+        const { id, title } = blogById[key];
+        if (title.includes(blogTitle)) {
+          target.push(id);
+        }
+      }
+      return target;
     }
   })
 };

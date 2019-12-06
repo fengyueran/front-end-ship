@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import client from 'src/webapi';
@@ -7,13 +7,24 @@ import { getArribute } from 'src/utils/get-arribute';
 
 const withData = WrappedComponent => {
   const propTypes = {
+    blogIds: PropTypes.arrayOf(Object).isRequired,
     history: PropTypes.object.isRequired,
     initBlogs: PropTypes.func.isRequired,
+    searchBlog: PropTypes.func.isRequired,
     setCurrentBlog: PropTypes.func.isRequired
   };
 
   const Container = props => {
-    const { initBlogs, setCurrentBlog, history, ...res } = props;
+    const {
+      blogIds,
+      initBlogs,
+      setCurrentBlog,
+      searchBlog,
+      history,
+      ...res
+    } = props;
+
+    const [searched, setSearched] = useState([]);
 
     const handleBlogClick = e => {
       const blogId = getArribute(e, 'data-id');
@@ -23,13 +34,29 @@ const withData = WrappedComponent => {
       }
     };
 
+    const handSearch = useCallback(
+      async e => {
+        const { value } = e.target;
+        const searchResult = await searchBlog(value);
+        setSearched(searchResult);
+      },
+      [searchBlog]
+    );
+
     useEffect(() => {
       client.getBlogs().then(data => {
         initBlogs(data);
       });
     }, [initBlogs]);
 
-    return <WrappedComponent {...res} handleBlogClick={handleBlogClick} />;
+    return (
+      <WrappedComponent
+        {...res}
+        blogIds={searched.length > 0 ? searched : blogIds}
+        handleBlogClick={handleBlogClick}
+        onChange={handSearch}
+      />
+    );
   };
 
   Container.propTypes = propTypes;
@@ -38,8 +65,11 @@ const withData = WrappedComponent => {
     blogIds: state.blog.blogIds
   });
 
-  const mapDispatch = ({ blog: { initBlogs, setCurrentBlog } }) => ({
+  const mapDispatch = ({
+    blog: { initBlogs, setCurrentBlog, searchBlog }
+  }) => ({
     initBlogs,
+    searchBlog,
     setCurrentBlog
   });
 
