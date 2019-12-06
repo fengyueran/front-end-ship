@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Container from 'src/components/Container';
 
 const BlogsWrapper = styled(Container)`
-  height: 100%;
+  height: auto;
   display: block;
   background: #fff;
   img {
