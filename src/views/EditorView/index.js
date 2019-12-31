@@ -1,4 +1,9 @@
-import Editor from 'src/components/Editor';
-import withData from './container/editor-data-provider';
+import Loadable from 'react-loadable';
+import Loading from './Loading';
 
-export default withData(Editor);
+const AsyncEditor = Loadable({
+  loader: () => import('./EditorView'),
+  loading: Loading
+});
+
+export default AsyncEditor;
