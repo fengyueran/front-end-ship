@@ -38,6 +38,7 @@ const Content = styled.div`
   display: flex;
   flex-grow: 1;
   height: 100%;
+  overflow: hidden;
   border: 1px solid #eee;
   @media (hover: none) {
     min-height: calc(100vh - ${resHeight}px);
