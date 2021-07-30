@@ -27,9 +27,9 @@ const overrideProcessEnv = () => config => {
   const processEnv = plugin.definitions['process.env'] || {};
 
   if (processEnv.NODE_ENV === `"production"`) {
-    processEnv.SERVICE_URL = JSON.stringify('http://139.180.215.117:8000');
+    processEnv.SERVICE_URL = JSON.stringify('http://207.246.67.83:8000');
     processEnv.STORYBOOK_URL = JSON.stringify(
-      'http://139.180.215.117:80/storybook-static'
+      'http://207.246.67.83:80/storybook-static'
     );
   } else {
     processEnv.SERVICE_URL = JSON.stringify('http://localhost:8000');
